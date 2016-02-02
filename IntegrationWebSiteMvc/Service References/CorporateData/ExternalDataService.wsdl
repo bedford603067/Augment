@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://FinalBuild.co.uk/ExternalDataService" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://FinalBuild.co.uk/ExternalDataService" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://FinalBuild.co.uk/ExternalDataService/Imports">
+      <xsd:import namespace="http://FinalBuild.co.uk/ExternalDataService" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import namespace="urn:BusinessObjects.WorkManagement" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/BusinessObjects" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/BusinessObjects.AssetManagement" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IExternalDataService_SearchStock_InputMessage">
+    <wsdl:part name="parameters" element="tns:SearchStock" />
+  </wsdl:message>
+  <wsdl:message name="IExternalDataService_SearchStock_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SearchStockResponse" />
+  </wsdl:message>
+  <wsdl:message name="IExternalDataService_DeleteStockItemsByMaterialAndJob_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteStockItemsByMaterialAndJob" />
+  </wsdl:message>
+  <wsdl:message name="IExternalDataService_DeleteStockItemsByMaterialAndJob_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteStockItemsByMaterialAndJobResponse" />
+  </wsdl:message>
+  <wsdl:message name="IExternalDataService_UpdateStockItemsByMaterialAndJob_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateStockItemsByMaterialAndJob" />
+  </wsdl:message>
+  <wsdl:message name="IExternalDataService_UpdateStockItemsByMaterialAndJob_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateStockItemsByMaterialAndJobResponse" />
+  </wsdl:message>
+  <wsdl:message name="IExternalDataService_SearchAssets_InputMessage">
+    <wsdl:part name="parameters" element="tns:SearchAssets" />
+  </wsdl:message>
+  <wsdl:message name="IExternalDataService_SearchAssets_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SearchAssetsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IExternalDataService_SearchCustomers_InputMessage">
+    <wsdl:part name="parameters" element="tns:SearchCustomers" />
+  </wsdl:message>
+  <wsdl:message name="IExternalDataService_SearchCustomers_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SearchCustomersResponse" />
+  </wsdl:message>
+  <wsdl:message name="IExternalDataService_SearchMaterials_InputMessage">
+    <wsdl:part name="parameters" element="tns:SearchMaterials" />
+  </wsdl:message>
+  <wsdl:message name="IExternalDataService_SearchMaterials_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SearchMaterialsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IExternalDataService_SearchMeasurements_InputMessage">
+    <wsdl:part name="parameters" element="tns:SearchMeasurements" />
+  </wsdl:message>
+  <wsdl:message name="IExternalDataService_SearchMeasurements_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SearchMeasurementsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IExternalDataService_EvolveMetadata_InputMessage">
+    <wsdl:part name="parameters" element="tns:EvolveMetadata" />
+  </wsdl:message>
+  <wsdl:message name="IExternalDataService_EvolveMetadata_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EvolveMetadataResponse" />
+  </wsdl:message>
+  <wsdl:message name="IExternalDataService_UploadAssetData_InputMessage">
+    <wsdl:part name="parameters" element="tns:UploadAssetData" />
+  </wsdl:message>
+  <wsdl:message name="IExternalDataService_UploadAssetData_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UploadAssetDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="IExternalDataService_UploadAssetMeasurements_InputMessage">
+    <wsdl:part name="parameters" element="tns:UploadAssetMeasurements" />
+  </wsdl:message>
+  <wsdl:message name="IExternalDataService_UploadAssetMeasurements_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UploadAssetMeasurementsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IExternalDataService_UploadCustomerData_InputMessage">
+    <wsdl:part name="parameters" element="tns:UploadCustomerData" />
+  </wsdl:message>
+  <wsdl:message name="IExternalDataService_UploadCustomerData_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UploadCustomerDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="IExternalDataService_SaveContactInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:SaveContactInfo" />
+  </wsdl:message>
+  <wsdl:message name="IExternalDataService_SaveContactInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SaveContactInfoResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IExternalDataService">
+    <wsdl:operation name="SearchStock">
+      <wsdl:input wsaw:Action="http://FinalBuild.co.uk/ExternalDataService/IExternalDataService/SearchStock" message="tns:IExternalDataService_SearchStock_InputMessage" />
+      <wsdl:output wsaw:Action="http://FinalBuild.co.uk/ExternalDataService/IExternalDataService/SearchStockResponse" message="tns:IExternalDataService_SearchStock_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteStockItemsByMaterialAndJob">
+      <wsdl:input wsaw:Action="http://FinalBuild.co.uk/ExternalDataService/IExternalDataService/DeleteStockItemsByMaterialAndJob" message="tns:IExternalDataService_DeleteStockItemsByMaterialAndJob_InputMessage" />
+      <wsdl:output wsaw:Action="http://FinalBuild.co.uk/ExternalDataService/IExternalDataService/DeleteStockItemsByMaterialAndJobResponse" message="tns:IExternalDataService_DeleteStockItemsByMaterialAndJob_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateStockItemsByMaterialAndJob">
+      <wsdl:input wsaw:Action="http://FinalBuild.co.uk/ExternalDataService/IExternalDataService/UpdateStockItemsByMaterialAndJob" message="tns:IExternalDataService_UpdateStockItemsByMaterialAndJob_InputMessage" />
+      <wsdl:output wsaw:Action="http://FinalBuild.co.uk/ExternalDataService/IExternalDataService/UpdateStockItemsByMaterialAndJobResponse" message="tns:IExternalDataService_UpdateStockItemsByMaterialAndJob_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SearchAssets">
+      <wsdl:input wsaw:Action="http://FinalBuild.co.uk/ExternalDataService/IExternalDataService/SearchAssets" message="tns:IExternalDataService_SearchAssets_InputMessage" />
+      <wsdl:output wsaw:Action="http://FinalBuild.co.uk/ExternalDataService/IExternalDataService/SearchAssetsResponse" message="tns:IExternalDataService_SearchAssets_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SearchCustomers">
+      <wsdl:input wsaw:Action="http://FinalBuild.co.uk/ExternalDataService/IExternalDataService/SearchCustomers" message="tns:IExternalDataService_SearchCustomers_InputMessage" />
+      <wsdl:output wsaw:Action="http://FinalBuild.co.uk/ExternalDataService/IExternalDataService/SearchCustomersResponse" message="tns:IExternalDataService_SearchCustomers_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SearchMaterials">
+      <wsdl:input wsaw:Action="http://FinalBuild.co.uk/ExternalDataService/IExternalDataService/SearchMaterials" message="tns:IExternalDataService_SearchMaterials_InputMessage" />
+      <wsdl:output wsaw:Action="http://FinalBuild.co.uk/ExternalDataService/IExternalDataService/SearchMaterialsResponse" message="tns:IExternalDataService_SearchMaterials_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SearchMeasurements">
+      <wsdl:input wsaw:Action="http://FinalBuild.co.uk/ExternalDataService/IExternalDataService/SearchMeasurements" message="tns:IExternalDataService_SearchMeasurements_InputMessage" />
+      <wsdl:output wsaw:Action="http://FinalBuild.co.uk/ExternalDataService/IExternalDataService/SearchMeasurementsResponse" message="tns:IExternalDataService_SearchMeasurements_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EvolveMetadata">
+      <wsdl:input wsaw:Action="http://FinalBuild.co.uk/ExternalDataService/IExternalDataService/EvolveMetadata" message="tns:IExternalDataService_EvolveMetadata_InputMessage" />
+      <wsdl:output wsaw:Action="http://FinalBuild.co.uk/ExternalDataService/IExternalDataService/EvolveMetadataResponse" message="tns:IExternalDataService_EvolveMetadata_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UploadAssetData">
+      <wsdl:input wsaw:Action="http://FinalBuild.co.uk/ExternalDataService/IExternalDataService/UploadAssetData" message="tns:IExternalDataService_UploadAssetData_InputMessage" />
+      <wsdl:output wsaw:Action="http://FinalBuild.co.uk/ExternalDataService/IExternalDataService/UploadAssetDataResponse" message="tns:IExternalDataService_UploadAssetData_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UploadAssetMeasurements">
+      <wsdl:input wsaw:Action="http://FinalBuild.co.uk/ExternalDataService/IExternalDataService/UploadAssetMeasurements" message="tns:IExternalDataService_UploadAssetMeasurements_InputMessage" />
+      <wsdl:output wsaw:Action="http://FinalBuild.co.uk/ExternalDataService/IExternalDataService/UploadAssetMeasurementsResponse" message="tns:IExternalDataService_UploadAssetMeasurements_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UploadCustomerData">
+      <wsdl:input wsaw:Action="http://FinalBuild.co.uk/ExternalDataService/IExternalDataService/UploadCustomerData" message="tns:IExternalDataService_UploadCustomerData_InputMessage" />
+      <wsdl:output wsaw:Action="http://FinalBuild.co.uk/ExternalDataService/IExternalDataService/UploadCustomerDataResponse" message="tns:IExternalDataService_UploadCustomerData_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveContactInfo">
+      <wsdl:input wsaw:Action="http://FinalBuild.co.uk/ExternalDataService/IExternalDataService/SaveContactInfo" message="tns:IExternalDataService_SaveContactInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://FinalBuild.co.uk/ExternalDataService/IExternalDataService/SaveContactInfoResponse" message="tns:IExternalDataService_SaveContactInfo_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+</wsdl:definitions>

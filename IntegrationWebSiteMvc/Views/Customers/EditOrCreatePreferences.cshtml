@@ -1,0 +1,72 @@
+﻿@model BusinessObjects.WorkManagement.Customer
+
+@{
+    ViewBag.Title = "EditOrCreatePreferences";
+}
+
+<h2>Customer Preferences</h2>
+
+<p></p>
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Customer</legend>
+
+        @Html.HiddenFor(model => model.ID)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Preferences.TimeWindow)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Preferences.TimeWindow)
+            @Html.ValidationMessageFor(model => model.Preferences.TimeWindow)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Preferences.RequiredEngineerID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Preferences.RequiredEngineerID)
+            @Html.ValidationMessageFor(model => model.Preferences.RequiredEngineerID)
+        </div>
+
+        <h3>Comments</h3>
+        <table>
+        @foreach (var item in Model.Comments)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ChangeDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ChangeUser)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Text)
+                </td>
+            </tr>
+            <tr>
+               <td colspan="3">
+                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                </td>
+            </tr>
+        }
+        </table>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

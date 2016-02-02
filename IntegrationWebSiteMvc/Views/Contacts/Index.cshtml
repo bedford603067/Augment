@@ -1,0 +1,73 @@
+﻿@model IEnumerable<BusinessObjects.WorkManagement.Contact>
+
+@{
+    ViewBag.Title = "Contacts";
+}
+
+<h2>Contacts</h2>
+
+@{string parentController = string.Format("{0}s", ViewBag.ParentEntityType);}
+
+<p>
+    @Html.ActionLink("Create New", "EditOrCreate", new { parentEntityID = ViewBag.ParentEntityID, parentEntityType = ViewBag.ParentEntityType, contactSurname = "" }) 
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Surname)
+        </th>
+        <th>
+            | @Html.DisplayNameFor(model => model.Forenames)
+        </th>
+        <th>
+            | Telephone
+        </th>
+        <th>
+            Mobile
+        </th>
+        <th>
+            | EMail
+        </th>
+        <th>
+            | Alt. Phone No.
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Surname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Forenames)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TelephoneNo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MobileNo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EMail)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AlternativeTelephoneNo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "EditOrCreate", new { parentEntityID = ViewBag.ParentEntityID, parentEntityType = ViewBag.ParentEntityType, contactSurname = item.Surname }) 
+        </td>
+    </tr>
+}
+
+</table>
+
+<div>
+    @Html.ActionLink("Back to List", "Index", parentController) 
+</div>

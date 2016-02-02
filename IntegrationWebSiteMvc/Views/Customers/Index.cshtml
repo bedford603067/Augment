@@ -1,0 +1,60 @@
+﻿@model IEnumerable<BusinessObjects.WorkManagement.Customer>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<script src="~/Scripts/jquery-1.7.1.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('table tr:not(.Header):even').addClass('d0');
+
+        $('table tr:not(.Header):odd').addClass("d1");
+    });
+</script>
+
+<h2>Customers</h2>
+
+<p>
+    @Html.ActionLink("Create New", "EditOrCreate", new { id = 0 })
+</p>
+<table>
+    <tr>
+        <th>
+            Company Name
+        </th>
+        <th>
+            Telephone
+        </th>
+        <th>
+            Mobile
+        </th>
+        <th>
+            | Email
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Surname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TelephoneNo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MobileNo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EMail)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "EditOrCreate", new { id=item.ID }) |
+            @Html.ActionLink("Contacts", "Index", "Contacts", new { parentEntityID = item.ID, parentEntityType = "Customer" }, null) 
+            @Html.ActionLink("Preferences", "EditOrCreatePreferences", "Customers", new { id = item.ID }, null) 
+        </td>
+    </tr>
+}
+
+</table>

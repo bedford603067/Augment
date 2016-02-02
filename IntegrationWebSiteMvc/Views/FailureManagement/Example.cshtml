@@ -1,0 +1,21 @@
+﻿@model IntegrationWebSiteMvc.Models.JobFailure
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+<p>
+ID:
+@Html.Encode(Model.ID)
+</p>
+<div>
+@Html.DisplayFor(model => model.ID)
+</div>
+<div>
+@Html.DisplayFor(model => model.DateRecorded)
+</div>
+</fieldset>

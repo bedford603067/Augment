@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="6a211641-a53d-44f0-8dee-9f807dddab7b" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings>
+      <CollectionMapping TypeName="System.Collections.Generic.List`1" Category="List" />
+    </CollectionMappings>
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>false</ReferenceAllAssemblies>
+    <ReferencedAssemblies>
+      <ReferencedAssembly AssemblyName="WMLibrary" />
+    </ReferencedAssemblies>
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://DEVAPPS1/WorkIntegrationService/WorkLookupService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="WorkLookupService1.disco" MetadataType="Disco" ID="5b841546-624d-45fa-8912-65b1ea418890" SourceId="1" SourceUrl="http://devapps1.finalbuild.co.uk/WorkIntegrationService/WorkLookupService.svc?disco" />
+    <MetadataFile FileName="WorkLookupService6.xsd" MetadataType="Schema" ID="41731829-c22d-4abf-8fe6-a50ce6aac929" SourceId="1" SourceUrl="http://devapps1.finalbuild.co.uk/WorkIntegrationService/WorkLookupService.svc?xsd=xsd0" />
+    <MetadataFile FileName="WorkLookupService61.xsd" MetadataType="Schema" ID="a6059817-8a82-4825-bb48-bce7975dcf96" SourceId="1" SourceUrl="http://devapps1.finalbuild.co.uk/WorkIntegrationService/WorkLookupService.svc?xsd=xsd3" />
+    <MetadataFile FileName="WorkLookupService62.xsd" MetadataType="Schema" ID="fed76baf-2d75-4cad-8a75-064369689a29" SourceId="1" SourceUrl="http://devapps1.finalbuild.co.uk/WorkIntegrationService/WorkLookupService.svc?xsd=xsd2" />
+    <MetadataFile FileName="WorkLookupService63.xsd" MetadataType="Schema" ID="115e0919-ed64-437c-bfb6-11d599a48585" SourceId="1" SourceUrl="http://devapps1.finalbuild.co.uk/WorkIntegrationService/WorkLookupService.svc?xsd=xsd5" />
+    <MetadataFile FileName="WorkLookupService64.xsd" MetadataType="Schema" ID="da1ea790-985d-4dda-b346-df5cc0794673" SourceId="1" SourceUrl="http://devapps1.finalbuild.co.uk/WorkIntegrationService/WorkLookupService.svc?xsd=xsd4" />
+    <MetadataFile FileName="WorkLookupService65.xsd" MetadataType="Schema" ID="dc465838-ad9e-4de6-87a7-af8d5bee1afd" SourceId="1" SourceUrl="http://devapps1.finalbuild.co.uk/WorkIntegrationService/WorkLookupService.svc?xsd=xsd1" />
+    <MetadataFile FileName="LookupService1.wsdl" MetadataType="Wsdl" ID="07cc0d58-7c63-4098-a7d2-e811d47a5bb4" SourceId="1" SourceUrl="http://devapps1.finalbuild.co.uk/WorkIntegrationService/WorkLookupService.svc?wsdl" />
+    <MetadataFile FileName="WorkLookupService1.wsdl" MetadataType="Wsdl" ID="36639e6d-28c6-4c00-b196-9081e362d313" SourceId="1" SourceUrl="http://devapps1.finalbuild.co.uk/WorkIntegrationService/WorkLookupService.svc?wsdl=wsdl0" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

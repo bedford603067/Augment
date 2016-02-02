@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="82a3e0d2-a50f-42c3-801f-d6d9c9781c66" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings>
+      <CollectionMapping TypeName="System.Collections.Generic.List`1" Category="List" />
+    </CollectionMappings>
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>false</ReferenceAllAssemblies>
+    <ReferencedAssemblies>
+      <ReferencedAssembly AssemblyName="SharedComponents" />
+      <ReferencedAssembly AssemblyName="WMLibrary" />
+    </ReferencedAssemblies>
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://devapps1/WorkIntegrationService/ExternalDataService.svc/mex" Protocol="mex" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="ExternalDataService.wsdl" MetadataType="Wsdl" ID="1005fcda-63bb-4b37-a253-24ffbe18edad" SourceId="1" SourceUrl="http://devapps1/WorkIntegrationService/ExternalDataService.svc/mex" />
+    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="d5b69209-d3fe-4be3-8d40-c449fe481e72" SourceId="1" SourceUrl="http://devapps1/WorkIntegrationService/ExternalDataService.svc/mex" />
+    <MetadataFile FileName="ExternalDataService.xsd" MetadataType="Schema" ID="bfee78cd-ac29-4018-9e60-f11c849caef6" SourceId="1" SourceUrl="http://devapps1/WorkIntegrationService/ExternalDataService.svc/mex" />
+    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="10c52007-a518-4ab4-bfde-05ac988d7d9a" SourceId="1" SourceUrl="http://devapps1/WorkIntegrationService/ExternalDataService.svc/mex" />
+    <MetadataFile FileName="BusinessObjects.WorkManagement.xsd" MetadataType="Schema" ID="e36744c0-a544-4703-9946-efd1d45ab96f" SourceId="1" SourceUrl="http://devapps1/WorkIntegrationService/ExternalDataService.svc/mex" />
+    <MetadataFile FileName="BusinessObjects.xsd" MetadataType="Schema" ID="dfaadbfc-00b5-4ebc-a40f-ee62ef83c09c" SourceId="1" SourceUrl="http://devapps1/WorkIntegrationService/ExternalDataService.svc/mex" />
+    <MetadataFile FileName="BusinessObjects.AssetManagement.xsd" MetadataType="Schema" ID="d9bf69c5-486f-4882-8c9c-1f1dd75eab3c" SourceId="1" SourceUrl="http://devapps1/WorkIntegrationService/ExternalDataService.svc/mex" />
+    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="87cfabed-1eca-43ea-8c0e-61a0debba4ed" SourceId="1" SourceUrl="http://devapps1/WorkIntegrationService/ExternalDataService.svc/mex" />
+    <MetadataFile FileName="Arrays.xsd" MetadataType="Schema" ID="03897be1-c37e-4440-8a2e-09a223eacb80" SourceId="1" SourceUrl="http://devapps1/WorkIntegrationService/ExternalDataService.svc/mex" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

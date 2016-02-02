@@ -1,0 +1,35 @@
+﻿@model IEnumerable<IntegrationWebSiteMvc.Models.PrimaryArea>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Primary Areas</h2>
+
+<p>
+    @Html.ActionLink("Create New", "EditOrCreatePrimaryArea", new { id = 0 })
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th></th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "EditOrCreatePrimaryArea", new { id = item.ID }) |
+        </td>
+        <td>
+            @Html.ActionLink("Edit SubAreas", "SubAreas", new { id=item.ID }) |
+        </td>
+    </tr>
+}
+
+</table>

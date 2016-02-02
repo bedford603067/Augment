@@ -1,0 +1,155 @@
+using System;
+using System.Net.Sockets;
+
+namespace MeterReadingClient
+{
+	public class Client
+	{
+		#region Private Fields
+
+			private TcpClient mobjClient; 
+			private System.TimeSpan mobjTimeout;
+			private bool mblnIsConnected = false;
+
+			private const int DEFAULT_TIMEOUT = 60; // Seconds
+
+		#endregion
+
+		#region Public Properties
+
+			public bool IsConnected
+			{
+				get
+				{
+					return mblnIsConnected;
+				}
+			}
+
+		#endregion
+
+		#region Construct\Finalise
+
+		public Client(string hostAddress, int portNumber, System.TimeSpan timeoutPeriod)
+		{
+			Connect(hostAddress, portNumber, timeoutPeriod);
+		}
+
+		#endregion
+
+		#region Public Methods
+
+		public bool SubmitRequest(MultiPurposeService.MultiThreading.WorkerTaskInfo taskInfo, bool waitForResponse)
+		{
+			byte[] arrBytes = null;
+			string strResponse = null;
+
+			if (mblnIsConnected == true)
+			{
+				// Submit to Service for processing
+				arrBytes = BusinessObjects.Base.BinarySerialize(taskInfo);
+				mobjClient.GetStream().Write(arrBytes, 0, arrBytes.Length);
+				if (waitForResponse == true)
+				{
+					while (true)
+					{
+						if (mobjClient.GetStream().DataAvailable == true)
+						{
+							arrBytes = new byte[mobjClient.ReceiveBufferSize];
+							mobjClient.GetStream().Read(arrBytes, 0, arrBytes.Length);
+							// Debug
+							strResponse = System.Text.Encoding.ASCII.GetString(arrBytes);
+							Console.WriteLine(strResponse);
+							break;
+						}
+					}
+				}
+			}
+			else
+			{
+				// Submit to SQL Server based Queue if service is offline
+			}
+
+			return true;
+		}
+
+		public bool SubmitRequest(string requestString, bool waitForResponse)
+		{
+			byte[] arrBytes = null;
+			string strResponse = null;
+
+			if (mblnIsConnected == true)
+			{
+				// Submit to Service for processing
+				requestString += "|";
+				arrBytes = System.Text.Encoding.ASCII.GetBytes(requestString);
+				mobjClient.GetStream().Write(arrBytes, 0, arrBytes.Length);
+				if (waitForResponse == true)
+				{
+					while (true)
+					{
+						if (mobjClient.GetStream().DataAvailable == true)
+						{
+							arrBytes = new byte[mobjClient.ReceiveBufferSize];
+							mobjClient.GetStream().Read(arrBytes, 0, arrBytes.Length);
+							// Debug
+							strResponse = System.Text.Encoding.ASCII.GetString(arrBytes);
+							Console.WriteLine(strResponse);
+							break;
+						}
+					}
+				}
+			}
+			else
+			{
+				// Submit to SQL Server based Queue if service is offline
+			}
+
+			return true;
+		}
+
+		#endregion
+
+		#region Private Methods
+
+		public bool Connect(string hostAddress, int portNumber, System.TimeSpan timeoutPeriod)
+		{
+			System.Net.IPAddress objIPAddress = null;
+			
+			try
+			{
+				if (timeoutPeriod.Ticks > 0)
+				{
+					mobjTimeout = timeoutPeriod;
+				}
+				else
+				{
+					mobjTimeout = new System.TimeSpan(0, 0, DEFAULT_TIMEOUT);
+				}
+				objIPAddress = System.Net.Dns.GetHostEntry(hostAddress).AddressList[0];
+				mobjClient = new TcpClient();
+				// Attempt to Connect - returns at once if Socket Connection cannot be made
+				mobjClient.Connect(objIPAddress, portNumber);
+				// Set Timeouts
+				mobjClient.SendTimeout = mobjTimeout.Seconds;
+				mobjClient.ReceiveTimeout = mobjTimeout.Seconds;
+				// Set Flag denoting Connected
+				mblnIsConnected = true;
+			}
+			catch (Exception excE)
+			{
+				// Class instance queries the IsConnected property at head of each Public method
+				Console.WriteLine(excE.Message); // TODO : Log Error
+				mblnIsConnected = false;
+			}
+			finally
+			{
+				// Update database flag that denotes Service is currently unavailable
+				// UpdateServiceStatus(mblnIsConnected)
+			}
+
+			return mblnIsConnected;
+		}
+
+		#endregion
+	}
+}

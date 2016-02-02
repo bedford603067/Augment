@@ -1,0 +1,86 @@
+﻿@model IntegrationWebSiteMvc.Models.JobFailure
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>JobFailure</legend>
+
+        @Html.HiddenFor(model => model.ID)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.SourceSystem)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.SourceSystem)
+            @Html.ValidationMessageFor(model => model.SourceSystem)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Type)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Type)
+            @Html.ValidationMessageFor(model => model.Type)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.DateRecorded)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.DateRecorded)
+            @Html.ValidationMessageFor(model => model.DateRecorded)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ExceptionMessage)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ExceptionMessage)
+            @Html.ValidationMessageFor(model => model.ExceptionMessage)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.RetryCount)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.RetryCount)
+            @Html.ValidationMessageFor(model => model.RetryCount)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Comments)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Comments)
+            @Html.ValidationMessageFor(model => model.Comments)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ServiceWrapperType)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ServiceWrapperType)
+            @Html.ValidationMessageFor(model => model.ServiceWrapperType)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

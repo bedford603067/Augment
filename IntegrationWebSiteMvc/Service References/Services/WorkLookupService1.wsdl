@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://FinalBuild.co.uk/LookupService" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://FinalBuild.co.uk/LookupService" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://FinalBuild.co.uk/LookupService/Imports">
+      <xsd:import schemaLocation="http://devapps1.finalbuild.co.uk/WorkIntegrationService/WorkLookupService.svc?xsd=xsd0" namespace="http://FinalBuild.co.uk/LookupService" />
+      <xsd:import schemaLocation="http://devapps1.finalbuild.co.uk/WorkIntegrationService/WorkLookupService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://devapps1.finalbuild.co.uk/WorkIntegrationService/WorkLookupService.svc?xsd=xsd2" namespace="urn:BusinessObjects.WorkManagement" />
+      <xsd:import schemaLocation="http://devapps1.finalbuild.co.uk/WorkIntegrationService/WorkLookupService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/BusinessObjects" />
+      <xsd:import schemaLocation="http://devapps1.finalbuild.co.uk/WorkIntegrationService/WorkLookupService.svc?xsd=xsd4" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+      <xsd:import schemaLocation="http://devapps1.finalbuild.co.uk/WorkIntegrationService/WorkLookupService.svc?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/BusinessObjects.FileProcessing" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="ILookupService_GetActivityTree_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetActivityTree" />
+  </wsdl:message>
+  <wsdl:message name="ILookupService_GetActivityTree_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetActivityTreeResponse" />
+  </wsdl:message>
+  <wsdl:message name="ILookupService_GetActivityTreeFiltered_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetActivityTreeFiltered" />
+  </wsdl:message>
+  <wsdl:message name="ILookupService_GetActivityTreeFiltered_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetActivityTreeFilteredResponse" />
+  </wsdl:message>
+  <wsdl:message name="ILookupService_GetActivitiesForMobile_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetActivitiesForMobile" />
+  </wsdl:message>
+  <wsdl:message name="ILookupService_GetActivitiesForMobile_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetActivitiesForMobileResponse" />
+  </wsdl:message>
+  <wsdl:message name="ILookupService_GetActivitiesMatchingCriteria_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetActivitiesMatchingCriteria" />
+  </wsdl:message>
+  <wsdl:message name="ILookupService_GetActivitiesMatchingCriteria_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetActivitiesMatchingCriteriaResponse" />
+  </wsdl:message>
+  <wsdl:message name="ILookupService_SaveActivity_InputMessage">
+    <wsdl:part name="parameters" element="tns:SaveActivity" />
+  </wsdl:message>
+  <wsdl:message name="ILookupService_SaveActivity_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SaveActivityResponse" />
+  </wsdl:message>
+  <wsdl:message name="ILookupService_GetTaskLibrary_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetTaskLibrary" />
+  </wsdl:message>
+  <wsdl:message name="ILookupService_GetTaskLibrary_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetTaskLibraryResponse" />
+  </wsdl:message>
+  <wsdl:message name="ILookupService_GetTaskLookupData_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetTaskLookupData" />
+  </wsdl:message>
+  <wsdl:message name="ILookupService_GetTaskLookupData_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetTaskLookupDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="ILookupService_GetTaskLookupDataBySourceSystem_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetTaskLookupDataBySourceSystem" />
+  </wsdl:message>
+  <wsdl:message name="ILookupService_GetTaskLookupDataBySourceSystem_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetTaskLookupDataBySourceSystemResponse" />
+  </wsdl:message>
+  <wsdl:message name="ILookupService_GetPriorityLookupData_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPriorityLookupData" />
+  </wsdl:message>
+  <wsdl:message name="ILookupService_GetPriorityLookupData_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPriorityLookupDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="ILookupService_GetOnHoldLookupData_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetOnHoldLookupData" />
+  </wsdl:message>
+  <wsdl:message name="ILookupService_GetOnHoldLookupData_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetOnHoldLookupDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="ILookupService_GetActivityLookupData_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetActivityLookupData" />
+  </wsdl:message>
+  <wsdl:message name="ILookupService_GetActivityLookupData_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetActivityLookupDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="ILookupService_GetActivityOnHoldReasons_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetActivityOnHoldReasons" />
+  </wsdl:message>
+  <wsdl:message name="ILookupService_GetActivityOnHoldReasons_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetActivityOnHoldReasonsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ILookupService_SaveTaskTemplate_InputMessage">
+    <wsdl:part name="parameters" element="tns:SaveTaskTemplate" />
+  </wsdl:message>
+  <wsdl:message name="ILookupService_SaveTaskTemplate_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SaveTaskTemplateResponse" />
+  </wsdl:message>
+  <wsdl:message name="ILookupService_SaveTaskTemplateAndActivitySequence_InputMessage">
+    <wsdl:part name="parameters" element="tns:SaveTaskTemplateAndActivitySequence" />
+  </wsdl:message>
+  <wsdl:message name="ILookupService_SaveTaskTemplateAndActivitySequence_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SaveTaskTemplateAndActivitySequenceResponse" />
+  </wsdl:message>
+  <wsdl:message name="ILookupService_SaveCategory_InputMessage">
+    <wsdl:part name="parameters" element="tns:SaveCategory" />
+  </wsdl:message>
+  <wsdl:message name="ILookupService_SaveCategory_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SaveCategoryResponse" />
+  </wsdl:message>
+  <wsdl:message name="ILookupService_SaveLookupData_InputMessage">
+    <wsdl:part name="parameters" element="tns:SaveLookupData" />
+  </wsdl:message>
+  <wsdl:message name="ILookupService_SaveLookupData_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SaveLookupDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="ILookupService_RequestLookupContainer_InputMessage">
+    <wsdl:part name="parameters" element="tns:RequestLookupContainer" />
+  </wsdl:message>
+  <wsdl:message name="ILookupService_RequestLookupContainer_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RequestLookupContainerResponse" />
+  </wsdl:message>
+  <wsdl:message name="ILookupService_GetWorkflowLookupData_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetWorkflowLookupData" />
+  </wsdl:message>
+  <wsdl:message name="ILookupService_GetWorkflowLookupData_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetWorkflowLookupDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="ILookupService_RemoveTasksFromActivity_InputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveTasksFromActivity" />
+  </wsdl:message>
+  <wsdl:message name="ILookupService_RemoveTasksFromActivity_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveTasksFromActivityResponse" />
+  </wsdl:message>
+  <wsdl:message name="ILookupService_AddTasksToActivity_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddTasksToActivity" />
+  </wsdl:message>
+  <wsdl:message name="ILookupService_AddTasksToActivity_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddTasksToActivityResponse" />
+  </wsdl:message>
+  <wsdl:message name="ILookupService_SaveTaskSequence_InputMessage">
+    <wsdl:part name="parameters" element="tns:SaveTaskSequence" />
+  </wsdl:message>
+  <wsdl:message name="ILookupService_SaveTaskSequence_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SaveTaskSequenceResponse" />
+  </wsdl:message>
+  <wsdl:portType name="ILookupService">
+    <wsdl:operation name="GetActivityTree">
+      <wsdl:input wsaw:Action="http://FinalBuild.co.uk/LookupService/ILookupService/GetActivityTree" message="tns:ILookupService_GetActivityTree_InputMessage" />
+      <wsdl:output wsaw:Action="http://FinalBuild.co.uk/LookupService/ILookupService/GetActivityTreeResponse" message="tns:ILookupService_GetActivityTree_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetActivityTreeFiltered">
+      <wsdl:input wsaw:Action="http://FinalBuild.co.uk/LookupService/ILookupService/GetActivityTreeFiltered" message="tns:ILookupService_GetActivityTreeFiltered_InputMessage" />
+      <wsdl:output wsaw:Action="http://FinalBuild.co.uk/LookupService/ILookupService/GetActivityTreeFilteredResponse" message="tns:ILookupService_GetActivityTreeFiltered_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetActivitiesForMobile">
+      <wsdl:input wsaw:Action="http://FinalBuild.co.uk/LookupService/ILookupService/GetActivitiesForMobile" message="tns:ILookupService_GetActivitiesForMobile_InputMessage" />
+      <wsdl:output wsaw:Action="http://FinalBuild.co.uk/LookupService/ILookupService/GetActivitiesForMobileResponse" message="tns:ILookupService_GetActivitiesForMobile_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetActivitiesMatchingCriteria">
+      <wsdl:input wsaw:Action="http://FinalBuild.co.uk/LookupService/ILookupService/GetActivitiesMatchingCriteria" message="tns:ILookupService_GetActivitiesMatchingCriteria_InputMessage" />
+      <wsdl:output wsaw:Action="http://FinalBuild.co.uk/LookupService/ILookupService/GetActivitiesMatchingCriteriaResponse" message="tns:ILookupService_GetActivitiesMatchingCriteria_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveActivity">
+      <wsdl:input wsaw:Action="http://FinalBuild.co.uk/LookupService/ILookupService/SaveActivity" message="tns:ILookupService_SaveActivity_InputMessage" />
+      <wsdl:output wsaw:Action="http://FinalBuild.co.uk/LookupService/ILookupService/SaveActivityResponse" message="tns:ILookupService_SaveActivity_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTaskLibrary">
+      <wsdl:input wsaw:Action="http://FinalBuild.co.uk/LookupService/ILookupService/GetTaskLibrary" message="tns:ILookupService_GetTaskLibrary_InputMessage" />
+      <wsdl:output wsaw:Action="http://FinalBuild.co.uk/LookupService/ILookupService/GetTaskLibraryResponse" message="tns:ILookupService_GetTaskLibrary_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTaskLookupData">
+      <wsdl:input wsaw:Action="http://FinalBuild.co.uk/LookupService/ILookupService/GetTaskLookupData" message="tns:ILookupService_GetTaskLookupData_InputMessage" />
+      <wsdl:output wsaw:Action="http://FinalBuild.co.uk/LookupService/ILookupService/GetTaskLookupDataResponse" message="tns:ILookupService_GetTaskLookupData_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTaskLookupDataBySourceSystem">
+      <wsdl:input wsaw:Action="http://FinalBuild.co.uk/LookupService/ILookupService/GetTaskLookupDataBySourceSystem" message="tns:ILookupService_GetTaskLookupDataBySourceSystem_InputMessage" />
+      <wsdl:output wsaw:Action="http://FinalBuild.co.uk/LookupService/ILookupService/GetTaskLookupDataBySourceSystemResponse" message="tns:ILookupService_GetTaskLookupDataBySourceSystem_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPriorityLookupData">
+      <wsdl:input wsaw:Action="http://FinalBuild.co.uk/LookupService/ILookupService/GetPriorityLookupData" message="tns:ILookupService_GetPriorityLookupData_InputMessage" />
+      <wsdl:output wsaw:Action="http://FinalBuild.co.uk/LookupService/ILookupService/GetPriorityLookupDataResponse" message="tns:ILookupService_GetPriorityLookupData_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOnHoldLookupData">
+      <wsdl:input wsaw:Action="http://FinalBuild.co.uk/LookupService/ILookupService/GetOnHoldLookupData" message="tns:ILookupService_GetOnHoldLookupData_InputMessage" />
+      <wsdl:output wsaw:Action="http://FinalBuild.co.uk/LookupService/ILookupService/GetOnHoldLookupDataResponse" message="tns:ILookupService_GetOnHoldLookupData_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetActivityLookupData">
+      <wsdl:input wsaw:Action="http://FinalBuild.co.uk/LookupService/ILookupService/GetActivityLookupData" message="tns:ILookupService_GetActivityLookupData_InputMessage" />
+      <wsdl:output wsaw:Action="http://FinalBuild.co.uk/LookupService/ILookupService/GetActivityLookupDataResponse" message="tns:ILookupService_GetActivityLookupData_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetActivityOnHoldReasons">
+      <wsdl:input wsaw:Action="http://FinalBuild.co.uk/LookupService/ILookupService/GetActivityOnHoldReasons" message="tns:ILookupService_GetActivityOnHoldReasons_InputMessage" />
+      <wsdl:output wsaw:Action="http://FinalBuild.co.uk/LookupService/ILookupService/GetActivityOnHoldReasonsResponse" message="tns:ILookupService_GetActivityOnHoldReasons_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveTaskTemplate">
+      <wsdl:input wsaw:Action="http://FinalBuild.co.uk/LookupService/ILookupService/SaveTaskTemplate" message="tns:ILookupService_SaveTaskTemplate_InputMessage" />
+      <wsdl:output wsaw:Action="http://FinalBuild.co.uk/LookupService/ILookupService/SaveTaskTemplateResponse" message="tns:ILookupService_SaveTaskTemplate_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveTaskTemplateAndActivitySequence">
+      <wsdl:input wsaw:Action="http://FinalBuild.co.uk/LookupService/ILookupService/SaveTaskTemplateAndActivitySequence" message="tns:ILookupService_SaveTaskTemplateAndActivitySequence_InputMessage" />
+      <wsdl:output wsaw:Action="http://FinalBuild.co.uk/LookupService/ILookupService/SaveTaskTemplateAndActivitySequenceResponse" message="tns:ILookupService_SaveTaskTemplateAndActivitySequence_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveCategory">
+      <wsdl:input wsaw:Action="http://FinalBuild.co.uk/LookupService/ILookupService/SaveCategory" message="tns:ILookupService_SaveCategory_InputMessage" />
+      <wsdl:output wsaw:Action="http://FinalBuild.co.uk/LookupService/ILookupService/SaveCategoryResponse" message="tns:ILookupService_SaveCategory_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveLookupData">
+      <wsdl:input wsaw:Action="http://FinalBuild.co.uk/LookupService/ILookupService/SaveLookupData" message="tns:ILookupService_SaveLookupData_InputMessage" />
+      <wsdl:output wsaw:Action="http://FinalBuild.co.uk/LookupService/ILookupService/SaveLookupDataResponse" message="tns:ILookupService_SaveLookupData_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RequestLookupContainer">
+      <wsdl:input wsaw:Action="http://FinalBuild.co.uk/LookupService/ILookupService/RequestLookupContainer" message="tns:ILookupService_RequestLookupContainer_InputMessage" />
+      <wsdl:output wsaw:Action="http://FinalBuild.co.uk/LookupService/ILookupService/RequestLookupContainerResponse" message="tns:ILookupService_RequestLookupContainer_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetWorkflowLookupData">
+      <wsdl:input wsaw:Action="http://FinalBuild.co.uk/LookupService/ILookupService/GetWorkflowLookupData" message="tns:ILookupService_GetWorkflowLookupData_InputMessage" />
+      <wsdl:output wsaw:Action="http://FinalBuild.co.uk/LookupService/ILookupService/GetWorkflowLookupDataResponse" message="tns:ILookupService_GetWorkflowLookupData_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveTasksFromActivity">
+      <wsdl:input wsaw:Action="http://FinalBuild.co.uk/LookupService/ILookupService/RemoveTasksFromActivity" message="tns:ILookupService_RemoveTasksFromActivity_InputMessage" />
+      <wsdl:output wsaw:Action="http://FinalBuild.co.uk/LookupService/ILookupService/RemoveTasksFromActivityResponse" message="tns:ILookupService_RemoveTasksFromActivity_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddTasksToActivity">
+      <wsdl:input wsaw:Action="http://FinalBuild.co.uk/LookupService/ILookupService/AddTasksToActivity" message="tns:ILookupService_AddTasksToActivity_InputMessage" />
+      <wsdl:output wsaw:Action="http://FinalBuild.co.uk/LookupService/ILookupService/AddTasksToActivityResponse" message="tns:ILookupService_AddTasksToActivity_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveTaskSequence">
+      <wsdl:input wsaw:Action="http://FinalBuild.co.uk/LookupService/ILookupService/SaveTaskSequence" message="tns:ILookupService_SaveTaskSequence_InputMessage" />
+      <wsdl:output wsaw:Action="http://FinalBuild.co.uk/LookupService/ILookupService/SaveTaskSequenceResponse" message="tns:ILookupService_SaveTaskSequence_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+</wsdl:definitions>

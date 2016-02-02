@@ -1,0 +1,17 @@
+﻿@model IntegrationWebSiteMvc.Models.DashboardModel
+
+@{
+    ViewBag.Title = "Dashboard";
+}
+
+<!--
+<div>
+@foreach (var item in Model.Charts)
+{
+    @Html.Partial("ChartWrapperControl", item)
+}
+</div>
+-->
+
+<iframe id="aspNetFrame" src = @string.Format("http://{0}/IntegrationWebSite/Forms/Dashboard.aspx", global_asax.AspNetSiteUrl) style="height:600em; width:100%">
+</iframe>

@@ -1,0 +1,45 @@
+﻿@{
+    ViewBag.Title = "LookupData";
+}
+
+<script language="javascript" type="text/javascript">
+    function pageY(elem) 
+    {
+        return elem.offsetParent ? (elem.offsetTop + pageY(elem.offsetParent)) : elem.offsetTop;
+    }
+    
+    var buffer = 10; //scroll bar buffer
+
+    function resizeIframe() 
+    {
+        var frameName = null;
+        var list = document.getElementsByTagName('iframe');
+
+        if (list != null && list.length > 0) 
+        {
+            frameName = list[0].id;
+            // alert(frameName); 
+        }
+
+        if (frameName != null) 
+        {
+            var height = window.innerHeight || document.body.clientHeight || document.documentElement.clientHeight;
+            height -= pageY(document.getElementById(frameName)) + buffer;
+            height = (height < 0) ? 0 : height;
+            document.getElementById(frameName).style.height = height + 'px';
+        }
+    }
+
+    /*
+    // NB: The iframe script does not work when deployed to DEVAPPS1. Skip doing it this way for now at least and use cssStyle height=100em, width=100% instead.
+    window.onresize = resizeIframe;
+    window.onload = resizeIframe;
+    */
+</script>
+
+<h2>Activity - LookupData</h2>
+<div>
+    <a href="@Url.RequestContext.HttpContext.Request.UrlReferrer.PathAndQuery">Back to list</a>
+    <iframe id="aspNetFrame" src ="@Url.Content("../../Forms/LookupDataForm.aspx?activityID=")@ViewBag.ActivityID.ToString()" style="height:100em; width:100%">
+    </iframe>
+</div>

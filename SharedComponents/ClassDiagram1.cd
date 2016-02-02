@@ -1,0 +1,490 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Font Name="Tahoma" Size="8.25" />
+  <Class Name="BusinessObjects.Base" Collapsed="true">
+    <Position X="8.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Classes\Base.cs</FileName>
+      <HashCode>gAIAAAgIMBCQAiSIAABwAIBIADBIIAMEwECBLAEIQBA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BusinessObjects.BaseBindingList&lt;T&gt;" Collapsed="true">
+    <Position X="7.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Classes\Base.cs</FileName>
+      <HashCode>ABAAAgAAAAACAEAAAABQACBAAAEIAAiIAAAQABAAECA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BusinessObjects.PropertyComparer&lt;T&gt;" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="22.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Classes\Base.cs</FileName>
+      <HashCode>EAAAAAAAIBAAAAAAgAACAAAAAAAAAIAAAABIAAAAAAA=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="BusinessObjects.Utilities" Collapsed="true">
+    <Position X="22.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Classes\Base.cs</FileName>
+      <HashCode>AAAAAAABAAAAAAAAAAAAAAAAQAAAAAAAAAAABAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BusinessObjects.ApplicationContext" Collapsed="true">
+    <Position X="19" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Classes\Base.cs</FileName>
+      <HashCode>AAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BusinessObjects.GenericComparer" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="20.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Classes\CollectionSort.cs</FileName>
+      <HashCode>AAAEAACABAAAAAAAAAAAAAAAAAAAABAAAJBAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="BusinessObjects.SortableCollectionBase" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="22.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Classes\CollectionSort.cs</FileName>
+      <HashCode>AAAEAAAABAAAAAAAAAAQAAAAAAAAABCAABAAgAAAAAA=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="BusinessObjects.RestrictionAttribute" Collapsed="true">
+    <Position X="22.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Classes\CustomAttributes.cs</FileName>
+      <HashCode>AAAAAAAAAAABAACCAAAAAAIRAAAAAAAAAIgAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BusinessObjects.ReportCollection" Collapsed="true">
+    <Position X="20.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Classes\Reporting.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BusinessObjects.Report" Collapsed="true">
+    <Position X="19" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Classes\Reporting.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAQAQAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BusinessObjects.Query" Collapsed="true">
+    <Position X="24.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Classes\Reporting.cs</FileName>
+      <HashCode>AAAAAAAAAgAAAAQAAAAAAAQAAAAAAAEAAIAABAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BusinessObjects.QueryCollection" Collapsed="true">
+    <Position X="26" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Classes\Reporting.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BusinessObjects.SerializableHashTable" Collapsed="true">
+    <Position X="26" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Classes\SerializableHashTable.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BusinessObjects.KeyValuePair" Collapsed="true">
+    <Position X="22.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Classes\SerializableHashTable.cs</FileName>
+      <HashCode>AAAAAAACAAAAABQAAAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BusinessObjects.SerializableAssembly" Collapsed="true">
+    <Position X="24.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Classes\SerializableTypeMemberClasses.cs</FileName>
+      <HashCode>AAAAAAEAAAAAAIAAAAIAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BusinessObjects.SerializableNamespace" Collapsed="true">
+    <Position X="27.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Classes\SerializableTypeMemberClasses.cs</FileName>
+      <HashCode>AgAAAAAAAAAAAAAAAAAAAAQIAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BusinessObjects.SerializableType" Collapsed="true">
+    <Position X="29.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Classes\SerializableTypeMemberClasses.cs</FileName>
+      <HashCode>AACAAAAAAAAAAAAAAAAAAAQIAAAAAAAAAAAAAAACAEA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BusinessObjects.SerializableTypeProperty" Collapsed="true">
+    <Position X="20.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Classes\SerializableTypeMemberClasses.cs</FileName>
+      <HashCode>AACAAAAAAAAAIAAAAIAAAAQAAAACABAAAQABAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BusinessObjects.SerializableTypeMethod" Collapsed="true">
+    <Position X="19" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Classes\SerializableTypeMemberClasses.cs</FileName>
+      <HashCode>AACAAAAAAAAAAAAAAAAAAAQAAAAAAABAAAABAAAEAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BusinessObjects.ValidationException" Collapsed="true">
+    <Position X="19" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Classes\Validation.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAABAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BusinessObjects.ValidationExceptionCollection" Collapsed="true">
+    <Position X="20.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Classes\Validation.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BusinessObjects.ValidationClass" Collapsed="true">
+    <Position X="29.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Classes\Validation.cs</FileName>
+      <HashCode>AAAAAAAAAACEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BusinessObjects.ValidationBase" Collapsed="true">
+    <Position X="27.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Classes\Validation.cs</FileName>
+      <HashCode>AAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FinalBuild.DataAccess" Collapsed="true">
+    <Position X="24.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Classes\DataAccess.cs</FileName>
+      <HashCode>gAQNCAAAAAAAwggABAQgAJhAFAACAAEDQCAAEBQEAgA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FinalBuild.DataTypeConverter" Collapsed="true">
+    <Position X="27.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Classes\DataAccess.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FinalBuild.DataEncryption" Collapsed="true">
+    <Position X="26" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Classes\DataEncryption.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAABAAIAAAAAAAAAAAAAAAAAAIAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FinalBuild.Encryption" Collapsed="true">
+    <Position X="29.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Classes\Encryption.cs</FileName>
+      <HashCode>AQAAAAAAAAAAAAAQAAAAAhAAAAAACAAAAAgIAQAACQA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FinalBuild.SymmetricEncryptionDataValidationException" Collapsed="true">
+    <Position X="29.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Classes\Encryption.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAAAAABAAAEAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FinalBuild.EnvironmentInfo" Collapsed="true">
+    <Position X="19" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Classes\EnvironmentInfo.cs</FileName>
+      <HashCode>AAACIAAAAAAAAAAAAABAAAQAAggAAAAAAAAAQAAOAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FinalBuild.LogWriter" Collapsed="true">
+    <Position X="26" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Classes\LogWriter.cs</FileName>
+      <HashCode>QAAAIIAAEAAAAAAAAAAAAAAQAAAQAAQAAAAAABBIABA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FinalBuild.LoggingSection" Collapsed="true">
+    <Position X="24.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Classes\LogWriter.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAABABAAAABAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FinalBuild.SQLServerLog" Collapsed="true">
+    <Position X="26" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Classes\LogWriter.cs</FileName>
+      <HashCode>ACCAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FinalBuild.ClientLogEntry" Collapsed="true">
+    <Position X="20.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Classes\LogWriter.cs</FileName>
+      <HashCode>gAAAEABAABAAAAAAAAAAAAgAAAAAAACAAAACMAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FinalBuild.ClientLogEntryCollection" Collapsed="true">
+    <Position X="22.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Classes\LogWriter.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FinalBuild.Mail" Collapsed="true">
+    <Position X="27.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Classes\Mail.cs</FileName>
+      <HashCode>AAAAAAEAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAIAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FinalBuild.MessageQueueSection" Collapsed="true">
+    <Position X="20.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Classes\QueueConfiguration.cs</FileName>
+      <HashCode>AAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FinalBuild.MessageQueueElement" Collapsed="true">
+    <Position X="29.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Classes\QueueConfiguration.cs</FileName>
+      <HashCode>AAAAAAAAAAAgAAAAAQAAAAQAAAAAAAAAAAQCAAAAgAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FinalBuild.MessageQueueElementCollection" Collapsed="true">
+    <Position X="19" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Classes\QueueConfiguration.cs</FileName>
+      <HashCode>AAACAAAAAAAAMAAACAAAAAAAAAABAAAAAAIAAAACAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FinalBuild.QueueWriter" Collapsed="true">
+    <Position X="27.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Classes\QueueWriter.cs</FileName>
+      <HashCode>AAAAAAAEAAACAAAAAAAAAAIAAABAAAAAQAAEAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FinalBuild.Randomizer" Collapsed="true">
+    <Position X="29.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Classes\Randomizer.cs</FileName>
+      <HashCode>AAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAE=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FinalBuild.StateManager" Collapsed="true">
+    <Position X="27.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Classes\StateManager.cs</FileName>
+      <HashCode>AgAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAADAEA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FinalBuild.UserMessageWriter" Collapsed="true">
+    <Position X="19" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Classes\UserMessaging.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAEAAAAAAAEAAAABAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FinalBuild.UserMessagingSection" Collapsed="true">
+    <Position X="20.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Classes\UserMessaging.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FinalBuild.SQLServerDB" Collapsed="true">
+    <Position X="24.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Classes\UserMessaging.cs</FileName>
+      <HashCode>AACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FinalBuild.UserMessageCollection" Collapsed="true">
+    <Position X="5" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Classes\UserMessaging.cs</FileName>
+      <HashCode>CAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FinalBuild.Utilities" Collapsed="true">
+    <Position X="24.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Classes\Utilities.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FinalBuild.ValidatePostCode" Collapsed="true">
+    <Position X="26" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Classes\ValidatePostCode.cs</FileName>
+      <HashCode>AAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FinalBuild.BackgroundTaskSettings" Collapsed="true">
+    <Position X="14.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Schema\MobileWebService.cs</FileName>
+      <HashCode>AAAAQAAAAAAgAEAAAAIAAAQAAAAAAAAAAAAAAQIAAgA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FinalBuild.BackgroundTaskSettingsCollection" Collapsed="true">
+    <Position X="14" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Schema\MobileWebService.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FinalBuild.DeviceInfo" Collapsed="true">
+    <Position X="0.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Schema\MobileWebService.cs</FileName>
+      <HashCode>BAAKAAAABAAQEADAAAAgAAAEAUAAAkACwBAgABoABBA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FinalBuild.ServerFeedback" Collapsed="true">
+    <Position X="5.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Schema\MobileWebService.cs</FileName>
+      <HashCode>AABAAABAAABAgggAAAAAAhAAAAAAAAAAAiAAAAAAMAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FinalBuild.SupportingDataStatistics" Collapsed="true">
+    <Position X="7.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Schema\MobileWebService.cs</FileName>
+      <HashCode>AAAAAAAAAAEAAAAAAAAAAAAAAEAAAAAAAAAAIAIAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FinalBuild.SupportingDataStatisticsCollection" Collapsed="true">
+    <Position X="7.25" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Schema\MobileWebService.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FinalBuild.ThrottlingParameters" Collapsed="true">
+    <Position X="12" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Schema\MobileWebService.cs</FileName>
+      <HashCode>ABAAAAAAAAAABAIAAAABAAAAAEAAAAAAhAAAAAIAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FinalBuild.ThrottlingParametersCollection" Collapsed="true">
+    <Position X="11.75" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Schema\MobileWebService.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FinalBuild.UserMessage" Collapsed="true">
+    <Position X="16.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Schema\MobileWebService.cs</FileName>
+      <HashCode>AAAQBAQAAAAAiACAAIABQAIAAIABAAAAAAgEAAAIAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FinalBuild.WorkReceivedAcknowledgement" Collapsed="true">
+    <Position X="3" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Schema\MobileWebService.cs</FileName>
+      <HashCode>CAAAREAAAQAEAAAAgAAAAAgAQIAAAAQAAAAAEAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FinalBuild.WorkReceivedAcknowledgementCollection" Collapsed="true">
+    <Position X="0.5" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Schema\MobileWebService.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FinalBuild.WorkReceivedComplexAcknowledgement" Collapsed="true">
+    <Position X="3" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Schema\MobileWebService.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAIAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FinalBuild.WorkReceivedComplexAcknowledgementCollection" Collapsed="true">
+    <Position X="2.75" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Schema\MobileWebService.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FinalBuild.WorkStatusInfo" Collapsed="true">
+    <Position X="9.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Schema\MobileWebService.cs</FileName>
+      <HashCode>AAAAAAAAAAQAmDAAEBQAACQEIwAeAAAAACBAAwAAACA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FinalBuild.WorkStatusInfoCollection" Collapsed="true">
+    <Position X="9.5" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Schema\MobileWebService.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="BusinessObjects.IGenericComparer" Collapsed="true">
+    <Position X="19" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Classes\CollectionSort.cs</FileName>
+      <HashCode>AAAAAAAABAAAAAAAAAAAAAAAAAAAABAAAIAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="BusinessObjects.ISortable" Collapsed="true">
+    <Position X="20.75" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Classes\CollectionSort.cs</FileName>
+      <HashCode>AAAAAAAABAAAAAAAAAAQAAAAAAAAABCAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="BusinessObjects.SaveAction" Collapsed="true">
+    <Position X="26" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Classes\Base.cs</FileName>
+      <HashCode>AAQAAEAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAEAAAA=</HashCode>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="FinalBuild.eEnvironmentName" Collapsed="true">
+    <Position X="19" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Classes\EnvironmentInfo.cs</FileName>
+      <HashCode>AAAAEAAAAAAgAAAAAAAAAAAAEAAAAAAACAAACAABAAA=</HashCode>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="FinalBuild.eLoggingMechanism" Collapsed="true">
+    <Position X="22.5" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Classes\LogWriter.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAgAAAAAAAAAEAAAAAAAAAAECAAQ=</HashCode>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="FinalBuild.eLoggingLevel" Collapsed="true">
+    <Position X="20.75" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Schema\MobileWebService.cs</FileName>
+      <HashCode>AAAAAAAAAIAAAIAAAAAAAAAAAAAAAAAAAAAAAAEAAAA=</HashCode>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="FinalBuild.eWorkDownloadedAction" Collapsed="true">
+    <Position X="24.25" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Schema\MobileWebService.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAEAAABAAAEAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Enum>
+</ClassDiagram>

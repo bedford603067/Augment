@@ -1,0 +1,86 @@
+﻿@model IEnumerable<IntegrationWebSiteMvc.Models.Employee>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<script src="~/Scripts/jquery-1.7.1.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('table tr:not(.Header):even').addClass('d0');
+
+        $('table tr:not(.Header):odd').addClass("d1");
+    });
+</script>
+
+<h2>Users</h2>
+
+<p>
+    @Html.ActionLink("Create New", "EditOrCreate", new { id = string.Empty })
+</p>
+<table>
+    <tr>
+        <th>
+            Login
+        </th>
+        <th>
+            Emp No.
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Surname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Forenames)
+        </th>
+        <th>
+            <center>Email</center>
+        </th>
+        <th>
+            Mobile
+        </th>
+        <th>
+            Primary Area
+        </th>
+        <th>
+            Sub Area
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ADLoginID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EmployeeNo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Surname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Forenames)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EmailAddress)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MobileNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AreaDetails.Primary)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AreaDetails.Sub)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "EditOrCreate", new { id=item.ADLoginID }) |
+            @Html.ActionLink("Skills", "Skills", new { id=item.ADLoginID }) |
+            @Html.ActionLink("NonAvailability", "NonAvailability", new { id = item.ADLoginID }) 
+            @Html.ActionLink("Areas", "Areas", new { id = item.ADLoginID }) 
+            @Html.ActionLink("PostCodes", "PostCodes", new { id = item.ADLoginID }) 
+        </td>
+    </tr>
+}
+
+</table>

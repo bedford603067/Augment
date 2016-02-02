@@ -1,0 +1,190 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://FinalBuild.co.uk/ExternalDataService" elementFormDefault="qualified" targetNamespace="http://FinalBuild.co.uk/ExternalDataService" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import namespace="urn:BusinessObjects.WorkManagement" />
+  <xs:import namespace="http://schemas.datacontract.org/2004/07/BusinessObjects.AssetManagement" />
+  <xs:import namespace="http://schemas.datacontract.org/2004/07/" />
+  <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:element name="SearchStock">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="materialSearchCriteria" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="materialID" type="xs:int" />
+        <xs:element minOccurs="0" name="jobID" type="xs:int" />
+        <xs:element minOccurs="0" name="locationCode" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SearchStockResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="urn:BusinessObjects.WorkManagement" minOccurs="0" name="SearchStockResult" nillable="true" type="q1:ArrayOfStock" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeleteStockItemsByMaterialAndJob">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="urn:BusinessObjects.WorkManagement" minOccurs="0" name="stockItem" nillable="true" type="q2:StockItem" />
+        <xs:element minOccurs="0" name="quantity" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeleteStockItemsByMaterialAndJobResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="DeleteStockItemsByMaterialAndJobResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateStockItemsByMaterialAndJob">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="urn:BusinessObjects.WorkManagement" minOccurs="0" name="stockItem" nillable="true" type="q3:StockItem" />
+        <xs:element minOccurs="0" name="location" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="quantity" type="xs:int" />
+        <xs:element minOccurs="0" name="clearJob" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateStockItemsByMaterialAndJobResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="UpdateStockItemsByMaterialAndJobResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SearchAssets">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/BusinessObjects.AssetManagement" minOccurs="0" name="searchCriteria" nillable="true" type="q4:AssetSearchCriteria" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SearchAssetsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q5="urn:BusinessObjects.WorkManagement" minOccurs="0" name="SearchAssetsResult" nillable="true" type="q5:ArrayOfAsset" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SearchCustomers">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/" minOccurs="0" name="searchCriteria" nillable="true" type="q6:CustomerSearchCriteria" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SearchCustomersResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q7="urn:BusinessObjects.WorkManagement" minOccurs="0" name="SearchCustomersResult" nillable="true" type="q7:ArrayOfCustomer" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SearchMaterials">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="searchCriteria" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="id" type="xs:int" />
+        <xs:element minOccurs="0" name="manufacturer" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="code" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="description" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SearchMaterialsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q8="urn:BusinessObjects.WorkManagement" minOccurs="0" name="SearchMaterialsResult" nillable="true" type="q8:ArrayOfMaterial" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SearchMeasurements">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="searchCriteria" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SearchMeasurementsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q9="urn:BusinessObjects.WorkManagement" minOccurs="0" name="SearchMeasurementsResult" nillable="true" type="q9:ArrayOfPerformanceMeasurement" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="EvolveMetadata">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q10="urn:BusinessObjects.WorkManagement" minOccurs="0" name="materials" nillable="true" type="q10:ArrayOfMaterial" />
+        <xs:element xmlns:q11="urn:BusinessObjects.WorkManagement" minOccurs="0" name="measurements" nillable="true" type="q11:ArrayOfPerformanceMeasurement" />
+        <xs:element xmlns:q12="urn:BusinessObjects.WorkManagement" minOccurs="0" name="tasks" nillable="true" type="q12:ArrayOfActivityTask" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="EvolveMetadataResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UploadAssetData">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/BusinessObjects.AssetManagement" minOccurs="0" name="assetUpdate" nillable="true" type="q13:AssetUpdate" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UploadAssetDataResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q14="urn:BusinessObjects.WorkManagement" minOccurs="0" name="UploadAssetDataResult" nillable="true" type="q14:AssetCollection" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UploadAssetMeasurements">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="assetID" type="xs:int" />
+        <xs:element xmlns:q15="urn:BusinessObjects.WorkManagement" minOccurs="0" name="measurements" nillable="true" type="q15:PerformanceMeasurementCollection" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UploadAssetMeasurementsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="UploadAssetMeasurementsResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UploadCustomerData">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q16="urn:BusinessObjects.WorkManagement" minOccurs="0" name="customer" nillable="true" type="q16:Customer" />
+        <xs:element minOccurs="0" name="userID" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UploadCustomerDataResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q17="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="UploadCustomerDataResult" nillable="true" type="q17:ArrayOfint" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SaveContactInfo">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="parentEntityID" type="xs:int" />
+        <xs:element minOccurs="0" name="parentEntityType" nillable="true" type="xs:string" />
+        <xs:element xmlns:q18="urn:BusinessObjects.WorkManagement" minOccurs="0" name="contacts" nillable="true" type="q18:ArrayOfContact" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SaveContactInfoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="SaveContactInfoResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

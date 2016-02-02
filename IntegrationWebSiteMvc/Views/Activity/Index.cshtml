@@ -1,0 +1,68 @@
+﻿@model IEnumerable<BusinessObjects.WorkManagement.Activity>
+
+@{
+    ViewBag.Title = "Activity";
+}
+
+<script src="~/Scripts/jquery-1.7.1.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('table tr:not(.Header):even').addClass('d0');
+
+        $('table tr:not(.Header):odd').addClass("d1");
+    });
+</script>
+
+<h2>Activities</h2>
+
+<p>
+    @Html.ActionLink("Create New", "EditOrCreate", new { id = 0 })
+</p>
+<table>
+    <tr style="background-color:#253980; color:White"> 
+        <th>
+            @Html.DisplayNameFor(model => model.ID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Code)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            Schedule
+        </th>
+        <th>
+            Dispatch
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Code)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SchedulingPriority.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DispatchPriority.Description)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "EditOrCreate", new { id = item.ID }) |
+            @Html.ActionLink("Tasks", "Tasks", new { id = item.ID }) |
+            <!-- 
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+            -->
+        </td>
+    </tr>
+}
+
+</table>

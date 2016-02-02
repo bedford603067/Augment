@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xs:schema id="MobileSchema"
+                  targetNamespace="http://FinalBuild.co.uk/MobileSchema.xsd"
+                  elementFormDefault="qualified"
+                  xmlns="http://FinalBuild.co.uk/MobileSchema.xsd"
+                  xmlns:mstns="http://FinalBuild.co.uk/MobileSchema.xsd"
+                  xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+
+	<!-- Imports Only required -->
+	<xs:import namespace="http://FinalBuild.co.uk/BusinessObjects.AssetMaintenance" schemaLocation="C:\Work\WMS\trunk\src\Core\trunk\src\Libraries\MaintenanceLibrary\Schema\BusinessObjects.xsd" />
+	<xs:import namespace="http://FinalBuild.co.uk/BusinessObjects.FileProcessing" schemaLocation="C:\Work\Components\Libraries\FileProcessingComponents\Schema\BusinessObjects.xsd" />
+	<xs:import namespace="http://FinalBuild.co.uk/BusinessObjects.MeterReading" schemaLocation="C:\Work\WMS\trunk\src\Core\trunk\src\Libraries\MeterReadingLibrary\Schema\BusinessObjects.xsd" />
+  <xs:import namespace="http://FinalBuild.co.uk/BusinessObjects.Inspections" schemaLocation="C:\Work\WMS\trunk\src\Core\trunk\src\Libraries\InspectionLibrary\Schema\BusinessObjects.xsd" />	
+</xs:schema>

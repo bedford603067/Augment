@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/BusinessObjects.AssetManagement" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/BusinessObjects.AssetManagement" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import namespace="urn:BusinessObjects.WorkManagement" />
+  <xs:import namespace="http://schemas.datacontract.org/2004/07/BusinessObjects" />
+  <xs:complexType name="AssetSearchCriteria">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q1="urn:BusinessObjects.WorkManagement" base="q1:ReferenceType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="CodeOrDescription" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="IncludeAttributes" type="xs:boolean" />
+          <xs:element minOccurs="0" name="IncludeLocation" type="xs:boolean" />
+          <xs:element minOccurs="0" name="IncludeMeasurementHistory" type="xs:boolean" />
+          <xs:element minOccurs="0" name="ParentCodeOrDescription" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ParentID" type="xs:int" />
+          <xs:element minOccurs="0" name="ParentType" type="tns:eAssetSearchType" />
+          <xs:element minOccurs="0" name="Type" type="tns:eAssetSearchType" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="AssetSearchCriteria" nillable="true" type="tns:AssetSearchCriteria" />
+  <xs:simpleType name="eAssetSearchType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Unspecified" />
+      <xs:enumeration value="Site" />
+      <xs:enumeration value="Process" />
+      <xs:enumeration value="Asset" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="eAssetSearchType" nillable="true" type="tns:eAssetSearchType" />
+  <xs:complexType name="AssetUpdate">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q2="http://schemas.datacontract.org/2004/07/BusinessObjects" base="q2:Base">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="AssetID" type="xs:int" />
+          <xs:element minOccurs="0" name="AssetType" nillable="true" type="xs:string" />
+          <xs:element xmlns:q3="urn:BusinessObjects.WorkManagement" minOccurs="0" name="Attributes" nillable="true" type="q3:AssetAttributeCollection" />
+          <xs:element minOccurs="0" name="Code" nillable="true" type="xs:string" />
+          <xs:element xmlns:q4="urn:BusinessObjects.WorkManagement" minOccurs="0" name="Customer" nillable="true" type="q4:Customer" />
+          <xs:element minOccurs="0" name="CustomerID" type="xs:int" />
+          <xs:element minOccurs="0" name="DateSubmitted" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Group" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="HasLocationChanged" type="xs:boolean" />
+          <xs:element minOccurs="0" name="ID" type="xs:int" />
+          <xs:element xmlns:q5="urn:BusinessObjects.WorkManagement" minOccurs="0" name="Location" nillable="true" type="q5:Location" />
+          <xs:element xmlns:q6="urn:BusinessObjects.WorkManagement" minOccurs="0" name="ParentAsset" nillable="true" type="q6:ReferenceType" />
+          <xs:element minOccurs="0" name="UserID" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="AssetUpdate" nillable="true" type="tns:AssetUpdate" />
+</xs:schema>

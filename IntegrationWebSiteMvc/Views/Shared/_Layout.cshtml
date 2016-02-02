@@ -1,0 +1,75 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>@ViewBag.Title - Integration Web Site MVC Application</title>
+        <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+        <meta name="viewport" content="width=device-width" />
+        @Styles.Render("~/Content/css")
+        @Styles.Render("~/Content/themes/base/css")
+        @Scripts.Render("~/bundles/modernizr")
+
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/jqueryui")
+
+        <script type="text/javascript" src="@Url.Content("~/scripts/jquery.unobtrusive-ajax.js")"></script> 
+
+        <script language="javascript" type="text/javascript">
+            function Redirect(url) 
+            {
+                if (url == null || url == '') {
+                    location.reload();
+                }
+                else {
+                    // location.href = 'http://www.google.co.uk';
+                    location.href = url;
+                }
+            }
+            function RaiseAlert(message) 
+            {
+                // message = 'Raise Alert was called';
+                alert(message);
+            }
+        </script>
+    </head>
+    <body>
+        <header>
+            <div class="content-wrapper">
+                <div class="float-left">
+                    <img alt="Logo" src="@Url.Content("~/Content/Augment_Blue.gif")" /> 
+                </div>
+                <div id="menu">
+                    <ul id="nav">
+                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                        <li>@Html.ActionLink("Customers", "Index", "Customers")</li>
+                        <li>@Html.ActionLink("Sites", "Index", "Assets")</li>
+                        <li>@Html.ActionLink("Users", "Index", "Users")</li>
+                        <li><a href="#" target="_self" >Lookup Data</a>
+                            <ul>
+                                <li>@Html.ActionLink("Activities", "Index", "Activity")</li>
+                                <li>@Html.ActionLink("Areas", "index", "Areas")</li>
+                                <li>@Html.ActionLink("Skills", "Skills", "Activity")</li>
+                                <li>@Html.ActionLink("Stock", "Index", "Stock")</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </header>
+        <div id="body">  
+            @RenderSection("featured", required: false)
+            <section class="content-wrapper main-content clear-fix">
+                @RenderBody()
+            </section>
+        </div>
+        <footer>
+            <div class="content-wrapper">
+                <div class="float-left">
+                    <p>&copy; @DateTime.Now.Year - Augment Software Ltd</p>
+                </div>
+            </div>
+        </footer>
+
+        @RenderSection("scripts", required: false)
+    </body>
+</html>

@@ -1,0 +1,32 @@
+﻿@model IEnumerable<IntegrationWebSiteMvc.Models.PostCodeResponsibility>
+
+@{
+    ViewBag.Title = "PostCodes";
+}
+
+<h2>Post Codes</h2>
+
+<p>
+    @Html.ActionLink("Create New", "EditOrCreatePostCode", "Users", new { id = 0, adLoginID = ViewBag.ADLoginID }, null)
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.PostCodePattern)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.PostCodePattern)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "EditOrCreatePostCode","Users", new { id=item.ID, adLoginID=ViewBag.ADLoginID }, null) |
+            @Html.ActionLink("Delete", "EditOrCreatePostCode", "Users", new { id = item.ID, adLoginID = ViewBag.ADLoginID }, null) |
+        </td>
+    </tr>
+}
+
+</table>

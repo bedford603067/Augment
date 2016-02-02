@@ -1,0 +1,44 @@
+﻿@model BusinessObjects.WorkManagement.Skill
+
+@{
+    ViewBag.Title = "EditOrCreateSkill";
+}
+
+<h2>User Skill</h2>
+
+<p>
+    @if (!string.IsNullOrEmpty(Model.Code))
+    {
+        @Html.ActionLinkButton("Delete", "DeleteSkill", "Users", new RouteValueDictionary(new { id = Model.ID, adLoginID = ViewBag.ADLoginID })) 
+    }
+</p>
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Skill</legend>
+
+        @Html.HiddenFor(model => model.ID)
+
+        <div class="editor-label">
+            Area
+        </div>
+        <div class="editor-field">
+            @Html.DropDownListFor(x => x.Code, new SelectList(ViewBag.Skills, "Code", "Description", Model.Code), new { style = "font-size:medium;" }) | 
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

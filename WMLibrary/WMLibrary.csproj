@@ -1,0 +1,189 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{25F01158-020D-44B8-9783-C5DE79E14788}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BusinessObjects.WorkManagement</RootNamespace>
+    <AssemblyName>WMLibrary</AssemblyName>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <IsWebBootstrapper>true</IsWebBootstrapper>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
+    <PublishUrl>http://localhost/WMLibrary/</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Web</InstallFrom>
+    <UpdateEnabled>true</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization, Version=3.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Classes\ActivityTask.cs" />
+    <Compile Include="Classes\ActivityTaskCollection.cs" />
+    <Compile Include="Classes\ActivityTree.cs" />
+    <Compile Include="Classes\AreaLookupData.cs" />
+    <Compile Include="Classes\Asset.cs" />
+    <Compile Include="Classes\AssignmentConstraints.cs" />
+    <Compile Include="Classes\AssignmentDetails.cs" />
+    <Compile Include="Classes\CommentAuditRecordCollection.cs" />
+    <Compile Include="Classes\EngineerNonAvailabilityCollection.cs" />
+    <Compile Include="Classes\EngineerSkillCollection.cs" />
+    <Compile Include="Classes\EngineerStandbyCollection.cs" />
+    <Compile Include="Classes\Exceptions.cs" />
+    <Compile Include="Classes\ExtendedAssignment.cs" />
+    <Compile Include="Classes\ExtendedJob.cs" />
+    <Compile Include="Classes\FileAssociation.cs" />
+    <Compile Include="Classes\History.cs" />
+    <Compile Include="Classes\Job.cs" />
+    <Compile Include="Classes\Appointment.cs" />
+    <Compile Include="Classes\Domain.cs" />
+    <Compile Include="Classes\JobAppointmentChange.cs" />
+    <Compile Include="Classes\JobReferences.cs" />
+    <Compile Include="Classes\JobStatusChange.cs" />
+    <Compile Include="Classes\JobUpdate.cs" />
+    <Compile Include="Classes\JobUpdateCollection.cs" />
+    <Compile Include="Classes\Location.cs" />
+    <Compile Include="Classes\LookupContainer.cs" />
+    <Compile Include="Classes\LookupData.cs" />
+    <Compile Include="Classes\Material.cs" />
+    <Compile Include="Classes\OnHoldReasonCollection.cs" />
+    <Compile Include="Classes\PerformanceMeasurements.cs" />
+    <Compile Include="Classes\PriorityLookupData.cs" />
+    <Compile Include="Classes\QueueAssistant.cs" />
+    <Compile Include="Classes\SkillsMatrix.cs" />
+    <Compile Include="Classes\StockItemCollection.cs" />
+    <Compile Include="Classes\SupportingData.cs" />
+    <Compile Include="Classes\Worker.cs" />
+    <Compile Include="Classes\WorkerAddress.cs" />
+    <Compile Include="Classes\WorkerCollection.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Classes\XmlSerializationInfo.cs" />
+    <Compile Include="DataAccess\DataAccessCallsInstances.cs" />
+    <Compile Include="DataAccess\DataAccessCallStatics.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Schema\BusinessObjects.cs">
+      <DependentUpon>BusinessObjects.xsd</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Schema\BusinessObjects.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schema\BusinessObjects.xsx">
+      <DependentUpon>BusinessObjects.xsd</DependentUpon>
+    </None>
+    <None Include="Schema\IntegrationSchema.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schema\IntegrationSchema.xsx">
+      <DependentUpon>IntegrationSchema.xsd</DependentUpon>
+    </None>
+    <None Include="Schema\MobileSchema.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schema\MobileSchema.xsx">
+      <DependentUpon>MobileSchema.xsd</DependentUpon>
+    </None>
+    <None Include="Schema\SystemTypes.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schema\SystemTypes.xsx">
+      <DependentUpon>SystemTypes.xsd</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SharedComponents\SharedComponents.csproj">
+      <Project>{F1A38271-0B4A-4011-84CB-19E611940BE1}</Project>
+      <Name>SharedComponents</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Interfaces\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

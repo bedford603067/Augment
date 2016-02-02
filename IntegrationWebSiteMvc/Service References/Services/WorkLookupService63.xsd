@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/BusinessObjects.FileProcessing" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/BusinessObjects.FileProcessing" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="FileRequest">
+    <xs:sequence>
+      <xs:element name="_hasFileBeenReceived" type="xs:boolean" />
+      <xs:element name="_jobID" nillable="true" type="xs:string" />
+      <xs:element name="_sourceSystem" nillable="true" type="xs:string" />
+      <xs:element name="mblnIsEncrypted" type="xs:boolean" />
+      <xs:element name="mintSizeInBytes" type="xs:int" />
+      <xs:element name="mstrAssociationType" nillable="true" type="xs:string" />
+      <xs:element name="mstrDescription" nillable="true" type="xs:string" />
+      <xs:element name="mstrHash" nillable="true" type="xs:string" />
+      <xs:element name="mstrLocalPath" nillable="true" type="xs:string" />
+      <xs:element name="mstrPath" nillable="true" type="xs:string" />
+      <xs:element name="mstrServer" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="FileRequest" nillable="true" type="tns:FileRequest" />
+</xs:schema>

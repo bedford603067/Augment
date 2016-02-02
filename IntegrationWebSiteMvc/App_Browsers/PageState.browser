@@ -1,0 +1,9 @@
+﻿<browsers>
+  <!--
+  <browser refID="Default">
+    <controlAdapters>
+      <adapter controlType="System.Web.UI.Page" adapterType="SessionPageStateAdapter" />
+    </controlAdapters>
+  </browser>
+  -->
+</browsers>

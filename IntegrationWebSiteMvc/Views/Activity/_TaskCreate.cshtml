@@ -1,0 +1,44 @@
+﻿@model BusinessObjects.WorkManagement.ActivityTask
+
+<script src="~/Scripts/jquery-1.7.1.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+<h2>Add Task</h2>
+
+@using (Html.BeginForm("_TaskCreate","Activity")) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>ActivityTask</legend>
+
+        @{ Model.TemplateID = ViewBag.ActivityID; }
+        @Html.HiddenFor(model => model.TemplateID) <!-- NB: For a property to be set on the bound instance returned from the POST it must be bound to a Hidden or Visible field -->
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Description)
+        </div>
+        <div class="editor-field">
+            @Html.DropDownListFor(x => x.ID, new SelectList(ViewBag.Tasks, "ID", "Description", Model.ID), new { style = "font-size:medium;" }) 
+            @Html.ValidationMessageFor(model => model.Description)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Sequence)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Sequence)
+            @Html.ValidationMessageFor(model => model.Sequence)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<!--
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+-->

@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xs:schema id="MobileWebService" targetNamespace="http://FinalBuild.co.uk/FinalBuild"
+	elementFormDefault="qualified" xmlns="http://FinalBuild.co.uk/FinalBuild"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+
+  <!-- Elements (for XmlTypeExport purposes)  -->
+  <xs:element name="ServerFeedback" type="ServerFeedback" />
+  <xs:element name="UserMessages" type="UserMessageCollection" />
+  <xs:element name="CurrentWorkStatus" type="WorkStatusInfoCollection" />
+  <xs:element name="WorkReceivedAcknowledgements" type="WorkReceivedComplexAcknowledgementCollection" />
+  
+  <!-- Complex Types -->
+	<xs:complexType name="ServerFeedback">
+		<xs:sequence>
+			<xs:element name="DeviceSettings" type="DeviceInfo" />
+			<xs:element name="ServerTime" type="xs:dateTime" />
+			<xs:element name="LastDownloadDate" type="xs:dateTime" />
+			<xs:element name="LastUploadDate" type="xs:dateTime" />
+			<xs:element name="ThrottlingSettings" type="ThrottlingParametersCollection" />
+			<xs:element name="SupportingDataSettings" type="SupportingDataStatisticsCollection" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="DeviceInfo">
+		<xs:sequence>
+			<xs:element name="LoggingLevel" type="eLoggingLevel" />
+			<xs:element name="DownloadPollingInterval" type="xs:int" />
+			<xs:element name="MaxNoOfWorkItemsAllowed" type="xs:int">
+				<xs:annotation>
+					<xs:documentation>For MeterReading this is NoOfJobs present (Ad Hoc)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CurrentNoOfWorkItemsPresent" type="xs:int" />
+			<xs:element name="DownloadPollingWaitDuration" type="xs:int" />
+			<xs:element name="BackgroundTasks" type="BackgroundTaskSettingsCollection" />
+			<!-- Required for Meter Reading (Batching of Meters sent down per Round) -->
+			<xs:element name="UploadBatchSize" type="xs:int" />
+			<xs:element name="MaxNoOfSubItemsAllowed" type="xs:int">
+				<xs:annotation>
+					<xs:documentation>For MeterReading this is NoOfMeters present (Cyclic or Mini Round batch)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CurrentNoOfSubItemsPresent" type="xs:int" />
+			<xs:element name="MaxNoOfWorkItemsDisplayed" type="xs:int" />
+			<xs:element name="IsClientLockdownOn" type="xs:boolean" minOccurs="1" default="false">
+				<xs:annotation>
+					<xs:documentation>This flag denotes whether to restrict what Jobs the Mobile user can start. Logic to utilise this flag be interact with Stream (Region)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="BusinessStream" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>This is the Stream (Region) associated with the Mobile user</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+      <xs:element name="PageSize" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>Maximum number of records to display on the client per container ie. DataGrid</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <!-- Required for Mobile Client throttling -->
+      <xs:element name="SourceName" type="xs:string" />
+      <xs:element name="GroupPPM" type="xs:boolean" />
+      <xs:element name="ApplyToHierarchy" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>This flag denotes whether to hierarchically apply Device Info values to those groups (Regions/Users) within a particular Stream</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ThrottlingParameters">
+		<xs:sequence>
+			<xs:element name="BusinessStream" type="xs:string" />
+			<xs:element name="MaxNoOfWorkItemsPerDownload" type="xs:int" />
+			<xs:element name="CutoffDays" type="xs:int" />
+			<xs:element name="CutoffToCalendarDay" type="xs:boolean" />
+      <xs:element name="CutoffHours" type="xs:int" />
+      <xs:element name="SourceName" type="xs:string" />
+      <xs:element name="ThrottleChildren" type="xs:boolean" />
+      <xs:element name="OutOfHours" type="xs:boolean" />
+      <xs:element name="GroupPPM" type="xs:boolean" />
+      <xs:element name="ModifiedBy" type="xs:string" />
+      <xs:element name="ModifiedDate" type="xs:dateTime" />
+      <xs:element name="Comments" type="xs:string" />
+      
+    </xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ThrottlingParametersCollection">
+		<xs:sequence>
+			<xs:element name="ThrottlingParameters" type="ThrottlingParameters" maxOccurs="unbounded" minOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SupportingDataStatistics">
+		<xs:sequence>
+			<xs:element name="BusinessStream" type="xs:string" />
+			<xs:element name="LastUpdatedDate" type="xs:dateTime" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SupportingDataStatisticsCollection">
+		<xs:sequence>
+			<xs:element name="SupportingDataStatistics" type="SupportingDataStatistics" maxOccurs="unbounded" minOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="UserMessage">
+		<xs:sequence>
+			<xs:element name="ID" type="xs:int" minOccurs="1" />
+			<xs:element name="Recipient" type="xs:string" />
+			<xs:element name="DateCreated" type="xs:dateTime" />
+			<xs:element name="Body" type="xs:string" />
+			<xs:element name="DateReceived" type="xs:dateTime" />
+			<xs:element name="Subject" type="xs:string" />
+			<xs:element name="Sender" type="xs:string" />
+			<xs:element name="TargetUrl" type="xs:string" />
+      <xs:element name="ExpiryMinutesAfterSent" type="xs:int" default="-1">
+        <xs:annotation>
+          <xs:documentation>No.of Minutes after Alert is sent to Expire it</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="ExpiryMinutesAfterCreation" type="xs:int" default="-1">
+        <xs:annotation>
+          <xs:documentation>No.of Minutes after Alert is created to Expire it</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="DateExpired" type="xs:dateTime">
+        <xs:annotation>
+          <xs:documentation>Datetime the message was Expired if indeed it was</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="PriorityLevel" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>Allows a Priority to be associated e.g Alert System property EscalationLevel</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="AlertID" type="xs:int" minOccurs="1" >
+        <xs:annotation>
+          <xs:documentation>The ID of the associated Alert</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+	</xs:complexType>
+  <xs:complexType name="UserMessageCollection">
+    <xs:sequence>
+      <xs:element name="UserMessage" type="UserMessage" maxOccurs="unbounded" minOccurs="1" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="BackgroundTaskSettings">
+    <xs:sequence>
+      <xs:element name="Name" type="xs:string" />
+      <xs:element name="Description" type="xs:string" />
+      <xs:element name="PollingInterval" type="xs:int" />
+      <xs:element name="PollingWaitDuration" type="xs:int" />
+      <!-- Potentially More.. e.g., FileName, MethodName for Delegate passed to polling task -->
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="BackgroundTaskSettingsCollection">
+    <xs:sequence>
+      <xs:element name="BackgroundTaskSettings" type="BackgroundTaskSettings" maxOccurs="unbounded" minOccurs="1" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="WorkStatusInfo">
+    <xs:sequence>
+      <xs:element name="ID" type="xs:int" minOccurs="1" />
+      <xs:element name="IsWorkPackageComplete" type="xs:boolean" />
+      <xs:element name="NoOfWorkItemsDownloaded" type="xs:int" />
+      <xs:element name="NoOfWorkItemsUploaded" type="xs:int" />
+      <xs:element name="WorkItemsToDo" type="xs:int" />
+      <xs:element name="WorkItemsAttempted" type="xs:int" />
+      <xs:element name="WorkItemsDone" type="xs:int" />
+      <xs:element name="HighPriorityWorkItemsToDo" type="xs:int" />
+      <xs:element name="HighPriorityWorkItemsAttempted" type="xs:int" />
+      <xs:element name="HighPriorityWorkItemsDone" type="xs:int" />
+      <xs:element name="LastWorkItemCompletedDate" type="xs:dateTime" />
+      <xs:element name="LatestBatchNo" type="xs:int" />      
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="WorkStatusInfoCollection">
+    <xs:sequence>
+      <xs:element name="WorkStatusInfo" type="WorkStatusInfo" maxOccurs="unbounded" minOccurs="1" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="WorkReceivedAcknowledgement">
+    <xs:sequence>
+      <xs:element name="EntityID" type="xs:int" minOccurs="1" />
+      <xs:element name="EntityType" type="xs:string" minOccurs="1" />
+      <xs:element name="ActionTaken" type="eWorkDownloadedAction" minOccurs="1" />
+      <xs:element name="UserID" type="xs:string" />
+      <xs:element name="DateReceived" type="xs:dateTime" />
+      <xs:element name="DeviceID" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="WorkReceivedAcknowledgementCollection">
+    <xs:sequence>
+      <xs:element name="WorkReceivedAcknowledgement" type="WorkReceivedAcknowledgement" maxOccurs="unbounded" minOccurs="1" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="WorkReceivedComplexAcknowledgement">
+    <xs:complexContent>
+      <xs:extension base="WorkReceivedAcknowledgement">
+        <xs:sequence>
+          <xs:element name="Children" type="WorkReceivedAcknowledgementCollection" nillable="true" />
+          <xs:element name="IsSupportingData" type="xs:boolean" default="false">
+            <xs:annotation>
+              <xs:documentation>Flag denoting that the Acknowledgment is for Supporting Data received.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="SupportingDataChangeDate" type="xs:dateTime">
+            <xs:annotation>
+              <xs:documentation>The date on which the Assignment Supporting Data, that triggered the acknowledgment, was changed.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="WorkReceivedComplexAcknowledgementCollection">
+    <xs:sequence>
+      <xs:element name="WorkReceivedComplexAcknowledgement" type="WorkReceivedComplexAcknowledgement" maxOccurs="unbounded" minOccurs="1" />
+    </xs:sequence>
+  </xs:complexType>
+  <!-- Enumerated Types -->
+  <xs:simpleType name="eLoggingLevel">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Verbose" >
+        <xs:annotation>
+          <xs:documentation>Most detailed level of logging</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="ExceptionsOnly" >
+        <xs:annotation>
+          <xs:documentation>Only sends logged Exceptions back</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="None" >
+        <xs:annotation>
+          <xs:documentation>No Client Side log entries</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="eWorkDownloadedAction">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Added" >
+        <xs:annotation>
+          <xs:documentation>Add downloaded items into local data</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Removed" >
+        <xs:annotation>
+          <xs:documentation>Remove downloaded items from local data</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Modified" >
+        <xs:annotation>
+          <xs:documentation>Modify existing copies of downloaded items within local data</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

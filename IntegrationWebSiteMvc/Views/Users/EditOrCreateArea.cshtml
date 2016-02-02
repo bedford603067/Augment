@@ -1,0 +1,88 @@
+﻿@model IntegrationWebSiteMvc.Models.AreaData
+
+@{
+    ViewBag.Title = "EditOrCreateArea";
+}
+
+<h2>User Areas</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+
+<div> 
+    @Html.HiddenFor(model => model.ADLoginID)
+
+    <h4>Primary Areas </h4>
+    <p>
+        @Html.DropDownListFor(model => model.PrimaryAreaID,
+            new SelectList(@ViewBag.PrimaryAreas, "ID", "Name"),
+        "--select a Primary Area--",
+        new
+        {
+            id = "drpPrimaryAreas"
+        })
+    </p> 
+ 
+    <h4>Sub Areas</h4>
+    <p>
+        @Html.DropDownListFor(model => model.SubAreaID, new SelectList(
+            Enumerable.Empty<SelectListItem>(), "ID", "Name"),
+        "-- select a Sub Area --",
+        new
+        {
+            id = "drpSubAreas",
+        })
+    </p>
+    <p>
+        <input type="submit" value="Save" />
+    </p>
+ </div>  
+}
+
+@section scripts
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // alert("document ready");
+
+            $("#drpPrimaryAreas").change(function OnPrimaryAreaChange() {
+                // alert("on change");
+
+                // Get the ProductCategory data and load into second DropDownList
+                var id = $(this).val();
+
+                $.getJSON('@Url.Action("GetSubAreas")', { primaryAreaID: id },
+                //---------------------------------------------------
+                    function PopulateSubAreasDropdown(categoryData) {
+                        var select = $("#drpSubAreas");
+                        select.empty();
+
+                        select.append($('<option/>',
+                        {
+                            value: 0,
+                            text: "-- select a Sub Area --"
+                        }));
+
+                        // alert(categoryData.length);
+
+                        $.each(categoryData,
+                        function AddCategoryItem(index, itemData) {
+                            select.append($('<option/>',
+                        {
+                            value: itemData.Value,
+                            text: itemData.Text
+                        }));
+                        });
+                        //---------------------------------------------------
+                    });
+            });
+        });
+    </script>
+    <script type="text/javascript">
+        function foo() {
+            alert("foo hello");
+        }
+    </script>
+}
+

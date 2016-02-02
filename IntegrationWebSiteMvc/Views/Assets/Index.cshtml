@@ -1,0 +1,59 @@
+﻿@model IEnumerable<BusinessObjects.WorkManagement.Asset>
+
+@{
+    ViewBag.Title = "Assets";
+}
+
+<script src="~/Scripts/jquery-1.7.1.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('table tr:not(.Header):even').addClass('d0');
+
+        $('table tr:not(.Header):odd').addClass("d1");
+    });
+</script>
+
+<h2>Sites</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create", new { isPrimaryAsset = true, parentAssetID = 0 })
+</p>
+<table>
+    <tr style="background-color:#253980; color:White"> 
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Code)
+        </th>
+        <th>
+            Type
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Code)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AssetType)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID, parentAssetID=0 }) |
+            @Html.ActionLink("Secondary Assets", "Children", new { id = item.ID }) |
+            @Html.ActionLink("Attributes", "Attributes", new { id = item.ID })
+            @Html.ActionLink("Contacts", "Index", "Contacts", new { parentEntityID = item.ID, parentEntityType = "Asset" }, null) |
+            @Html.ActionLink("Measurements", "Measurements", new { id = item.ID })
+            <!--            
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+            -->
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://FinalBuild.co.uk/LookupService" elementFormDefault="qualified" targetNamespace="http://FinalBuild.co.uk/LookupService" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://devapps1.finalbuild.co.uk/WorkIntegrationService/WorkLookupService.svc?xsd=xsd2" namespace="urn:BusinessObjects.WorkManagement" />
+  <xs:import schemaLocation="http://devapps1.finalbuild.co.uk/WorkIntegrationService/WorkLookupService.svc?xsd=xsd4" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:import schemaLocation="http://devapps1.finalbuild.co.uk/WorkIntegrationService/WorkLookupService.svc?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/BusinessObjects.FileProcessing" />
+  <xs:element name="GetActivityTree">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetActivityTreeResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="urn:BusinessObjects.WorkManagement" minOccurs="0" name="GetActivityTreeResult" nillable="true" type="q1:ActivityTree" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetActivityTreeFiltered">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="topLevelCategory" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetActivityTreeFilteredResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="urn:BusinessObjects.WorkManagement" minOccurs="0" name="GetActivityTreeFilteredResult" nillable="true" type="q2:ActivityTree" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetActivitiesForMobile">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetActivitiesForMobileResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="urn:BusinessObjects.WorkManagement" minOccurs="0" name="GetActivitiesForMobileResult" nillable="true" type="q3:ActivityCollection" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetActivitiesMatchingCriteria">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="targetCategory" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="targetRegion" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetActivitiesMatchingCriteriaResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="urn:BusinessObjects.WorkManagement" minOccurs="0" name="GetActivitiesMatchingCriteriaResult" nillable="true" type="q4:ActivityCollection" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SaveActivity">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q5="urn:BusinessObjects.WorkManagement" minOccurs="0" name="activity" nillable="true" type="q5:Activity" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SaveActivityResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="SaveActivityResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetTaskLibrary">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetTaskLibraryResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q6="urn:BusinessObjects.WorkManagement" minOccurs="0" name="GetTaskLibraryResult" nillable="true" type="q6:ActivityTaskTemplateCollection" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetTaskLookupData">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetTaskLookupDataResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q7="urn:BusinessObjects.WorkManagement" minOccurs="0" name="GetTaskLookupDataResult" nillable="true" type="q7:TaskLookupData" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetTaskLookupDataBySourceSystem">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="sourceSystem" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetTaskLookupDataBySourceSystemResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q8="urn:BusinessObjects.WorkManagement" minOccurs="0" name="GetTaskLookupDataBySourceSystemResult" nillable="true" type="q8:TaskLookupData" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPriorityLookupData">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPriorityLookupDataResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q9="urn:BusinessObjects.WorkManagement" minOccurs="0" name="GetPriorityLookupDataResult" nillable="true" type="q9:PriorityLookupData" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetOnHoldLookupData">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetOnHoldLookupDataResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q10="urn:BusinessObjects.WorkManagement" minOccurs="0" name="GetOnHoldLookupDataResult" nillable="true" type="q10:OnHoldReasonCollection" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetActivityLookupData">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetActivityLookupDataResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q11="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="GetActivityLookupDataResult" nillable="true" type="q11:ArrayOfstring" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetActivityOnHoldReasons">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="activityID" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetActivityOnHoldReasonsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q12="urn:BusinessObjects.WorkManagement" minOccurs="0" name="GetActivityOnHoldReasonsResult" nillable="true" type="q12:OnHoldReasonCollection" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SaveTaskTemplate">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q13="urn:BusinessObjects.WorkManagement" minOccurs="0" name="taskTemplate" nillable="true" type="q13:ActivityTaskTemplate" />
+        <xs:element minOccurs="0" name="activityID" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SaveTaskTemplateResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="SaveTaskTemplateResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SaveTaskTemplateAndActivitySequence">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q14="urn:BusinessObjects.WorkManagement" minOccurs="0" name="taskTemplate" nillable="true" type="q14:ActivityTaskTemplate" />
+        <xs:element minOccurs="0" name="activityID" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SaveTaskTemplateAndActivitySequenceResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="SaveTaskTemplateAndActivitySequenceResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SaveCategory">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="categoryName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="parentCategoryID" type="xs:int" />
+        <xs:element minOccurs="0" name="categoryID" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SaveCategoryResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="SaveCategoryResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SaveLookupData">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q15="urn:BusinessObjects.WorkManagement" minOccurs="0" name="lookupData" nillable="true" type="q15:TaskLookupData" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SaveLookupDataResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="SaveLookupDataResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RequestLookupContainer">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q16="urn:BusinessObjects.WorkManagement" minOccurs="0" name="sourceSystem" type="q16:eWMSourceSystem" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RequestLookupContainerResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/BusinessObjects.FileProcessing" minOccurs="0" name="RequestLookupContainerResult" nillable="true" type="q17:FileRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetWorkflowLookupData">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetWorkflowLookupDataResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q18="urn:BusinessObjects.WorkManagement" minOccurs="0" name="GetWorkflowLookupDataResult" nillable="true" type="q18:ReferenceTypeCollection" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RemoveTasksFromActivity">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="strTasks" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="intActivityID" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RemoveTasksFromActivityResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="RemoveTasksFromActivityResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AddTasksToActivity">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="strTasks" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="intActivityID" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AddTasksToActivityResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="AddTasksToActivityResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SaveTaskSequence">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q19="urn:BusinessObjects.WorkManagement" minOccurs="0" name="taskTemplate" nillable="true" type="q19:ActivityTaskTemplate" />
+        <xs:element minOccurs="0" name="activityID" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SaveTaskSequenceResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="SaveTaskSequenceResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

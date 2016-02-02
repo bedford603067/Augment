@@ -1,0 +1,63 @@
+﻿@model IEnumerable<BusinessObjects.WorkManagement.ActivityTask>
+
+@{
+    ViewBag.Title = "Tasks";
+}
+
+<script src="~/Scripts/jquery-1.7.1.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('table tr:not(.Header):even').addClass('d0');
+
+        $('table tr:not(.Header):odd').addClass("d1");
+    });
+</script>
+
+<h2>Activity - Tasks</h2>
+
+<table>
+    <tr style="background-color:#253980; color:White"> 
+        <th>
+            @Html.DisplayNameFor(model => model.ID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsCritical)
+        </th>
+        <th></th>
+    </tr>
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsCritical)
+        </td>
+        <td>
+        @if (item.Description != ViewBag.ActivityMandatoryTaskDescription)
+        {
+            @Html.ActionLink("Remove", "RemoveTask", new { id = item.ID, activityID = ViewBag.ActivityID }) 
+        }
+        </td>
+    </tr>
+}
+
+</table>
+
+<div>
+@Html.Partial("_TaskCreate", new BusinessObjects.WorkManagement.ActivityTask())
+</div>
+
+<h2>@Html.ActionLink("Open Task Library", "LookupData", new { id = ViewBag.ActivityID })</h2> 
+
+<!--
+<div>
+    <iframe id="aspNetFrame" src ="@Url.Content("../../Forms/LookupDataForm.aspx?activityID=")@ViewBag.ActivityID.ToString()" ></iframe>
+</div>
+-->

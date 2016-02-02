@@ -1,0 +1,60 @@
+﻿@model IntegrationWebSiteMvc.Models.AreaData
+
+<p>
+    @Html.ActionLink("Create New", "EditOrCreateArea", new { id = 0, adLoginID = Model.ADLoginID })
+</p>
+
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+
+<div> 
+    @Html.HiddenFor(model => model.ADLoginID)
+
+    <h4>Primary Areas </h4>
+    <p>
+        @Html.DropDownListFor(model => model.PrimaryAreaName,
+            new SelectList(@ViewBag.PrimaryAreas, "Name", "Name"),
+        "--select a Primary Area--",
+        new
+        {
+            id = "drpPrimaryAreas"
+        })
+    </p> 
+    <p>
+        <input type="submit" value="Save" />
+    </p>
+ </div>  
+}
+
+<table>
+    <tr>
+        <th>
+            ID
+        </th>
+        <th>
+            Name
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model.SubAreas) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.ActionLink("Delete", "DeleteArea", new { id = item.ID, adLoginID = Model.ADLoginID }) |
+        </td>
+    </tr>
+}
+
+</table>
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

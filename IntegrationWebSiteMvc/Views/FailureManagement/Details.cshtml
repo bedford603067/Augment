@@ -1,0 +1,65 @@
+﻿@model IntegrationWebSiteMvc.Models.JobFailure
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>JobFailure</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.SourceSystem)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.SourceSystem)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Type)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Type)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.DateRecorded)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DateRecorded)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ExceptionMessage)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ExceptionMessage)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.RetryCount)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.RetryCount)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Comments)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Comments)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ServiceWrapperType)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ServiceWrapperType)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

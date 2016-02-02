@@ -1,0 +1,82 @@
+﻿@model BusinessObjects.WorkManagement.Activity
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Activity Details</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Activity</legend>
+
+        @Html.HiddenFor(model => model.ID) <!-- NB: For a property to be set on the bound instance returned from the POST it must be bound to a Hidden or Visible field -->
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Code)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Code)
+            @Html.ValidationMessageFor(model => model.Code)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Description)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Description)
+            @Html.ValidationMessageFor(model => model.Description)
+        </div>
+
+        @Html.HiddenFor(model => model.Path) 
+        
+        @Html.HiddenFor(model => model.DistrictGroup) 
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.SchedulingPriority)
+        </div>
+        <div class="editor-field">
+            @Html.DropDownListFor(x => x.SchedulingPriority.ID, new SelectList(ViewBag.SchedulingPriorities, "ID", "Description", Model.SchedulingPriority.ID), new { style = "font-size:large;" }) 
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.DispatchPriority)
+        </div>
+        <div class="editor-field">
+            @Html.DropDownListFor(x => x.DispatchPriority.ID, new SelectList(ViewBag.DispatchPriorities, "ID", "Description", Model.DispatchPriority.ID), new { style = "font-size:large;" }) 
+        </div>
+
+        @Html.HiddenFor(model => model.ParentCategoryID) 
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Duration)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Duration)
+            @Html.ValidationMessageFor(model => model.Duration)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Comments)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Comments)
+            @Html.ValidationMessageFor(model => model.Comments)
+        </div>
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index") |
+    <!-- 
+    @Html.ActionLink("Lookup Data", "LookupData", new { id = ViewBag.ActivityID }) 
+    -->
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,529 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="urn:BusinessObjects.WorkManagement" elementFormDefault="qualified" targetNamespace="urn:BusinessObjects.WorkManagement" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://devapps1.finalbuild.co.uk/WorkIntegrationService/WorkLookupService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/BusinessObjects" />
+  <xs:complexType name="ActivityTree">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q1="http://schemas.datacontract.org/2004/07/BusinessObjects" base="q1:Base">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Activities" nillable="true" type="tns:ActivityCollection" />
+          <xs:element minOccurs="0" name="CategoryHierarchy" nillable="true">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:any minOccurs="0" processContents="lax" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ActivityTree" nillable="true" type="tns:ActivityTree" />
+  <xs:complexType name="ActivityCollection">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Activity" nillable="true" type="tns:Activity" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ActivityCollection" nillable="true" type="tns:ActivityCollection" />
+  <xs:complexType name="Activity">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:ActivityReference">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="AreSkillsMappedAtActivityLevel" type="xs:boolean" />
+          <xs:element minOccurs="0" name="AreUtilityPlansRequired" type="xs:boolean" />
+          <xs:element minOccurs="0" name="AssociatedActivities" nillable="true" type="tns:AssociatedActivityReferenceCollection" />
+          <xs:element minOccurs="0" name="Comments" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="DispatchPriority" nillable="true" type="tns:DispatchPriority" />
+          <xs:element minOccurs="0" name="Duration" type="xs:int" />
+          <xs:element minOccurs="0" name="EarlyStartDaysBeforeDue" type="xs:int" />
+          <xs:element minOccurs="0" name="EarlyStartTime" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="FileAssociations" nillable="true" type="tns:FileAssociationCollection" />
+          <xs:element minOccurs="0" name="IsDueDateFixed" type="xs:boolean" />
+          <xs:element minOccurs="0" name="IsFailure" type="xs:boolean" />
+          <xs:element minOccurs="0" name="IsProject" type="xs:boolean" />
+          <xs:element minOccurs="0" name="IsReactive" type="xs:boolean" />
+          <xs:element minOccurs="0" name="IsScheduleFrequencyConditional" type="xs:boolean" />
+          <xs:element minOccurs="0" name="IsVisibleInClick" type="xs:boolean" />
+          <xs:element minOccurs="0" name="IsVisibleInField" type="xs:boolean" />
+          <xs:element minOccurs="0" name="MethodOfDetection" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="OnHoldReasons" nillable="true" type="tns:OnHoldReasonCollection" />
+          <xs:element minOccurs="0" name="ParentCategoryID" type="xs:int" />
+          <xs:element minOccurs="0" name="Schedules" nillable="true" type="tns:ScheduleDetailsCollection" />
+          <xs:element minOccurs="0" name="SchedulingPriority" nillable="true" type="tns:SchedulingPriority" />
+          <xs:element minOccurs="0" name="SkillsBreakdown" nillable="true" type="tns:SkillsMatrix" />
+          <xs:element minOccurs="0" name="Tasks" nillable="true" type="tns:ActivityTaskCollection" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="Activity" nillable="true" type="tns:Activity" />
+  <xs:complexType name="ActivityReference">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q2="http://schemas.datacontract.org/2004/07/BusinessObjects" base="q2:Base">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Code" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="DistrictGroup" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ID" type="xs:int" />
+          <xs:element minOccurs="0" name="Path" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="SchedulingSystem" type="tns:eSchedulingSystem" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ActivityReference" nillable="true" type="tns:ActivityReference" />
+  <xs:simpleType name="eSchedulingSystem">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Click" />
+      <xs:enumeration value="Utilities" />
+      <xs:enumeration value="Sludge" />
+      <xs:enumeration value="Workshop" />
+      <xs:enumeration value="Contractor" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="eSchedulingSystem" nillable="true" type="tns:eSchedulingSystem" />
+  <xs:complexType name="AssociatedActivityReferenceCollection">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="AssociatedActivityReference" nillable="true" type="tns:AssociatedActivityReference" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="AssociatedActivityReferenceCollection" nillable="true" type="tns:AssociatedActivityReferenceCollection" />
+  <xs:complexType name="AssociatedActivityReference">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:ActivityReference">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="LeadTime" type="xs:int" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="AssociatedActivityReference" nillable="true" type="tns:AssociatedActivityReference" />
+  <xs:complexType name="DispatchPriority">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q3="http://schemas.datacontract.org/2004/07/BusinessObjects" base="q3:Base">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ID" type="xs:int" />
+          <xs:element minOccurs="0" name="Rank" type="xs:int" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="DispatchPriority" nillable="true" type="tns:DispatchPriority" />
+  <xs:complexType name="FileAssociationCollection">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="FileAssociation" nillable="true" type="tns:FileAssociation" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="FileAssociationCollection" nillable="true" type="tns:FileAssociationCollection" />
+  <xs:complexType name="FileAssociation">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q4="http://schemas.datacontract.org/2004/07/BusinessObjects" base="q4:Base">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="AssociationType" type="tns:eFileAssociationType" />
+          <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Hash" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="IsEncrypted" type="xs:boolean" />
+          <xs:element minOccurs="0" name="Path" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="SizeInBytes" type="xs:int" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="FileAssociation" nillable="true" type="tns:FileAssociation" />
+  <xs:simpleType name="eFileAssociationType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Unspecified" />
+      <xs:enumeration value="UtilityPlan" />
+      <xs:enumeration value="Map" />
+      <xs:enumeration value="FieldClientImage" />
+      <xs:enumeration value="UserRelated" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="eFileAssociationType" nillable="true" type="tns:eFileAssociationType" />
+  <xs:complexType name="OnHoldReasonCollection">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="OnHoldReason" nillable="true" type="tns:OnHoldReason" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="OnHoldReasonCollection" nillable="true" type="tns:OnHoldReasonCollection" />
+  <xs:complexType name="OnHoldReason">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q5="http://schemas.datacontract.org/2004/07/BusinessObjects" base="q5:Base">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Code" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Comments" nillable="true" type="tns:CommentAuditRecordCollection" />
+          <xs:element minOccurs="0" name="DateResolved" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ID" type="xs:int" />
+          <xs:element minOccurs="0" name="LastUpdated" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="LastUser" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="MaterialsRequired" nillable="true" type="tns:MaterialCollection" />
+          <xs:element minOccurs="0" name="ResolvingUser" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="SourceSystem" type="tns:eWMSourceSystem" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="OnHoldReason" nillable="true" type="tns:OnHoldReason" />
+  <xs:complexType name="CommentAuditRecordCollection">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="CommentAuditRecord" nillable="true" type="tns:CommentAuditRecord" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CommentAuditRecordCollection" nillable="true" type="tns:CommentAuditRecordCollection" />
+  <xs:complexType name="CommentAuditRecord">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q6="http://schemas.datacontract.org/2004/07/BusinessObjects" base="q6:Base">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="ChangeDate" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="ChangeUser" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="IsCritical" type="xs:boolean" />
+          <xs:element minOccurs="0" name="IsEngineerComment" type="xs:boolean" />
+          <xs:element minOccurs="0" name="SortExpression" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Text" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Type" type="tns:eCommentType" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="CommentAuditRecord" nillable="true" type="tns:CommentAuditRecord" />
+  <xs:simpleType name="eCommentType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="General" />
+      <xs:enumeration value="OnHold" />
+      <xs:enumeration value="Telemetry" />
+      <xs:enumeration value="UtilityPlan" />
+      <xs:enumeration value="Overdue" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="eCommentType" nillable="true" type="tns:eCommentType" />
+  <xs:complexType name="MaterialCollection">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Material" nillable="true" type="tns:Material" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="MaterialCollection" nillable="true" type="tns:MaterialCollection" />
+  <xs:complexType name="Material">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q7="http://schemas.datacontract.org/2004/07/BusinessObjects" base="q7:Base">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="AssetType" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Code" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ID" type="xs:int" />
+          <xs:element minOccurs="0" name="Manufacturer" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Quantity" type="xs:decimal" />
+          <xs:element minOccurs="0" name="Scope" type="tns:eTaskScope" />
+          <xs:element minOccurs="0" name="ScopedTasks" nillable="true" type="tns:ReferenceTypeCollection" />
+          <xs:element minOccurs="0" name="Supplier" nillable="true" type="tns:ReferenceType" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="Material" nillable="true" type="tns:Material" />
+  <xs:simpleType name="eTaskScope">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Unspecified" />
+      <xs:enumeration value="AllTasks" />
+      <xs:enumeration value="SpecificTasks" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="eTaskScope" nillable="true" type="tns:eTaskScope" />
+  <xs:complexType name="ReferenceTypeCollection">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ReferenceType" nillable="true" type="tns:ReferenceType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ReferenceTypeCollection" nillable="true" type="tns:ReferenceTypeCollection" />
+  <xs:complexType name="ReferenceType">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q8="http://schemas.datacontract.org/2004/07/BusinessObjects" base="q8:Base">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Code" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ID" type="xs:int" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ReferenceType" nillable="true" type="tns:ReferenceType" />
+  <xs:simpleType name="eWMSourceSystem">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Unspecified" />
+      <xs:enumeration value="Maintenance" />
+      <xs:enumeration value="Telemetry" />
+      <xs:enumeration value="Customer" />
+      <xs:enumeration value="MeterReading" />
+      <xs:enumeration value="Sludge" />
+      <xs:enumeration value="RepairAndMaintenance" />
+      <xs:enumeration value="AssetManagement" />
+      <xs:enumeration value="StoresProductCatalog" />
+      <xs:enumeration value="Workshop" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="eWMSourceSystem" nillable="true" type="tns:eWMSourceSystem" />
+  <xs:complexType name="ScheduleDetailsCollection">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ScheduleDetails" nillable="true" type="tns:ScheduleDetails" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ScheduleDetailsCollection" nillable="true" type="tns:ScheduleDetailsCollection" />
+  <xs:complexType name="ScheduleDetails">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q9="http://schemas.datacontract.org/2004/07/BusinessObjects" base="q9:Base">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Frequency" type="xs:int" />
+          <xs:element minOccurs="0" name="ID" type="xs:int" />
+          <xs:element minOccurs="0" name="Status" type="tns:eScheduleStatus" />
+          <xs:element minOccurs="0" name="Type" type="tns:eScheduleType" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ScheduleDetails" nillable="true" type="tns:ScheduleDetails" />
+  <xs:simpleType name="eScheduleStatus">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Unspecified" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="eScheduleStatus" nillable="true" type="tns:eScheduleStatus" />
+  <xs:simpleType name="eScheduleType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Unspecified" />
+      <xs:enumeration value="Group" />
+      <xs:enumeration value="Unit" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="eScheduleType" nillable="true" type="tns:eScheduleType" />
+  <xs:complexType name="SchedulingPriority">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q10="http://schemas.datacontract.org/2004/07/BusinessObjects" base="q10:Base">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="DueTime" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ExcludeNonWorkingDays" type="xs:boolean" />
+          <xs:element minOccurs="0" name="Hours" type="xs:int" />
+          <xs:element minOccurs="0" name="ID" type="xs:int" />
+          <xs:element minOccurs="0" name="IsReactive" type="xs:boolean" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="SchedulingPriority" nillable="true" type="tns:SchedulingPriority" />
+  <xs:complexType name="SkillsMatrix">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q11="http://schemas.datacontract.org/2004/07/BusinessObjects" base="q11:Base">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="AreSkillsMappedAtActivityLevel" type="xs:boolean" />
+          <xs:element minOccurs="0" name="NoOfResourcesRequired" type="xs:int" />
+          <xs:element minOccurs="0" name="ResourceProfiles" nillable="true" type="tns:ResourceProfileCollection" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="SkillsMatrix" nillable="true" type="tns:SkillsMatrix" />
+  <xs:complexType name="ResourceProfileCollection">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ResourceProfile" nillable="true" type="tns:ResourceProfile" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ResourceProfileCollection" nillable="true" type="tns:ResourceProfileCollection" />
+  <xs:complexType name="ResourceProfile">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q12="http://schemas.datacontract.org/2004/07/BusinessObjects" base="q12:Base">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="ID" type="xs:int" />
+          <xs:element minOccurs="0" name="Skills" nillable="true" type="tns:SkillCollection" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ResourceProfile" nillable="true" type="tns:ResourceProfile" />
+  <xs:complexType name="SkillCollection">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Skill" nillable="true" type="tns:Skill" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SkillCollection" nillable="true" type="tns:SkillCollection" />
+  <xs:complexType name="Skill">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q13="http://schemas.datacontract.org/2004/07/BusinessObjects" base="q13:Base">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Code" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ID" type="xs:int" />
+          <xs:element minOccurs="0" name="NoOfWorkersRequired" type="xs:int" />
+          <xs:element minOccurs="0" name="SourceSystems" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="StandardHours" type="xs:decimal" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="Skill" nillable="true" type="tns:Skill" />
+  <xs:complexType name="ActivityTaskCollection">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ActivityTask" nillable="true" type="tns:ActivityTask" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ActivityTaskCollection" nillable="true" type="tns:ActivityTaskCollection" />
+  <xs:complexType name="ActivityTask">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q14="http://schemas.datacontract.org/2004/07/BusinessObjects" base="q14:Base">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Duration" type="xs:int" />
+          <xs:element minOccurs="0" name="ID" type="xs:int" />
+          <xs:element minOccurs="0" name="IsComplete" type="xs:boolean" />
+          <xs:element minOccurs="0" name="IsCritical" type="xs:boolean" />
+          <xs:element minOccurs="0" name="IsDatabaseComplete" type="xs:boolean" />
+          <xs:element minOccurs="0" name="IsNotApplicable" type="xs:boolean" />
+          <xs:element minOccurs="0" name="LastUpdatedDate" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="MaterialsRequired" nillable="true" type="tns:MaterialCollection" />
+          <xs:element minOccurs="0" name="MeasurementsRequired" nillable="true" type="tns:PerformanceMeasurementCollection" />
+          <xs:element minOccurs="0" name="Scope" type="tns:eJobScope" />
+          <xs:element minOccurs="0" name="ScopedAssets" nillable="true" type="tns:ReferenceTypeCollection" />
+          <xs:element minOccurs="0" name="Sequence" type="xs:int" />
+          <xs:element minOccurs="0" name="SkillsBreakdown" nillable="true" type="tns:SkillsMatrix" />
+          <xs:element minOccurs="0" name="TaskUpdateType" nillable="true" type="tns:TaskUpdateType" />
+          <xs:element minOccurs="0" name="TemplateID" type="xs:int" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ActivityTask" nillable="true" type="tns:ActivityTask" />
+  <xs:complexType name="PerformanceMeasurementCollection">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="PerformanceMeasurement" nillable="true" type="tns:PerformanceMeasurement" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="PerformanceMeasurementCollection" nillable="true" type="tns:PerformanceMeasurementCollection" />
+  <xs:complexType name="PerformanceMeasurement">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:PerformanceIndicator">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Comments" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="JobID" type="xs:int" />
+          <xs:element minOccurs="0" name="ReadDate" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="UserID" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Value" type="xs:decimal" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="PerformanceMeasurement" nillable="true" type="tns:PerformanceMeasurement" />
+  <xs:complexType name="PerformanceIndicator">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q15="http://schemas.datacontract.org/2004/07/BusinessObjects" base="q15:Base">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="AssetType" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Code" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="DataType" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ID" type="xs:int" />
+          <xs:element minOccurs="0" name="MaxValue" type="xs:decimal" />
+          <xs:element minOccurs="0" name="MinValue" type="xs:decimal" />
+          <xs:element minOccurs="0" name="Position" type="xs:int" />
+          <xs:element minOccurs="0" name="Scope" type="tns:eTaskScope" />
+          <xs:element minOccurs="0" name="ScopedTasks" nillable="true" type="tns:ReferenceTypeCollection" />
+          <xs:element minOccurs="0" name="Units" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ValidationExpression" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ValidationMessage" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="PerformanceIndicator" nillable="true" type="tns:PerformanceIndicator" />
+  <xs:simpleType name="eJobScope">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Unspecified" />
+      <xs:enumeration value="AllAssets" />
+      <xs:enumeration value="SpecificAssets" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="eJobScope" nillable="true" type="tns:eJobScope" />
+  <xs:complexType name="TaskUpdateType">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q16="http://schemas.datacontract.org/2004/07/BusinessObjects" base="q16:Base">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ShortName" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="TaskUpdateType" nillable="true" type="tns:TaskUpdateType" />
+  <xs:complexType name="ActivityTaskTemplateCollection">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ActivityTaskTemplate" nillable="true" type="tns:ActivityTaskTemplate" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ActivityTaskTemplateCollection" nillable="true" type="tns:ActivityTaskTemplateCollection" />
+  <xs:complexType name="ActivityTaskTemplate">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:ActivityTask">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="AssociatedActivities" nillable="true" type="tns:ActivityTaskAssociationCollection" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ActivityTaskTemplate" nillable="true" type="tns:ActivityTaskTemplate" />
+  <xs:complexType name="ActivityTaskAssociationCollection">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ActivityTaskAssociation" nillable="true" type="tns:ActivityTaskAssociation" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ActivityTaskAssociationCollection" nillable="true" type="tns:ActivityTaskAssociationCollection" />
+  <xs:complexType name="ActivityTaskAssociation">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:ActivityReference">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="IsCritical" type="xs:boolean" />
+          <xs:element minOccurs="0" name="Sequence" type="xs:int" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ActivityTaskAssociation" nillable="true" type="tns:ActivityTaskAssociation" />
+  <xs:complexType name="TaskLookupData">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q17="http://schemas.datacontract.org/2004/07/BusinessObjects" base="q17:Base">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Materials" nillable="true" type="tns:MaterialCollection" />
+          <xs:element minOccurs="0" name="Skills" nillable="true" type="tns:SkillCollection" />
+          <xs:element minOccurs="0" name="TaskUpdateTypes" nillable="true" type="tns:TaskUpdateTypeCollection" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="TaskLookupData" nillable="true" type="tns:TaskLookupData" />
+  <xs:complexType name="TaskUpdateTypeCollection">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="TaskUpdateType" nillable="true" type="tns:TaskUpdateType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TaskUpdateTypeCollection" nillable="true" type="tns:TaskUpdateTypeCollection" />
+  <xs:complexType name="PriorityLookupData">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q18="http://schemas.datacontract.org/2004/07/BusinessObjects" base="q18:Base">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Dispatch" nillable="true" type="tns:DispatchPriorityCollection" />
+          <xs:element minOccurs="0" name="Scheduling" nillable="true" type="tns:SchedulingPriorityCollection" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="PriorityLookupData" nillable="true" type="tns:PriorityLookupData" />
+  <xs:complexType name="DispatchPriorityCollection">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="DispatchPriority" nillable="true" type="tns:DispatchPriority" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DispatchPriorityCollection" nillable="true" type="tns:DispatchPriorityCollection" />
+  <xs:complexType name="SchedulingPriorityCollection">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="SchedulingPriority" nillable="true" type="tns:SchedulingPriority" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SchedulingPriorityCollection" nillable="true" type="tns:SchedulingPriorityCollection" />
+</xs:schema>

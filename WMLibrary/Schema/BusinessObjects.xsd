@@ -1,0 +1,4346 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="BusinessObjects" targetNamespace="http://FinalBuild.co.uk/BusinessObjects.WorkManagement" elementFormDefault="qualified" xmlns="http://FinalBuild.co.uk/BusinessObjects.WorkManagement" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+	<!-- Elements (for XmlTypeExport purposes)  -->
+	<xs:element name="Job" type="Job" />
+	<xs:element name="JobUpdates" type="JobUpdateCollection" />
+	<xs:element name="JobUpdate" type="JobUpdate" />
+	<xs:element name="ReferenceTypes" type="ReferenceTypeCollection" />
+	<xs:element name="EngineerFeedback" type="EngineerFeedback" />
+	<xs:element name="JobReferences" type="JobReferenceCollection" />
+	<xs:element name="JobStatusChange" type="JobStatusChange" />
+	<xs:element name="LookupContainer" type="LookupContainer" />
+	<xs:element name="Customer" type="Customer" />
+	<xs:element name="ChangeRequests" type="ChangeRequestCollection" />
+	<xs:element name="Activities" type="ActivityCollection" />
+	<xs:element name="LibraryTasks" type="ActivityTaskTemplateCollection" />
+	<xs:element name="JobRequests" type="JobRequestCollection" />
+	<xs:element name="TaskLookupData" type="TaskLookupData" />
+	<xs:element name="Priorities" type="PriorityLookupData" />
+	<xs:element name="AuditRecord" type="WorkflowAuditRecord" />
+	<xs:element name="JobFailures" type="JobFailureCollection" />
+	<xs:element name="LostTimeReasons" type="LostTimeReasonCollection" />
+	<xs:element name="IncompleteReasons" type="IncompleteReasonCollection" />
+	<xs:element name="BankHolidays" type="BankHolidayCollection" />
+	<xs:element name="CoreLookupData" type="CoreLookupData" />
+	<xs:element name="WorkContainer" type="WorkContainer" />
+	<xs:element name="EngineerNonAvailabilities" type="EngineerNonAvailabilityCollection" />
+	<xs:element name="AssignmentDetailsCollection" type="AssignmentDetailsCollection" />
+	<xs:element name="AssetLookupData" type="AssetLookupData" />
+	<xs:element name="GPSInformation" type="GPSInformation" />
+	<xs:element name="MeterBase" type="MeterBase" />
+	<xs:element name="StatusConflictCollection" type="StatusConflictCollection" />
+	<xs:element name="ExtendedReferenceTypes" type="ExtendedReferenceTypeCollection" />
+	<xs:element name="PerformanceMeasurementGroups" type="PerformanceMeasurementGroupCollection" />
+	<xs:element name="SearchParameters" type="SearchParameterCollection" />
+	<xs:element name="WorkSchedulingContainer" type="WorkSchedulingContainer" />
+	<xs:element name="ScheduleDetailsCollection" type="ScheduleDetailsCollection" />
+	<xs:element name="EngineerSkills" type="EngineerSkillCollection" />
+	<xs:element name="EngineerStandbyCollection" type="EngineerStandbyCollection" />
+	<xs:element name="RecurringNonAvailabilityCollection" type="RecurringNonAvailabilityCollection" />
+	<xs:element name="WorkingWeek" type="WorkingWeek" />
+	<xs:element name="ExtendedAssignment" type="ExtendedAssignment" />
+  <xs:element name="SupportingAssignmentDetailsCollection" type="SupportingAssignmentDetailsCollection" />
+  <xs:element name="Stock" type="Stock" />
+  <xs:element name="StockItemCollection" type="StockItemCollection" />
+  <xs:element name="StockItem" type="StockItem" />
+  <xs:element name="StockLocation" type="StockLocation" />
+  <xs:element name="StockTaskUpdate" type="StockTaskUpdate"/>
+  <xs:element name="StockTaskUpdates" type="StockTaskUpdateCollection"/>
+  <xs:element name="AssignmentConstraints" type="AssignmentConstraints"/>
+  <xs:element name="OptimisationRequest" type="OptimisationRequest"/>
+  
+  <!-- Complex Types -->
+	<!-- Base -->
+	<xs:complexType name="Job" abstract="true">
+		<xs:sequence>
+			<xs:element name="ID" type="xs:int">
+				<xs:annotation>
+					<xs:documentation>Unique identifier for the entity within the Work Management system</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="SourceSystem" type="eWMSourceSystem">
+				<xs:annotation>
+					<xs:documentation>Business Stream</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="WorkType" type="eWorkType" default="Reactive">
+				<xs:annotation>
+					<xs:documentation>Work Type as defined by the Enumeration, e.g., Reactive</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Status" type="eJobStatus">
+				<xs:annotation>
+					<xs:documentation>Status as defined by the Enumeration, e.g., Dispatched</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="DueDate" type="xs:dateTime">
+				<xs:annotation>
+					<xs:documentation>The current Date\Time by which the Job must be completed. Dynamic through lifetime of a Job. Assignment.Start in Click terms.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="PlannedDueDate" type="xs:dateTime">
+				<xs:annotation>
+					<xs:documentation>The initially planned Date\Time by which the Job must be completed. Static through lifetime of a Job</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Location" type="Location">
+				<xs:annotation>
+					<xs:documentation>The Location where the work is to be carried out</xs:documentation>
+					<xs:documentation>One of the types {Location, Site, Property}</xs:documentation>
+					<xs:documentation>For Jobs involving a Start and End location, e..g, Sludge, this attribute represents Starting Location</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Asset" type="Asset">
+				<xs:annotation>
+					<xs:documentation>The Asset the work is to be carried out in respect of</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="IsComplete" type="xs:boolean" minOccurs="1" default="false">
+				<xs:annotation>
+					<xs:documentation>This flag signals the Field worker is finished with the Job. When true the Status should be one of Completed or Cancelled</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="DateCreated" type="xs:dateTime" minOccurs="1">
+				<xs:annotation>
+					<xs:documentation>The Date the Job was created in the Work Management system</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="SchedulingPriority" type="SchedulingPriority" minOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Scheduling (Lead Time) Priority value for the Job</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="DispatchPriority" type="DispatchPriority" minOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Dispatch Priority (Click) value for the Job</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="LastUser" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>The Last User of the Work Management system to amend the Job</xs:documentation>
+					<xs:documentation>XmlIgnore</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="LastUpdated" type="xs:dateTime">
+				<xs:annotation>
+					<xs:documentation>The Date the Job was last updated in the Work Management system to amend the Job.</xs:documentation>
+					<xs:documentation>XmlIgnore</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<!-- Optional attributes (Not required to create a Job instance) -->
+			<xs:element name="Description" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>This attribute is reserved for a Summary description of the Job which may vary according to Business Stream, Work Type, Asset, etc</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="RaisedBy" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>User who created the Job</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Originator" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>User on whose behalf the Job was created - usually the same as RaisedBy</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Workers" type="WorkerCollection">
+				<xs:annotation>
+					<xs:documentation>Engineer(s) the Job is assigned to</xs:documentation>
+					<xs:documentation>Note. Crew is not explicitly defined at present as is not per se relevant to Field delivery</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Appointment" type="Appointment">
+				<xs:annotation>
+					<xs:documentation>Appointment associated with the Job (where applicable)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="FileAssociations" type="FileAssociationCollection">
+				<xs:annotation>
+					<xs:documentation>Pointers to Files associated with the Job, e.g., Utility Plans</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="StartDateTime" type="xs:dateTime">
+				<xs:annotation>
+					<xs:documentation>Time recorded for the Job starting (in the Field)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="EndDateTime" type="xs:dateTime">
+				<xs:annotation>
+					<xs:documentation>Time recorded for the Job ending (in the Field)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="AreaDetails" type="AreaDetails">
+				<xs:annotation>
+					<xs:documentation>Primary and SubArea(s) associated with the Job (Region and District in Click terms)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Tasks" type="ActivityTaskCollection">
+				<xs:annotation>
+					<xs:documentation>Child Tasks of the Job. May be ActivityTask inheritors</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Activity" type="ActivityReference">
+				<xs:annotation>
+					<xs:documentation>This attribute is reserved for a Summary description of the Activity template the Job is based upon</xs:documentation>
+					<xs:documentation>Note. Job.Tasks and Activity.Tasks need not be identical so Activity as class Activity is not appropriate</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="EarliestStartDate" type="xs:dateTime">
+				<xs:annotation>
+					<xs:documentation>The earliest Date\Time that the Job should start (Scheduling Task.EarlyStart attribute)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Comments" type="CommentAuditRecordCollection">
+				<xs:annotation>
+					<xs:documentation>Comments (history) associated with the Job.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ParentJobReference" type="AssociatedJobReference">
+				<xs:annotation>
+					<xs:documentation>(Parent) Linked Job</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ActivityDuration" type="xs:int">
+				<xs:annotation>
+					<xs:documentation>Duration for completing the Task in Minutes. Duration itself is derived from Tasks or from this Activity.Duration value which may or may not be set at Job creation time</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="DateReopened" type="xs:dateTime">
+				<xs:annotation>
+					<xs:documentation>The Date the Job was reopened in the Work Management system (was previously Completed)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="OnHoldReasons" type="OnHoldReasonCollection" nillable="true">
+				<xs:annotation>
+					<xs:documentation>On Hold Reasons</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="RaisedInField" type="xs:boolean" minOccurs="1" default="false">
+				<xs:annotation>
+					<xs:documentation>Indicates if Job was created in response to a Field user Job Request (JobRequest.IsFieldUpdate) </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CostCode" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Cost Code associated with the Job</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="IncompleteOutcomeHistory" type="JobIncompleteOutcomeCollection">
+				<xs:annotation>
+					<xs:documentation>History of occurrences of the Job being stopped as Incomplete\Paused including the IncompleteReason selected</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		  <xs:element name="SkillsBreakdown" type="SkillsMatrix">
+			<xs:annotation>
+			  <xs:documentation>The Skills per Resource required to carry out the Task</xs:documentation>
+			</xs:annotation>
+		  </xs:element>
+			<xs:element name="RevisedDueDate" type="xs:dateTime">
+				<xs:annotation>
+					<xs:documentation>The Revised (from original PlannedDueDate) Date\Time by which the Job must be completed. Applies to all assignments\instances of the Job</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+      <xs:element name="Project" type="ReferenceType">
+        <xs:annotation>
+          <xs:documentation>Allow association to an overall Project</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Contact" type="Contact">
+        <xs:annotation>
+          <xs:documentation>Optional, to hold e.g Project Contact</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Customer" type="Customer">
+        <xs:annotation>
+          <xs:documentation>Optional, to hold the Job's Customer</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="AssignmentConstraints" type="AssignmentConstraints">
+        <xs:annotation>
+          <xs:documentation>Optional, to hold any contraints that should be considered when creating Assignments for this Job.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="LocationBase" abstract="true">
+		<xs:annotation>
+			<xs:documentation>This type is inherited by the Location and Property entities which include attributes for Street Address and Site respectively</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="PostCode">
+				<xs:annotation>
+					<xs:documentation>UK PostCode http://www.govtalk.gov.uk/gdsc/html/frames/Postcode.htm</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+            <xs:pattern value="^([A-Z]{1,2}[0-9][0-9A-Z]{0,1} {0,1}[0-9][A-Z]{2})$" >
+              <xs:annotation>
+                <xs:documentation>'Post Code' is a mandatory field that must be supplied in a valid format e.g XX1 1XX.</xs:documentation>
+              </xs:annotation>
+            </xs:pattern>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="XCoord">
+				<xs:annotation>
+					<xs:documentation>GPS X coordinate EASTING, should be exactly 6 numeric characters</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:pattern value="([0-9]{6})">
+            <xs:annotation>
+					  <xs:documentation>GPS X coordinate EASTING, should be exactly 6 numeric characters</xs:documentation>
+				    </xs:annotation>
+           </xs:pattern>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="YCoord">
+				<xs:annotation>
+					<xs:documentation>GPS Y coordinate NORTHING, should be exactly 6 numeric characters</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+            <xs:pattern value="([0-9]{6})">
+              <xs:annotation>
+                <xs:documentation>GPS Y coordinate NORTHING, should be exactly 6 numeric characters</xs:documentation>
+              </xs:annotation>
+            </xs:pattern>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+      <xs:element name="Latitude" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>WGS84 — SRID 4326 standard Latitude</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Longitude" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>WGS84 — SRID 4326 standard Longitude</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="JobUpdateCollection">
+		<xs:sequence>
+			<xs:element name="JobUpdate" type="JobUpdate" maxOccurs="unbounded" minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="JobUpdate" abstract="true">
+		<xs:sequence>
+			<xs:element name="ID" type="xs:int">
+				<xs:annotation>
+					<xs:documentation>ID of the Job being updated</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="SourceSystem" type="eWMSourceSystem">
+				<xs:annotation>
+					<xs:documentation>Business Stream</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Status" type="eJobStatus">
+				<xs:annotation>
+					<xs:documentation>(New) Status of the Job being updated</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="IsComplete" type="xs:boolean" minOccurs="1" default="false">
+				<xs:annotation>
+					<xs:documentation>This flag signals the Field worker is finished with the Job. When true the Status should be one of Completed or Cancelled</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="IsLoneWorker" type="xs:boolean" minOccurs="1" default="false">
+				<xs:annotation>
+					<xs:documentation>Flag denoting whether the assigned Worker is currently logged on to the Lone Worker system</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Description" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Description of the Update (for Field tracking purposes)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="StartDateTime" type="xs:dateTime">
+				<xs:annotation>
+					<xs:documentation>Start Date Time recorded for the Update (locally on Field device)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="1" maxOccurs="1" name="EndDateTime" nillable="true" type="xs:dateTime">
+				<xs:annotation>
+					<xs:documentation>End Date Time recorded for the Update (locally on Field device)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="UserID" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>The User who updated the Job</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="IsFieldUpdate" type="xs:boolean" minOccurs="1" default="true">
+				<xs:annotation>
+					<xs:documentation>This flag indicates Update is being submitted by a Field worker, not an Office worker using the Field client application</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="WindowsIdentity" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>The WindowsIdentity of the User who updated the Job e.g. when logged on as a Gang will be != UserID</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+      <xs:element name="SchedulerAlert" type="eSchedulerAlertType">
+        <xs:annotation>
+          <xs:documentation>When not default ("None") the JobUpdate should only be processed to create an Alert and nothing else</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="LookupContainer" abstract="true">
+		<xs:annotation>
+			<xs:documentation>This type supports the Field Management service and is solely for internal system use</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="SourceSystem" type="eWMSourceSystem">
+				<xs:annotation>
+					<xs:documentation>Business Stream</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="LastUpdated" type="xs:dateTime">
+				<xs:annotation>
+					<xs:documentation>Date\Time the LookupData contained was last updated</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+  <xs:complexType name="Contact">
+		<xs:annotation>
+			<xs:documentation>This type is inherited by Customer and by an entity within the BusinessObjects.CRM namespace</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Surname">
+				<xs:annotation>
+					<xs:documentation>Customer Surname within CRM master system, minimum of 2 alphabetical characters (maximum of 40, TBC)</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:pattern value="^([A-Za-z]{2,40})$" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="Forenames" type="xs:string" />
+			<xs:element name="TelephoneNo">
+				<xs:annotation>
+					<xs:documentation>UK Telephone No. http://www.ofcom.org.uk/telecoms/ioi/numbers/numbers_administered/</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+            <xs:pattern value="(((\+44)? ?(\(0\))? ?)|(0))( ?[0-9]{3,4}){3}">
+              <xs:annotation>
+                <xs:documentation>Telephone No. is not in a valid format</xs:documentation>
+              </xs:annotation>
+            </xs:pattern>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="MobileNo">
+				<xs:annotation>
+					<xs:documentation>UK Telephone No. http://www.ofcom.org.uk/telecoms/ioi/numbers/numbers_administered/</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:pattern value="(((\+44)? ?(\(0\))? ?)|(0))( ?[0-9]{3,4}){3}" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="EMail">
+				<xs:annotation>
+					<xs:documentation>Email Address/</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:pattern value="^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})$" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="AlternativeTelephoneNo">
+				<xs:annotation>
+					<xs:documentation>UK Telephone No. http://www.ofcom.org.uk/telecoms/ioi/numbers/numbers_administered/</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:pattern value="(((\+44)? ?(\(0\))? ?)|(0))( ?[0-9]{3,4}){3}" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="CompanyName" type="xs:string" />
+			<xs:element name="Title" type="xs:string" />
+      <xs:element name="Department" type="xs:string" />
+      <xs:element name="Role" type="xs:string" />
+      <xs:element name="Notes" type="xs:string" />
+    </xs:sequence>
+	</xs:complexType>
+  <xs:complexType name="ContactCollection">
+    <xs:sequence>
+      <xs:element name="ContactCollection" type="Contact" maxOccurs="unbounded" minOccurs="1" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- Core -->
+  <xs:complexType name="Asset">
+    <xs:sequence>
+      <xs:element name="ID" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>Unique identifier for the entity within the Asset Management system</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Description">
+        <xs:annotation>
+          <xs:documentation>This attribute is reserved for a Summary description of the Asset which may vary according to Asset, Site (if applicable), etc</xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:pattern value="^(?=.*\S).+$">
+              <xs:annotation>
+                <xs:documentation>'Description' is a mandatory field and has not been specified.</xs:documentation>
+              </xs:annotation>
+            </xs:pattern>
+            <xs:minLength value="1" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="Code" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Alternate key for the entity within the Asset Management system that the User knows the entity by</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Location" type="Location">
+        <!--
+        <xs:annotation>
+          <xs:documentation>This element will not be Serialized to Field devices as Location information will be present in the (parent) Job instance</xs:documentation>
+          <xs:documentation>XmlIgnore</xs:documentation>
+        </xs:annotation>
+        -->
+      </xs:element>
+      <xs:element name="AssetType" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>The Discipline of the Asset e.g Civil, Mechanical, etc</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Indicators" type="PerformanceIndicatorCollection">
+        <xs:annotation>
+          <xs:documentation>Directs Measurements to be gathered against the Asset</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="IndicatorGroups" type="PerformanceIndicatorGroupCollection">
+        <xs:annotation>
+          <xs:documentation>Directs how Measurements are to be gathered in "sets" against the Asset</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="MeasurementHistory" type="PerformanceMeasurementCollection">
+        <xs:annotation>
+          <xs:documentation>Measurements previously gathered against the Asset</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Attributes" type="AssetAttributeCollection">
+        <xs:annotation>
+          <xs:documentation>Attributes</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Groups" type="AssetGroupCollection">
+        <xs:annotation>
+          <xs:documentation>Asset Group(s). Optional, to hold child Assets of a Site (Asset). Plural to allow sub grouping, e.g Floor</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Contact" type="Contact">
+        <xs:annotation>
+          <xs:documentation>Optional, to hold Contact associated with the Asset itself e.g a Site Contact</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Comments" type="CommentAuditRecordCollection">
+        <xs:annotation>
+          <xs:documentation>XmlIgnore</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Location">
+		<xs:complexContent mixed="false">
+			<xs:extension base="Site">
+				<xs:sequence>
+					<xs:element name="Directions" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Free text description, though should use a standard set of abbreviations ideally, e.g. LHS for "left hand side" if autocomplete is to be supported on the Field device</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="Property">
+		<xs:complexContent mixed="false">
+			<xs:extension base="LocationBase">
+				<xs:sequence>
+					<xs:element name="HouseName" type="xs:string" />
+					<xs:element name="HouseNo" type="xs:int" />
+					<xs:element name="Street" type="xs:string" />
+					<xs:element name="Town" type="xs:string" />
+					<xs:element name="District" type="xs:string" />
+					<xs:element name="SubBuilding" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>e.g., Flat No.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="DepLocality" type="xs:string" />
+					<xs:element name="OrgName" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>For use where Location is owned by a Company</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="PropertyReference" type="xs:int">
+						<xs:annotation>
+							<xs:documentation>Unique Identifier for a Property in CRM and GIS</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="SiteID" type="xs:int">
+						<xs:annotation>
+							<xs:documentation>Unique Identifier for a Site recorded in Site Directory and GIS</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="PropertyType" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Property Classification within GIS. This attribute may or may not be useful in general</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="PostCodeType" type="xs:string" default="Rural">
+						<xs:annotation>
+							<xs:documentation>Property Classification within GIS. This attribute may or may not be useful in general</xs:documentation>
+							<xs:documentation>XmlIgnore</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="HasBeenValidated" type="xs:boolean" minOccurs="1" default="false">
+						<xs:annotation>
+							<xs:documentation>This flag indicates Address details are to be treated as having been validated against a corporate source e.g GIS</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="Site">
+		<xs:complexContent mixed="false">
+			<xs:extension base="Property">
+				<xs:sequence>
+					<xs:element name="ID" type="xs:int">
+						<xs:annotation>
+							<xs:documentation>Unique Identifier for a Site recorded in Site Directory and GIS</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="Description" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Description for a Site recorded in Site Directory and GIS</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+  <xs:complexType name="AssetCollection">
+    <xs:sequence>
+      <xs:element name="AssetCollection" type="Asset" maxOccurs="unbounded" minOccurs="1" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="AssetGroup">
+    <xs:sequence>
+      <xs:element name="Name" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>(internal) Name for the Asset Group</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Description" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>(external) Description for the Asset Group</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Assets" type="AssetCollection">
+        <xs:annotation>
+          <xs:documentation>Assets in the Asset Group.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Preferences" type="Preferences">
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="AssetGroupCollection">
+    <xs:sequence>
+      <xs:element name="AssetGroupCollection" type="AssetGroup" maxOccurs="unbounded" minOccurs="1" />
+    </xs:sequence>
+  </xs:complexType>
+  
+  <xs:complexType name="CoreLookupData">
+    <xs:complexContent mixed="false">
+      <xs:extension base="LookupContainer">
+        <xs:sequence>
+          <xs:element name="MobileIdentities" type="MobileIdentityCollection">
+            <xs:annotation>
+              <xs:documentation>Mobile Job Creation required lookup Data</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="ReportDefinitions" type="ReportDefinitionCollection">
+            <xs:annotation>
+              <xs:documentation>Definitions of available client requested reports lookup Data</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ReferenceType">
+    <xs:sequence>
+      <xs:element name="ID" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>Unique identifier for the Entity within the database</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Description" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Description</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Code" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Code</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ExtendedReferenceType">
+    <xs:complexContent mixed="false">
+      <xs:extension base="ReferenceType">
+        <xs:sequence>
+          <xs:element name="ExternalSystemCode" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>The code of the corresponding lookup item in the related External System</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="ParentLookupType" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>The lookup type of the parent lookup item</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="ParentLookupCode" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>The lookup code of the parent lookup item</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ReferenceTypeCollection">
+    <xs:sequence>
+      <xs:element name="ReferenceType" type="ReferenceType" maxOccurs="unbounded" minOccurs="1" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ExtendedReferenceTypeCollection">
+    <xs:sequence>
+      <xs:element name="ExtendedReferenceType" type="ExtendedReferenceType" maxOccurs="unbounded" minOccurs="1" />
+    </xs:sequence>
+  </xs:complexType> 
+  <xs:complexType name="Engineer">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Worker">
+        <xs:sequence>
+          <xs:element name="TODO" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>    
+  </xs:complexType>
+  <xs:complexType name="Contractor">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Worker">
+        <xs:sequence>
+          <xs:element name="Password" type="xs:string" />
+          <xs:element name="Telephone" type="xs:string" />
+          <xs:element name="Mobile" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Gang">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Worker">
+        <xs:sequence>
+          <xs:element name="Members" type="WorkerCollection" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Worker">
+		<xs:sequence>
+      <xs:element name="UserID" type="xs:string" />      
+			<xs:element name="LoginName">
+				<xs:annotation>
+					<xs:documentation>AD login, maximum of 7 characters (minimum of 3, TBC)</xs:documentation>
+					<xs:documentation>The composite of LoginName and EmpNo is the unique identifier for the Employee within the Scheduling system (Click)</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:pattern value="^([A-Za-z]{3,7})$" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="EmpNo">
+				<xs:annotation>
+					<xs:documentation>Employee No within HR master system, maximum of 10 all numeric characters (minimum of 6, TBC)</xs:documentation>
+					<xs:documentation>The composite of LoginName and EmpNo is the unique identifier for the Employee within the Scheduling system (Click)</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:pattern value="^([0-9]{6,10})$" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="Surname">
+				<xs:annotation>
+					<xs:documentation>Employee Surname within HR master system, minimum of 2 alphabetical characters (maximum of 40, TBC)</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:pattern value="^([A-Za-z]{2,40})$" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="Forenames" type="xs:string" />
+			<xs:element name="EmpPrefname" type="xs:string" />
+			<xs:element name="AreaDetails" type="AreaDetails">
+				<xs:annotation>
+					<xs:documentation>Primary and SubArea(s) associated with the Job (Region and District in Click terms)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Skills" type="SkillCollection">
+				<xs:annotation>
+					<xs:documentation>Skills in respect of suitability to carry out a Job</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="EmpAddress" type="xs:string" />
+			<xs:element name="Email">
+				<xs:annotation>
+					<xs:documentation>Email Address/</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:pattern value="^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})$" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="MobileNo">
+				<xs:annotation>
+					<xs:documentation>UK Telephone No. http://www.ofcom.org.uk/telecoms/ioi/numbers/numbers_administered/</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:pattern value="(((\+44)? ?(\(0\))? ?)|(0))( ?[0-9]{3,4}){3}" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+      <xs:element name="SequenceNo" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>Used to order Workers within WorkerCollection, e.g Gang Members</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="WorkingWeek" type="WorkingWeek">
+        <xs:annotation>
+          <xs:documentation>Working hours for a week likely mastered within the Scheduling system</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="IsClickEngineer" type="xs:boolean" minOccurs="1">
+        <xs:annotation>
+          <xs:documentation>This flag indicates that a worker exists as an Engineer in the Click Scheduling System</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Home" type="Location">
+        <xs:annotation>
+          <xs:documentation>Specifies Start Location used for working out Route around Assignments. May be Depot or Emp Address. </xs:documentation>
+          <xs:documentation>XmlIgnore</xs:documentation><!-- Not required on Client -->
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="WorkerCollection">
+		<xs:sequence>
+			<xs:element name="Worker" type="Worker" maxOccurs="unbounded" minOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="JobReference">
+		<xs:annotation>
+			<xs:documentation>This type supports the Integration layer and is solely for internal system use</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="ID" type="xs:int">
+				<xs:annotation>
+					<xs:documentation>Unique identifier for the Job within the Integration layer, that is, across systems participating in the Work Management process</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="SourceID" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Unique identifier for the Job within the (originating) Work Management system</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="SourceSystem" type="eWMSourceSystem">
+				<xs:annotation>
+					<xs:documentation>Business Stream</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TypeName" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Class inheriting from base Job</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ClickKey" type="xs:int">
+				<xs:annotation>
+					<xs:documentation>Unique identifier for the Job within the Scheduling system (Click Task.ID)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="SourceKey" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Unique identifier for the Job within the (originating) system. Special case where PK is a String field</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ClickInstance" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Number used by Click to discriminate two tasks with the same CallID</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Region" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>(Click) Region - same as Primary Area on Job class AreaDetails</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="JobReferenceCollection">
+		<xs:sequence>
+			<xs:element name="JobReference" type="JobReference" maxOccurs="unbounded" minOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AssociatedJobReference">
+		<xs:annotation>
+			<xs:documentation>This allows specification of a Linked Job</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="ID" type="xs:int">
+				<xs:annotation>
+					<xs:documentation>Unique identifier for the Job within the Integration layer, that is, across systems participating in the Work Management process</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="SourceSystem" type="eWMSourceSystem">
+				<xs:annotation>
+					<xs:documentation>Business Stream</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="JobStatusChange">
+		<xs:annotation>
+			<xs:documentation>This type supports the Integration layer and is solely for internal system use</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="ID" type="xs:int">
+				<xs:annotation>
+					<xs:documentation>Unique identifier for the Job within the (originating) Work Management system</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="SourceSystem" type="eWMSourceSystem">
+				<xs:annotation>
+					<xs:documentation>Business Stream</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Status" type="eJobStatus">
+				<xs:annotation>
+					<xs:documentation>Status as defined by the Enumeration, e.g., Dispatched</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="LastUpdated" type="xs:dateTime" minOccurs="1">
+				<xs:annotation>
+					<xs:documentation>The Date the Job Status Change occurred</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="UserID" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>The User initiating the Status change</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="DueDate" type="xs:dateTime">
+				<xs:annotation>
+					<xs:documentation>The Date\Time by which the Job must be completed</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Service" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>The Service that issued the Status change message </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="InstanceNumber" type="xs:int" default="-1">
+				<xs:annotation>
+					<xs:documentation>Instance Number of the Job Assignment updated (Click Task.Number)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="WindowsIdentity" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>The WindowsIdentity of the User who updated the Job e.g. when logged on as a Gang will be != UserID</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="IsOfficeUser" type="xs:boolean" minOccurs="1" default="false">
+				<xs:annotation>
+					<xs:documentation>This flag indicates Update is being submitted via the Field Service is being sent by a Field worker, not an Office worker using the Field client application</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="IncompleteReason" type="IncompleteReason">
+				<xs:annotation>
+					<xs:documentation>This should be populated when Status is one of {Incomplete, Paused}</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Customer">
+		<xs:complexContent mixed="false">
+			<xs:extension base="Contact">
+				<xs:sequence>
+					<xs:element name="ID" type="xs:int">
+						<xs:annotation>
+							<xs:documentation>Unique identifier for the entity with the Customer Management system</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="BillingAddress" type="Location">
+						<xs:annotation>
+							<xs:documentation>The Billing Address for the Customer</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="HasSpecialNeeds" type="xs:boolean" default="false" />
+          <xs:element name="Contacts" type="ContactCollection"/>
+          <xs:element name="HasLocationChanged" type="xs:boolean" default="false" />
+          <xs:element name="ParentCustomerID" type="xs:int">
+            <xs:annotation>
+              <xs:documentation>Allows a Client-Customer relationship to be defined</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="Comments" type="CommentAuditRecordCollection">
+          </xs:element>
+          <xs:element name="Preferences" type="Preferences">
+          </xs:element>          
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="Area">
+		<xs:sequence>
+			<xs:element name="ID" type="xs:int">
+				<xs:annotation>
+					<xs:documentation>Unique identifier for the Area (where present)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Name" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Area Name</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Type" type="xs:string" default="Division">
+				<xs:annotation>
+					<xs:documentation>Type of Area, e.g., Division, DMA, WIS, etc</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AreaDetails">
+		<xs:sequence>
+			<xs:element name="PrimaryArea" type="Area">
+				<xs:annotation>
+					<xs:documentation>Top level Area, equivalent to Click Region</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="SubArea" type="Area">
+				<xs:annotation>
+					<xs:documentation>Sub Area, equivalent to Click District</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ResourceProfile">
+		<xs:sequence>
+			<xs:element minOccurs="1" maxOccurs="1" name="ID" type="xs:int" />
+			<xs:element name="Skills" type="SkillCollection">
+				<xs:annotation>
+					<xs:documentation>The Skills required to carry out the Task</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ResourceProfileCollection">
+		<xs:sequence>
+			<xs:element name="ResourceProfile" type="ResourceProfile" maxOccurs="unbounded" minOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SkillsMatrix">
+		<xs:sequence>
+			<xs:element name="NoOfResourcesRequired" type="xs:int" default="1" />
+			<xs:element name="ResourceProfiles" type="ResourceProfileCollection">
+				<xs:annotation>
+					<xs:documentation>The Skills per Resource required to carry out the Task</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="AreSkillsMappedAtActivityLevel" type="xs:boolean">
+				<xs:annotation>
+					<xs:documentation>Boolean denotes type of Skills association. Required at runtime when parent is the Job class </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+     
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ActivityTask">
+		<xs:sequence>
+			<xs:element minOccurs="1" maxOccurs="1" name="ID" type="xs:int" />
+      <xs:element name="Description" minOccurs="1" maxOccurs="1" nillable="false" >
+        <xs:annotation>
+          <xs:documentation>The Description of the Task</xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:pattern value="^(?=.*\S).+$">
+              <xs:annotation>
+                <xs:documentation>'Description' is a mandatory field and has not been specified.</xs:documentation>
+              </xs:annotation>
+            </xs:pattern>
+            <xs:minLength value="1" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="Duration">
+				<xs:annotation>
+					<xs:documentation>Standard Duration for completing the Task, in Minutes</xs:documentation>
+				</xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xs:int">
+            <xs:pattern value="^\d+$">
+              <xs:annotation>
+                <xs:documentation>'Duration' must be a whole number.</xs:documentation>
+              </xs:annotation>
+            </xs:pattern>
+          </xs:restriction>
+        </xs:simpleType>
+			</xs:element>
+			<xs:element name="Sequence" type="xs:int" />
+			<xs:element name="IsCritical" type="xs:boolean" />
+      <xs:element name="IsNotApplicable" type="xs:boolean" default="false" />
+			<xs:element name="SkillsBreakdown" type="SkillsMatrix">
+				<xs:annotation>
+					<xs:documentation>The Skills per Resource required to carry out the Task</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="MaterialsRequired" type="MaterialCollection">
+				<xs:annotation>
+					<xs:documentation>The Materials required to carry out the Task</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+      <xs:element minOccurs="1" maxOccurs="1" name="IsComplete" type="xs:boolean" />
+			<xs:element minOccurs="1" maxOccurs="1" name="IsDatabaseComplete" type="xs:boolean" />
+			<xs:element name="TemplateID" type="xs:int">
+				<xs:annotation>
+					<xs:documentation>The ActivityTaskTemplate.ID the Task is based upon</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TaskUpdateType" type="TaskUpdateType">
+				<xs:annotation>
+					<xs:documentation>The TaskUpdateType the Task is associated with</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+      <xs:element name="MeasurementsRequired" type="PerformanceMeasurementCollection">
+        <xs:annotation>
+          <xs:documentation>Measurements associated with the particular Task</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="LastUpdatedDate" type="xs:dateTime">
+        <xs:annotation>
+          <xs:documentation>The Date\Time that the Task was last updated on</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Scope" type="eJobScope" />
+      <xs:element name="ScopedAssets" type="ReferenceTypeCollection" />
+      <xs:element name="Attributes" type="TaskAttributeCollection" />
+      <xs:element name="Faults" type="FaultDetailsCollection" />
+    </xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ActivityTaskCollection">
+		<xs:sequence>
+			<xs:element name="ActivityTask" type="ActivityTask" maxOccurs="unbounded" minOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ActivityReference">
+		<xs:annotation>
+			<xs:documentation>Summary info for an Activity, entity is the Template for a Job </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="ID" type="xs:int">
+				<xs:annotation>
+					<xs:documentation>Unique identifier for the Activity</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Code">
+				<xs:annotation>
+					<xs:documentation>Code</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:pattern value="^(.{3,12})$" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="Description" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Description</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Path" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Category hierarchy path to the Activity</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+      <xs:element name="SchedulingSystem" type="eSchedulingSystem">
+        <xs:annotation>
+          <xs:documentation>Defines which system Jobs of this Activity type are scheduled by</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="DistrictGroup" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>District Group associated with Activity e.g ME, OPS, etc</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ActivityReferenceCollection">
+		<xs:sequence>
+			<xs:element name="ActivityReference" type="ActivityReference" maxOccurs="unbounded" minOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ActivityTaskAssociation">
+		<xs:complexContent mixed="false">
+			<xs:extension base="ActivityReference">
+				<xs:sequence>
+					<xs:element name="Sequence" type="xs:int" />
+          <xs:element name="IsCritical" type="xs:boolean" />
+        </xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ActivityTaskAssociationCollection">
+		<xs:sequence>
+			<xs:element name="ActivityTaskAssociation" type="ActivityTaskAssociation" maxOccurs="unbounded" minOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ActivityTaskTemplate">
+		<xs:complexContent mixed="false">
+			<xs:extension base="ActivityTask">
+				<xs:sequence>
+					<xs:element name="AssociatedActivities" type="ActivityTaskAssociationCollection" maxOccurs="unbounded" minOccurs="1">
+						<xs:annotation>
+							<xs:documentation>Activities (Reference objects) the Task Template is associated with</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ActivityTaskTemplateCollection">
+		<xs:sequence>
+			<xs:element name="ActivityTaskTemplate" type="ActivityTaskTemplate" maxOccurs="unbounded" minOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="OnHoldReason">
+		<xs:sequence>
+			<xs:element name="ID" type="xs:int">
+				<xs:annotation>
+					<xs:documentation>Unique identifier for the Entity within the database</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Code" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Code</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Description" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Description</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="DateResolved" type="xs:dateTime">
+				<xs:annotation>
+					<xs:documentation>DateResolved</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ResolvingUser" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>ResolvingUser</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Comments" type="CommentAuditRecordCollection">
+				<xs:annotation>
+					<xs:documentation>Comments (history) associated with the OH Reason.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="LastUser" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>The Last User of the Scheduling system to amend the OnHoldReason</xs:documentation>
+					<!--<xs:documentation>XmlIgnore</xs:documentation> -->
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="LastUpdated" type="xs:dateTime">
+				<xs:annotation>
+					<xs:documentation>The Date the OnHoldReason was last updated in the Scheduling system</xs:documentation>
+					<!--<xs:documentation>XmlIgnore</xs:documentation> -->
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="SourceSystem" type="eWMSourceSystem">
+				<xs:annotation>
+					<xs:documentation>Allows filtering of OnHoldReason appropriate to SourceSystem that Jobs will be created for from an Activity</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+      <xs:element name="MaterialsRequired" type="MaterialCollection">
+        <xs:annotation>
+          <xs:documentation>The required Materials associated with the OH Reason and required before the relevant OH Reason can be resolved</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="OnHoldReasonCollection">
+		<xs:sequence>
+			<xs:element name="OnHoldReason" type="OnHoldReason" maxOccurs="unbounded" minOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AssociatedActivityReference">
+		<xs:annotation>
+			<xs:documentation>Activity Reference to an Activity associated to a Project Activity</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent mixed="false">
+			<xs:extension base="ActivityReference">
+				<xs:sequence>
+					<xs:element name="LeadTime" type="xs:int">
+						<xs:annotation>
+							<xs:documentation>The Time in HOURS between this Activity and the next one in the Collection. NB: Whatever units this is in need to be reflected in Click Task Manager code around ImportJob</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="AssociatedActivityReferenceCollection">
+		<xs:sequence>
+			<xs:element name="AssociatedActivityReference" type="AssociatedActivityReference" maxOccurs="unbounded" minOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Activity">
+		<xs:annotation>
+			<xs:documentation>The Activity template that the Job is an exemplar of, a child of a Category in the Activity Tree </xs:documentation>
+		</xs:annotation>
+		<xs:complexContent mixed="false">
+			<xs:extension base="ActivityReference">
+				<xs:sequence>
+					<xs:element name="ParentCategoryID" type="xs:int">
+						<xs:annotation>
+							<xs:documentation>Unique identifier for the Parent Category within the WM system</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="Tasks" type="ActivityTaskCollection" nillable="true">
+						<xs:annotation>
+							<xs:documentation>Child Tasks</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="OnHoldReasons" type="OnHoldReasonCollection" nillable="true">
+						<xs:annotation>
+							<xs:documentation>On Hold Reasons</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="SchedulingPriority" type="SchedulingPriority">
+						<xs:annotation>
+							<xs:documentation>Scheduling Priority (Lead Time)</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="DispatchPriority" type="DispatchPriority">
+						<xs:annotation>
+							<xs:documentation>Dispatch Priority (1-10 in Click)</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="IsReactive" type="xs:boolean">
+						<xs:annotation>
+							<xs:documentation>Whether Activity spawns Reactive (as opposed to Planned) Jobs</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="IsProject" type="xs:boolean" />
+					<xs:element name="EarlyStartTime">
+						<xs:annotation>
+							<xs:documentation>The Time of Day a Job generated with this Activity template should start (Job.EarliestStartDate). May be empty</xs:documentation>
+						</xs:annotation>
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:pattern value="^(([0-1]?[0-9])|([2][0-3])):([0-5]?[0-9])" />
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					<xs:element name="IsDueDateFixed" type="xs:boolean">
+						<xs:annotation>
+							<xs:documentation>Determines if Early Start parameters can adjust DueDate. If true EarlyStartDaysBeforeDue is utilised</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="EarlyStartDaysBeforeDue" type="xs:int" default="0">
+						<xs:annotation>
+							<xs:documentation>The (0 or positive integer) number of Days before Due Date a Job with a Time of Day specified can start. Note 0 means on the same Day as Due Date.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="Duration" type="xs:int">
+						<xs:annotation>
+							<xs:documentation>The Duration of an activity in whole minutes</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="Comments" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Comments applicable to a specific Activity</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:sequence>
+						<xs:element name="AssociatedActivities" type="AssociatedActivityReferenceCollection">
+							<xs:annotation>
+								<xs:documentation>Activities (Reference objects) the Activity a parent of (parent is a Project Activity) including LeadTime between each one</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+					<xs:element name="MethodOfDetection" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Default Failure Method Of Detection that applies</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="IsVisibleInClick" type="xs:boolean" minOccurs="0" default="false">
+						<xs:annotation>
+							<xs:documentation>Boolean indicator of whether this Activity is visible in Click (FDC in Office Mode) or not</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="IsVisibleInField" type="xs:boolean" minOccurs="0" default="false">
+						<xs:annotation>
+							<xs:documentation>Boolean indicator of whether this Activity is visible in Field (FDC) or not</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="AreUtilityPlansRequired" type="xs:boolean" minOccurs="0" default="false">
+						<xs:annotation>
+							<xs:documentation>Boolean indicator of whether Jobs raised against this Activity require Utilty Plans</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+          <xs:element name="FileAssociations" type="FileAssociationCollection">
+            <xs:annotation>
+              <xs:documentation>Pointers to Files associated with the Activity. All Jobs based on Activity should include these Job.FileAssociations, other files may also be associated with the Job at runtime e.g Utility Plans</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="SkillsBreakdown" type="SkillsMatrix">
+            <xs:annotation>
+              <xs:documentation>The Skills per Resource required to carry out the Task</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="IsScheduleFrequencyConditional" type="xs:boolean" minOccurs="0" default="false">
+            <xs:annotation>
+              <xs:documentation>Boolean indicator of whether this Activity's schedule frequency is conditionalt</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="AreSkillsMappedAtActivityLevel" type="xs:boolean">
+            <xs:annotation>
+              <xs:documentation>Boolean set when activity loads to set Skills association </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="IsFailure" type="xs:boolean">
+            <xs:annotation>
+              <xs:documentation>Boolean set when Is Failure checked in Activity Details</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="Schedules" type="ScheduleDetailsCollection">
+            <xs:annotation>
+              <xs:documentation>Schedule Details Collection per Activity</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          
+        </xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ActivityCollection">
+		<xs:sequence>
+			<xs:element name="Activity" type="Activity" maxOccurs="unbounded" minOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="TaskUpdate">
+		<xs:annotation>
+			<xs:documentation>NB: This class is generally inherited but cannot be made abstract due to way Task feedback is assembled in Maintenance plugin</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element minOccurs="1" maxOccurs="1" name="ID" type="xs:int">
+				<xs:annotation>
+					<xs:documentation>Unique ID for the Task</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="1" maxOccurs="1" name="IsComplete" type="xs:boolean" />
+			<xs:element name="UserID" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>The User who updated the Task</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="DateUpdated" type="xs:dateTime">
+				<xs:annotation>
+					<xs:documentation>The Date the Task was updated</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+      <xs:element name="MaterialsUsed" type="MaterialCollection">
+        <xs:annotation>
+          <xs:documentation>Materials used in carrying out the Task</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="MeasurementsTaken" type="PerformanceMeasurementCollection">
+        <xs:annotation>
+          <xs:documentation>Measurements gathered against the Task</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Costings" type="CostingCollection">
+        <xs:annotation>
+          <xs:documentation>Measurements previously gathered against the Asset</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Comments" type="CommentAuditRecordCollection">
+        <xs:annotation>
+          <xs:documentation>Comments made specific to the execution of a particular Task</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="AssetID" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>Optional. This is applicable if the Job.Asset has an AssetGroup containing Assets, e.g the Job.Asset is a SITE</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Attributes" type="TaskAttributeCollection" />
+      <xs:element name="Faults" type="FaultDetailsCollection" />
+    </xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="TaskUpdateCollection">
+		<xs:sequence>
+			<xs:element name="TaskUpdate" type="TaskUpdate" maxOccurs="unbounded" minOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="WorkContainer">
+		<xs:annotation>
+			<xs:documentation>Provides a serializable container instance to pass any mixture of classes inheriting from Job and metadata of their associations</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Jobs" type="JobCollection">
+				<xs:annotation>
+					<xs:documentation>May contain any mixture of classes inheriting from Job</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Associations" type="AssociatedActivityReferenceCollection">
+				<xs:annotation>
+					<xs:documentation>Metadata for associations between the Activities that the Jobs within this structure are based upon</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="IsProject" type="xs:boolean" />
+		</xs:sequence>
+	</xs:complexType> 
+	<xs:complexType name="JobCollection">
+		<xs:sequence>
+			<xs:element name="Job" type="Job" maxOccurs="unbounded" minOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+  <xs:complexType name="WorkSchedulingContainer">
+    <xs:annotation>
+      <xs:documentation>Provides a serializable container instance to pass any mixture of classes inheriting from Job and metadata of their scheduling</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="Jobs" type="ExtendedJobCollection">
+        <xs:annotation>
+          <xs:documentation>Contains collection of information about Jobs and their Instances (actual and potential Assignments)</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ExtendedJobCollection">
+    <xs:sequence>
+      <xs:element name="ExtendedJob" type="ExtendedJob" maxOccurs="unbounded" minOccurs="1" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ExtendedJob">
+    <xs:sequence>
+      <xs:element name="Job" type="Job">
+        <xs:annotation>
+          <xs:documentation>The associated Job object</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Instances" type="AssignmentDetailsCollection">
+        <xs:annotation>
+          <xs:documentation>Instances of the Job (potential and actual Assignments)</xs:documentation>
+          <xs:documentation>NB: Appointment is a child of the Instance</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="OverallStatus" type="eJobStatus">
+        <xs:annotation>
+          <xs:documentation>Latest Status across potentially multiple Instances</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="DataObtainedAtDateTime" type="xs:dateTime">
+        <xs:annotation>
+          <xs:documentation>The datetime the data/object was populated from the database</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <!-- Supporting -->
+  <xs:complexType name="SearchParameterCollection">
+    <xs:sequence>
+      <xs:element name="SearchParameter" type="SearchParameter" maxOccurs="unbounded" minOccurs="1" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SearchParameter">
+    <xs:sequence>
+      <xs:element name="Name" type="xs:string" />
+      <xs:element name="Value" type="xs:anyType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="WorkflowAuditRecord">
+		<xs:sequence>
+			<xs:element name="ChangeDate" type="xs:dateTime" />
+			<xs:element name="ChangeUser" type="xs:string" />
+			<xs:element name="Status" type="eJobStatus" />
+			<xs:element name="ServiceName" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CommentAuditRecord">
+		<xs:sequence>
+			<xs:element name="ChangeDate" type="xs:dateTime" />
+			<xs:element name="ChangeUser" type="xs:string" />
+			<xs:element name="Text" type="xs:string" />
+			<xs:element name="IsEngineerComment" type="xs:boolean" />
+      <!--IsCritical column to indicate whether the comments are critical-->
+      <xs:element name="IsCritical" type="xs:boolean" />
+			<xs:element name="SortExpression" type="xs:string" />
+			<xs:element name="Type" type="eCommentType" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CommentAuditRecordCollection">
+		<xs:sequence>
+			<xs:element name="CommentAuditRecord" type="CommentAuditRecord" maxOccurs="unbounded" minOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Appointment">
+		<xs:sequence>
+			<xs:element name="ID" type="xs:int">
+				<xs:annotation>
+					<xs:documentation>Unique identifier for the entity within the Scheduling system</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+      <xs:element name="Date" type="xs:dateTime" minOccurs="1">
+				<xs:annotation>
+					<xs:documentation>(Customer) Agreed Date the Appointment must be Attended</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TimeFrom">
+				<xs:annotation>
+					<xs:documentation>(Customer) Agreed Time of Day the Appointment must be Attended</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:pattern value="^(([0-1]?[0-9])|([2][0-3])):([0-5]?[0-9])" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="TimeTo">
+				<xs:annotation>
+					<xs:documentation>Estimated Time of Day the Appointment will be concluded</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:pattern value="^(([0-1]?[0-9])|([2][0-3])):([0-5]?[0-9])" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="IsConfirmed" type="xs:boolean" minOccurs="1" default="false">
+				<xs:annotation>
+					<xs:documentation>The Appointment has been confirmed with Customer</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Responsibility" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Person responsible for making the Appointment (typically a CSU agent)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="LastUser" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>The Last User of the Scheduling system to amend the Appointment</xs:documentation>
+					<xs:documentation>XmlIgnore</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="LastUpdated" type="xs:dateTime">
+				<xs:annotation>
+					<xs:documentation>The Date the Appointment was last updated in the Scheduling system</xs:documentation>
+					<xs:documentation>XmlIgnore</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TimeAttended">
+				<xs:annotation>
+					<xs:documentation>Time Attended, must be explictly recorded for Regulatory purposes</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:pattern value="^(([0-1]?[0-9])|([2][0-3])):([0-5]?[0-9])" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="WasAttended" type="xs:boolean" minOccurs="1" default="false">
+				<xs:annotation>
+					<xs:documentation>Was Attended, must be explictly recorded for Regulatory purposes</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="WasMissed" type="xs:boolean" minOccurs="1" default="false">
+				<xs:annotation>
+					<xs:documentation>Was Attended, must be explictly recorded for Regulatory purposes</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ReasonMissed" type="eAppointmentMissedReason">
+				<xs:annotation>
+					<xs:documentation>Must be recorded if WasMissed=true</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="IsInternal" type="xs:boolean" minOccurs="1" default="false">
+				<xs:annotation>
+					<xs:documentation>Whether the Appointment comes under GSS Payments or not</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="SchedulerReasonMissed" type="eSchedulerAppointmentMissedReason">
+				<xs:annotation>
+					<xs:documentation>Must be recorded by the scheduler if WasMissed=true</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CustomerEarlyVisitOutcome" type="eAppointmentEarlyVisitOutcome" minOccurs="1">
+				<xs:annotation>
+					<xs:documentation>GSS Payment may not apply even though TimeAttended earlier than planned</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="DateSubmittedToGSS" type="xs:dateTime">
+				<xs:annotation>
+					<xs:documentation>The Date the Appointment was sent to the GSS system (if IsInternal = false)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ConfirmationMethod" type="eAppointmentConfirmationMethod" default="None">
+				<xs:annotation>
+					<xs:documentation>ConfirmationMethod (if confirmed, default value is None)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AppointmentCollection">
+		<xs:sequence>
+			<xs:element name="Appointment" type="Appointment" maxOccurs="unbounded" minOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="FileAssociation">
+		<xs:sequence>
+			<xs:element name="Path" minOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Path to the associated file. This should be a URI\local path, it is not intended to support virtual paths or mapped drives</xs:documentation>
+					<xs:documentation>TODO: Tighten up REGEX validation subject to confirmation of legal paths, where Utility Plans will be stored, etc</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:pattern value="^(.{8,})$" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="Description" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>A Summary description for the associated file. May simply be the file name, i.e., not including directory path</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="AssociationType" type="eFileAssociationType">
+				<xs:annotation>
+					<xs:documentation>Work Type as defined by the Enumeration, e.g., Utility Plan</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="SizeInBytes" type="xs:int">
+				<xs:annotation>
+					<xs:documentation>Size of the File (in Bytes)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Hash" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>MD5 Hash of the File</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="IsEncrypted" type="xs:boolean">
+				<xs:annotation>
+					<xs:documentation>Flag indicating whether File content is Encrypted</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="FileAssociationCollection">
+		<xs:sequence>
+			<xs:element name="FileAssociation" type="FileAssociation" maxOccurs="unbounded" minOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Skill">
+		<xs:sequence>
+			<xs:element name="ID" type="xs:int">
+				<xs:annotation>
+					<xs:documentation>Unique identifier for the entity within the system</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Code" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Unique Code for a Skill</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Description" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>User meaningful Description for a Skill</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="NoOfWorkersRequired" type="xs:int" minOccurs="1" default="1">
+				<xs:annotation>
+					<xs:documentation>The number of Workers required to perform the Skill</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="StandardHours" type="xs:decimal">
+				<xs:annotation>
+					<xs:documentation>The estimated Time perform the Skill</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="SourceSystems" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Semi-colon delimited strings representing which SourceSystem the skill applies to e.g. (Maintenance);(Telemetry)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SkillCollection">
+		<xs:sequence>
+			<xs:element name="Skill" type="Skill" maxOccurs="unbounded" minOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Material">
+		<xs:sequence>
+			<xs:element name="ID" type="xs:int">
+				<xs:annotation>
+					<xs:documentation>Unique identifier for the Material</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+      <xs:element name="Code" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>User frendly key for a Material</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Description">
+				<xs:annotation>
+					<xs:documentation>User meaningful Description for a Material</xs:documentation>
+				</xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:pattern value="^(?=.*\S).+$">
+              <xs:annotation>
+                <xs:documentation>'Description' is a mandatory field and has not been specified.</xs:documentation>
+              </xs:annotation>
+            </xs:pattern>
+            <xs:minLength value="1" />
+          </xs:restriction>
+        </xs:simpleType>
+			</xs:element>
+			<xs:element name="Quantity"  minOccurs="1" default="1">
+				<xs:annotation>
+					<xs:documentation>The number of Materials\Parts required</xs:documentation>
+				</xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xs:decimal">
+            <xs:pattern value="^([0-9]*[1-9][0-9]*(\.[0-9]+)?|[0]+\.[0-9]*[1-9][0-9]*)$">
+              <xs:annotation>
+                <xs:documentation>'Quantity' must be greater than zero.</xs:documentation>
+              </xs:annotation>
+            </xs:pattern>
+          </xs:restriction>
+        </xs:simpleType>
+			</xs:element>
+      <xs:element name="Manufacturer" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Manufacturer</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Supplier" type="ReferenceType">
+        <xs:annotation>
+          <xs:documentation>Supplier</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Scope" type="eTaskScope" />
+      <xs:element name="ScopedTasks" type="ReferenceTypeCollection"/>
+      <xs:element name="AssetType" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>The Asset Type that the entity is associated with</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="MaterialCollection">
+		<xs:sequence>
+			<xs:element name="Material" type="Material" maxOccurs="unbounded" minOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="JobAction">
+		<xs:annotation>
+			<xs:documentation>This type is modelled on the WMI system representation of Job Actions (Sub Tasks) and may not be required going forward</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="No" type="xs:int" minOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Action (Task) No., i.e., in a sequence of Tasks</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Code" type="xs:string" minOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Action (Task) Code</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Description" type="xs:string" minOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Action (Task) Description</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Notes" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Free text</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="LastUser" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>The Last User to amend the Action (may be a Field Worker)</xs:documentation>
+					<xs:documentation>XmlIgnore</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="LastUpdated" type="xs:dateTime">
+				<xs:annotation>
+					<xs:documentation>The Date the Action was last updated</xs:documentation>
+					<xs:documentation>XmlIgnore</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="JobActionCollection">
+		<xs:sequence>
+			<xs:element name="JobAction" type="JobAction" maxOccurs="unbounded" minOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="TaskUpdateType">
+		<xs:annotation>
+			<xs:documentation>This type contains the TaskUpdate type metadata associated to an ActivityTask</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Name" type="xs:string" minOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Full TypeName</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ShortName" type="xs:string" minOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Short Name (excluding Assembly information)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="TaskUpdateTypeCollection">
+		<xs:sequence>
+			<xs:element name="TaskUpdateType" type="TaskUpdateType" maxOccurs="unbounded" minOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="TaskLookupData">
+		<xs:sequence>
+			<xs:element name="Skills" type="SkillCollection">
+				<xs:annotation>
+					<xs:documentation>The Skills required to carry out the Task</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Materials" type="MaterialCollection">
+				<xs:annotation>
+					<xs:documentation>The Materials required to carry out the Task</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TaskUpdateTypes" type="TaskUpdateTypeCollection">
+				<xs:annotation>
+					<xs:documentation>Legal TaskUpdateTypes that may be associated with an Activity Task</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SchedulingPriority">
+		<xs:annotation>
+			<xs:documentation>This is used to determine the Due Date for a Job based on its Activity</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="ID" type="xs:int">
+				<xs:annotation>
+					<xs:documentation>Unique identifier for the entity</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Description" type="xs:string" minOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Description</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Hours" type="xs:int" minOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Hours to add to current DateTime to compute the Due Date</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="DueTime" type="xs:string" minOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Due Time in the format HH:mm</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ExcludeNonWorkingDays" type="xs:boolean" minOccurs="1" default="true">
+				<xs:annotation>
+					<xs:documentation>Boolean indicator of whether Non-Working days should be excluded in calculating DueDate</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="IsReactive" type="xs:boolean" minOccurs="0" default="false">
+				<xs:annotation>
+					<xs:documentation>Boolean indicator of whether this Scheduling Priority only applies to Reactive Activities</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SchedulingPriorityCollection">
+		<xs:sequence>
+			<xs:element name="SchedulingPriority" type="SchedulingPriority" maxOccurs="unbounded" minOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="DispatchPriority">
+		<xs:annotation>
+			<xs:documentation>This is used to choose which of two Jobs with equal Due Date should be Dispatched first</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="ID" type="xs:int">
+				<xs:annotation>
+					<xs:documentation>Unique identifier for the entity</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Description" type="xs:string" minOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Description</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Rank" type="xs:int" minOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Numeric associated with the Priority</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="DispatchPriorityCollection">
+		<xs:sequence>
+			<xs:element name="DispatchPriority" type="DispatchPriority" maxOccurs="unbounded" minOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PriorityLookupData">
+		<xs:sequence>
+			<xs:element name="Scheduling" type="SchedulingPriorityCollection">
+				<xs:annotation>
+					<xs:documentation>List of legal Scheduling Priority (Lead Time) values</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Dispatch" type="DispatchPriorityCollection">
+				<xs:annotation>
+					<xs:documentation>List of legal Dispatch Priority values</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="JobRequest">
+		<xs:sequence>
+			<xs:element name="Activity" type="ActivityReference" />
+			<xs:element name="DueDate" type="xs:dateTime">
+				<xs:annotation>
+					<xs:documentation>Proposed Date\Time by which the additional work should be done</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="AssociatedJobID" type="xs:int">
+				<xs:annotation>
+					<xs:documentation>Follow On Work - Associated Job</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="AssociatedJobSourceSystem" type="eWMSourceSystem">
+				<xs:annotation>
+					<xs:documentation>Follow On Work - Associated Job "type"</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Comments" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Free text</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="1" maxOccurs="1" name="RaisedDate" type="xs:dateTime" />
+			<xs:element minOccurs="0" maxOccurs="1" name="RaisedBy" type="xs:string" />
+			<xs:element minOccurs="0" maxOccurs="1" name="Originator" type="xs:string" />
+			<xs:element name="IsFieldUpdate" type="xs:boolean" minOccurs="1" default="false">
+				<xs:annotation>
+					<xs:documentation>This flag indicates Request is being submitted by a Field worker, not an Office worker using the Field client application</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="OnHoldReasons" type="OnHoldReasonCollection" nillable="true">
+				<xs:annotation>
+					<xs:documentation>On Hold Reasons</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Tasks" type="ActivityTaskCollection">
+				<xs:annotation>
+					<xs:documentation>Attribute allows the Job Requestor to override the preconfigured Activity.Tasks</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+      <xs:element name="CostCode" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Cost Code associated with the Job</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Project" type="ReferenceType">
+        <xs:annotation>
+          <xs:documentation>Allow association to an overall Project</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="RequiredEngineer" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Optional. UserID (NT Login) to assign the to be created Job to</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Materials" type="MaterialCollection" />
+      <xs:element name="Measurements" type="PerformanceMeasurementCollection" />
+      <xs:element name="Reference" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Optional. This can be any Reference that suits the client, e.g Works Code</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Contact" type="Contact">
+        <xs:annotation>
+          <xs:documentation>Optional, to hold e.g Project Contact</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="AssignmentConstraints" type="AssignmentConstraints">
+        <xs:annotation>
+          <xs:documentation>Optional, to hold any contraints that should be considered when creating Assignments for the to-be-created Job.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="JobRequestCollection">
+		<xs:sequence>
+			<xs:element name="JobRequest" type="JobRequest" maxOccurs="unbounded" minOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="JobFailure">
+		<xs:sequence>
+			<xs:element name="ID" type="xs:int">
+				<xs:annotation>
+					<xs:documentation>Unique identifier for the entity within the Work Management system</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="SourceSystem" type="eWMSourceSystem">
+				<xs:annotation>
+					<xs:documentation>Business Stream</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Type" type="eJobFailureType">
+				<xs:annotation>
+					<xs:documentation>Failure Type as defined by the Enumeration, e.g., Import</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="DateRecorded" type="xs:dateTime" minOccurs="1">
+				<xs:annotation>
+					<xs:documentation>The Date the Failure was recorded</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ExceptionMessage" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Exception Message associated with the Failure</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="RetryCount" type="xs:int">
+				<xs:annotation>
+					<xs:documentation>No. of times retried (without success)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Comments" type="xs:string">
+				<xs:annotation>
+				  <xs:documentation>Free text</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ServiceWrapperType" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>ServiceWrapperType within WFBusService (Optional)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="JobFailureCollection">
+		<xs:sequence>
+			<xs:element name="JobFailure" type="JobFailure" maxOccurs="unbounded" minOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+	<!-- Field Specific -->
+	<xs:complexType name="AppointmentTaskUpdate">
+		<xs:complexContent mixed="false">
+			<xs:extension base="TaskUpdate">
+				<xs:sequence>
+					<xs:element name="Appointment" type="Appointment" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>	
+	<xs:complexType name="LostTimeUpdate">
+		<xs:sequence>
+			<xs:element name="Reason" type="LostTimeReason">
+				<xs:annotation>
+					<xs:documentation>Lookup data - the ID of this now replaces the previous attribute LostTimeID</xs:documentation>
+				</xs:annotation>
+			</xs:element>			
+			<xs:element name="Minutes">
+				<xs:annotation>
+					<xs:documentation>Minutes lost due to reason specified in the Description attribute</xs:documentation>
+				</xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xs:int">
+            <xs:pattern value="^\d+$">
+              <xs:annotation>
+                <xs:documentation>'Minutes' must be a whole number.</xs:documentation>
+              </xs:annotation>
+            </xs:pattern>
+          </xs:restriction>
+        </xs:simpleType>
+			</xs:element>
+			<xs:element name="Comments" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="LostTimeUpdateCollection">
+		<xs:sequence>
+			<xs:element name="LostTimeUpdate" type="LostTimeUpdate" maxOccurs="unbounded" minOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="EngineerFeedback">
+		<xs:sequence>
+			<xs:element minOccurs="1" maxOccurs="1" name="StartDateTime" nillable="true" type="xs:dateTime" />
+			<xs:element minOccurs="1" maxOccurs="1" name="EndDateTime" nillable="true" type="xs:dateTime" />
+			<xs:element name="LostTime" type="LostTimeUpdateCollection">
+				<xs:annotation>
+					<xs:documentation>Collection of LostTimeUpdate instances, at a minimum recording minutes lost and cause</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" maxOccurs="1" name="Comments" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Job Comments, free text</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" maxOccurs="1" name="Workers" type="WorkerCollection" />
+			<xs:element minOccurs="1" maxOccurs="1" name="LogOnOnly" type="xs:boolean" default="false">
+				<xs:annotation>
+					<xs:documentation>LogOnOnly bypasses ApplyToJob including write to JobHistory table</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="1" maxOccurs="1" name="IncompleteReason" type="IncompleteReason" />
+			<xs:element minOccurs="0" maxOccurs="1" name="IncompleteComment" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Incomplete Comments, free text</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+      <xs:element minOccurs="1" maxOccurs="1" name="Travel" type="TravelDetails" />
+      <xs:element minOccurs="1" maxOccurs="1" name="Accommodation" type="AccommodationDetails" />
+      <xs:element name="Tasks" type="TaskUpdateCollection">
+        <xs:annotation>
+          <xs:documentation>Updates to child Tasks of the Job. May be TaskUpdate inheritors</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+			<xs:element name="ImageFilesTask" type="ImageFilesTaskUpdate">
+				<xs:annotation>
+					<xs:documentation>Container class for a collection of Image Files that are to be uploaded</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+    </xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="BankHoliday">
+		<xs:annotation>
+			<xs:documentation>This type provides a Bank Holiday date and description</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Date" type="xs:dateTime" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="BankHolidayCollection">
+		<xs:sequence>
+			<xs:element name="BankHoliday" type="BankHoliday" maxOccurs="unbounded" minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="IncompleteReason">
+		<xs:sequence>
+			<xs:element minOccurs="1" maxOccurs="1" name="ID" type="xs:int" />
+			<xs:element minOccurs="0" maxOccurs="1" name="Description" type="xs:string" />
+			<xs:element minOccurs="1" maxOccurs="1" name="CompleteJob" type="xs:boolean" />
+			<xs:element minOccurs="1" maxOccurs="1" name="ReassignJob" type="xs:boolean" />
+			<xs:element minOccurs="1" maxOccurs="1" name="IsCarryover" type="xs:boolean" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="IncompleteReasonCollection">
+		<xs:sequence>
+			<xs:element minOccurs="0" maxOccurs="unbounded" name="IncompleteReason" nillable="true" type="IncompleteReason" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="LostTimeReason">
+		<xs:sequence>
+      <xs:element name="ID" minOccurs="1" maxOccurs="1">
+        <xs:simpleType>
+          <xs:restriction base="xs:int">
+            <xs:pattern value="^[1-9][0-9]*$" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>    
+      <xs:element name="Description" minOccurs="0" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation>The Description of the LostTimeReason</xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:pattern value="^(?=.*\S).+$">
+              <xs:annotation>
+                <xs:documentation>'Description' is a mandatory field and has not been specified.</xs:documentation>
+              </xs:annotation>
+            </xs:pattern>
+            <xs:minLength value="1" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+			<xs:element minOccurs="1" maxOccurs="1" name="Travel" type="xs:boolean" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="LostTimeReasonCollection">
+		<xs:sequence>
+			<xs:element minOccurs="0" maxOccurs="unbounded" name="LostTimeReason" nillable="true" type="LostTimeReason" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ChangeRequest">
+		<xs:annotation>
+			<xs:documentation>This type provides a generic means for suggesting changes to corporate data by the Field Worker, e.g., changes to Meter or Property information within GIS</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="EntityName" type="xs:string" />
+			<xs:element name="EntityID" type="xs:int" />
+			<xs:element name="AttributeName" type="xs:string" />
+			<xs:element name="AttributeNewValue" type="xs:string" />
+			<xs:element name="AttributeOldValue" type="xs:string" />
+			<xs:element name="RequestUser" type="xs:string" />
+			<xs:element name="RequestDate" type="xs:dateTime" />
+			<xs:element name="RequestReason" type="xs:string" />
+			<xs:element name="ID" type="xs:int" />
+			<xs:element name="AdminApproved" type="xs:boolean" />
+			<xs:element name="AdminComment" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ChangeRequestCollection">
+		<xs:sequence>
+			<xs:element name="ChangeRequest" type="ChangeRequest" maxOccurs="unbounded" minOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="MobileIdentity">
+		<xs:sequence>
+			<xs:element name="Type" type="eMobileIdentityType" />
+			<xs:element name="UserID">
+				<xs:annotation>
+					<xs:documentation>AD login, Gang identitifer or Contractor</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:pattern value="^([A-Za-z]{3,10})$" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="DisplayName">
+				<xs:annotation>
+					<xs:documentation>Employee Forename(s) + Surname or Gang\Contractor identifier</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:pattern value="^([A-Za-z]{2,40})$" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="EmpNo">
+				<xs:annotation>
+					<xs:documentation>Employee No within HR master system, maximum of 10 all numeric characters (minimum of 6, TBC)</xs:documentation>
+					<xs:documentation>The composite of LoginName and EmpNo is the unique identifier for the Employee within the Scheduling system (Click)</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:pattern value="^([0-9]{6,10})$" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="AreaDetails" type="AreaDetails">
+				<xs:annotation>
+					<xs:documentation>Primary and SubArea(s) associated with the Job (Region and District in Click terms)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Forenames" type="xs:string" />
+			<xs:element name="Surname" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="MobileIdentityCollection">
+		<xs:sequence>
+			<xs:element name="MobileIdentity" type="MobileIdentity" maxOccurs="unbounded" minOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+  <xs:complexType name="ReportDefinition">
+    <xs:sequence>
+      <xs:element name="Type" type="eReportDefinitionType" />
+      <xs:element name="ReportPath" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>SSRS Report Path</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="DisplayName" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Friendly name of the Report</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>  
+  <xs:complexType name="ReportDefinitionCollection">
+    <xs:sequence>
+      <xs:element name="ReportDefinition" type="ReportDefinition" maxOccurs="unbounded" minOccurs="1" />
+    </xs:sequence>
+  </xs:complexType>
+	<xs:complexType name="EngineerNonAvailability">
+		<xs:sequence>
+			<xs:element name="ID" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Unique identifier for the entity. Guid or Hash</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="StartDate" type="xs:dateTime">
+				<xs:annotation>
+					<xs:documentation>The Date\Time the NA begins at</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="EndDate" type="xs:dateTime">
+				<xs:annotation>
+					<xs:documentation>The Date\Time the NA ends at</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Type" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>The Non Availability Type (expected to be from a lookup list of legal values)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Comments" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>The NA Comments</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+      <xs:element name="SystemID" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Unique identifier for the entity within HR System</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="IsToBeDeleted" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>Flag denoting whether the Engineer Non-Availability record is to be deleted</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="EngineerNonAvailabilityCollection">
+		<xs:sequence>
+			<xs:element minOccurs="0" maxOccurs="unbounded" name="EngineerNonAvailability" type="EngineerNonAvailability" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AssignmentDetails">
+		<xs:sequence>
+			<xs:element name="ID" type="xs:int">
+				<xs:annotation>
+					<xs:documentation>Unique identifier for the entity within the Work Management system</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="SourceSystem" type="eWMSourceSystem">
+				<xs:annotation>
+					<xs:documentation>Business Stream</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+      <xs:element name="InstanceNumber" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>Unique identifier for the Instance (potential or actual Assignment) of the Job that is this AssignmentDetails instance [Click Task.Number]</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Status" type="eJobStatus">
+				<xs:annotation>
+					<xs:documentation>Status as defined by the Enumeration, e.g., Dispatched</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="DueDate" type="xs:dateTime">
+				<xs:annotation>
+					<xs:documentation>The current Date\Time by which the Assignment must be started. Dynamic through lifetime of an Assignment (Job Instance)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Workers" type="WorkerCollection">
+				<xs:annotation>
+					<xs:documentation>All Engineers the Job associated with this Assignment is assigned to</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Appointment" type="Appointment">
+				<xs:annotation>
+					<xs:documentation>Appointment associated with the Assignment (Job Instance)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+      <xs:element name="DateAssigned" type="xs:dateTime">
+        <xs:annotation>
+          <xs:documentation>The Date\Time an Assignee was assigned to the Assignment</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AssignmentDetailsCollection">
+		<xs:sequence>
+			<xs:element minOccurs="0" maxOccurs="unbounded" name="AssignmentDetails" type="AssignmentDetails" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ExtendedAssignment">
+		<xs:sequence>
+			<xs:element name="Assignment" type="AssignmentDetails">
+				<xs:annotation>
+					<xs:documentation>The Assignment itself</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="JobTypeName" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>The Type of the Job the Assignment pertains to. To allow creation of a Job instance</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="SiteID" type="xs:int">
+				<xs:annotation>
+					<xs:documentation>The SiteID for use with Group PPM logic in the first instance</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="PPMGroup" minOccurs="0" maxOccurs="1"  type="xs:string">
+				<xs:annotation>
+					<xs:documentation>This attribute denotes that this Extended Assignment's Job is part of a Group of PPM Jobs and is populated with a value (unique to the PPM Group's constituent jobs) derived from the concatenation of the Extended Assignment Site ID (Job.Location.SiteID)and Assignment Date.</xs:documentation>
+				</xs:annotation>
+		   </xs:element>
+		   <xs:element name="IsStandby" minOccurs="0" maxOccurs="1"  type="xs:boolean" default="false">
+				<xs:annotation>
+					<xs:documentation>This attribute denotes that this is for a Job scheduled during an engineer Standby/Out of Hours period .. used primarily in the Mobile Throttling process.</xs:documentation>
+				</xs:annotation>
+		   </xs:element>
+			<xs:element name="WorkType" type="eWorkType">
+				<xs:annotation>
+					<xs:documentation>WorkType enumeration value e.g Reactive or Planned</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<!-- Asset related -->
+	<xs:complexType name="PerformanceIndicator">
+		<xs:sequence>
+			<xs:element name="ID" type="xs:int">
+				<xs:annotation>
+					<xs:documentation>Unique identifier for the entity within the Asset Management system</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Code" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>PERFCODE</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Description">
+				<xs:annotation>
+					<xs:documentation>Description</xs:documentation>
+				</xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:pattern value="^(?=.*\S).+$">
+              <xs:annotation>
+                <xs:documentation>'Description' is a mandatory field and has not been specified.</xs:documentation>
+              </xs:annotation>
+            </xs:pattern>
+            <xs:minLength value="1" />
+          </xs:restriction>
+        </xs:simpleType>
+			</xs:element>
+			<xs:element name="Units" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>PERFUM</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		  <xs:element name="MaxValue">
+        <xs:annotation>
+			  <xs:documentation>Validate within configured tolerance, Max</xs:documentation>
+			</xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xs:decimal">
+            <xs:pattern value="[0-9]+(\.[0-9][0-9]?)?">
+              <xs:annotation>
+                <xs:documentation>'Max Value' must be a valid decimal number.</xs:documentation>
+              </xs:annotation>
+            </xs:pattern>
+          </xs:restriction>
+        </xs:simpleType>
+		  </xs:element>
+		  <xs:element name="MinValue">
+			<xs:annotation>
+			  <xs:documentation>Validate within configured tolerance, Min</xs:documentation>
+			</xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xs:decimal">
+            <xs:pattern value="[0-9]+(\.[0-9][0-9]?)?">
+              <xs:annotation>
+                <xs:documentation>'Min Value' must be a valid decimal number.</xs:documentation>
+              </xs:annotation>
+            </xs:pattern>
+          </xs:restriction>
+        </xs:simpleType>
+		  </xs:element>
+		  <xs:element name="DataType" type="xs:string">
+			<xs:annotation>
+			  <xs:documentation>The native DataType of Value</xs:documentation>
+			</xs:annotation>
+		  </xs:element>
+		  <xs:element name="Position" type="xs:int">
+			<xs:annotation>
+			  <xs:documentation>Allows control of the Display Order that P.Is appear in</xs:documentation>
+			</xs:annotation>
+		  </xs:element>
+			<xs:element name="ValidationExpression" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Regex expression where applicable. If present this overrides Max\Min property values</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ValidationMessage" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>ValidationMessage associated with ValidationExpression (Regex)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+      <xs:element name="Scope" type="eTaskScope" />
+      <xs:element name="ScopedTasks" type="ReferenceTypeCollection"/>
+      <xs:element name="AssetType" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>The Asset Type that the entity is associated with</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PerformanceIndicatorCollection">
+		<xs:sequence>
+			<xs:element name="PerformanceIndicator" type="PerformanceIndicator" maxOccurs="unbounded" minOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+  <xs:complexType name="PerformanceIndicatorGroup">
+    <xs:sequence>
+      <xs:element name="ID" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>Unique identifier for the entity within the Asset Management system</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Name" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Name (for programming purposes)</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Description" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Description (for the User)</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Precedence" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>Allows control of the Display Order that P.I Groups appear in</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Indicators" type="PerformanceIndicatorCollection" maxOccurs="unbounded" minOccurs="1">
+        <xs:annotation>
+          <xs:documentation>Defines PerformanceIndicators included</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="PerformanceIndicatorGroupCollection">
+    <xs:sequence>
+      <xs:element name="PerformanceIndicatorGroup" type="PerformanceIndicatorGroup" maxOccurs="unbounded" minOccurs="1" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="PerformanceMeasurement">
+		<xs:complexContent mixed="false">
+			<xs:extension base="PerformanceIndicator">
+				<xs:sequence>
+					<xs:element name="Value">
+						<xs:annotation>
+							<xs:documentation>PERFVAL</xs:documentation>
+						</xs:annotation>
+            <xs:simpleType>
+              <xs:restriction base="xs:decimal">
+                <xs:pattern value="[0-9]+(\.[0-9][0-9]?)?">
+                  <xs:annotation>
+                    <xs:documentation>'Value' must be a valid decimal number.</xs:documentation>
+                  </xs:annotation>
+                </xs:pattern>
+              </xs:restriction>
+            </xs:simpleType>
+					</xs:element>
+					<xs:element name="ReadDate" type="xs:dateTime">
+						<xs:annotation>
+							<xs:documentation>READDTTM</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="JobID" type="xs:int">
+						<xs:annotation>
+							<xs:documentation>Unqiue Identifier for the Job</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="UserID" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>ADDBY</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+          <xs:element name="Comments" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Comments</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="PerformanceMeasurementCollection">
+		<xs:sequence>
+			<xs:element name="PerformanceMeasurement" type="PerformanceMeasurement" maxOccurs="unbounded" minOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+  <xs:complexType name="PerformanceMeasurementGroup">
+    <xs:sequence>
+      <xs:element name="ID" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>Unique identifier for the entity within the Asset Management system</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Name" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Name (for programming purposes)</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Description" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Description (for the User)</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Precedence" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>Allows control of the Display Order that P.I Groups appear in</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Measurements" type="PerformanceMeasurementCollection" maxOccurs="unbounded" minOccurs="1">
+        <xs:annotation>
+          <xs:documentation>Defines PerformanceIndicators included</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="PerformanceMeasurementGroupCollection">
+    <xs:sequence>
+      <xs:element name="PerformanceMeasurementGroup" type="PerformanceMeasurementGroup" maxOccurs="unbounded" minOccurs="1" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="AssetAttribute">
+		<xs:sequence>
+			<xs:element name="Name">
+				<xs:annotation>
+					<xs:documentation>Unique identifier for the entity within the Asset Management system</xs:documentation>
+				</xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:pattern value="^(?=.*\S).+$">
+              <xs:annotation>
+                <xs:documentation>'Name' is a mandatory field and has not been specified.</xs:documentation>
+              </xs:annotation>
+            </xs:pattern>
+            <xs:minLength value="1" />
+          </xs:restriction>
+        </xs:simpleType>
+			</xs:element>
+			<xs:element name="Value" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>All SQL Server column values are converted to string irrelevant of datatype</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Type" type="eAssetAttributeType" default="Dynamic">
+				<xs:annotation>
+					<xs:documentation>Database source of the Attribute</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="UserID" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>ADDBY/MODBY</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ValidationExpression" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Regex expression where applicable (when no Lookup data is available to constrain the value entered)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+      <xs:element name="ValidationMessage" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>User friendly message to post when Regex expression not matched</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="IsEditable" type="xs:boolean" minOccurs="1" default="false">
+				<xs:annotation>
+					<xs:documentation>This flag indicates to client software (AAA) if value can be edited or not</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="MaxLength" type="xs:int">
+				<xs:annotation>
+					<xs:documentation>Max length of Value when it is natively a varchar in SQL Server</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="DataType" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>The native DataType of Value</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+      <xs:element name="Position" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>Allows control of the Display Order that Attributes appear in</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="IsMandatory" type="xs:boolean" minOccurs="1" default="false">
+        <xs:annotation>
+          <xs:documentation>This flag indicates to client software (AAA) if value required on a New asset</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="IsHidden" type="xs:boolean" minOccurs="1" default="false">
+        <xs:annotation>
+          <xs:documentation>This flag indicates to client software (AAA) if value should be displayed to User</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AssetAttributeCollection">
+		<xs:sequence>
+			<xs:element name="AssetAttribute" type="AssetAttribute" maxOccurs="unbounded" minOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AssetAttributeCodeList">
+		<xs:sequence>
+			<xs:element name="AttributeName" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>The name of the Asset Attribute the CodeList relates to within the Asset Management system (COMPKEY)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Items" type="ReferenceTypeCollection">
+				<xs:annotation>
+					<xs:documentation>Lookup items [ID, Code, Description]</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AssetAttributeCodeListCollection">
+		<xs:sequence>
+			<xs:element name="AssetAttributeCodeList" type="AssetAttributeCodeList" maxOccurs="unbounded" minOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+  <xs:complexType name="AssetLookupData">
+    <xs:complexContent mixed="false">
+      <xs:extension base="LookupContainer">
+        <xs:sequence>
+          <xs:element name="CodeLists" type="AssetAttributeCodeListCollection">
+            <xs:annotation>
+              <xs:documentation>AAA required Lookup data for Asset Attribute updating</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" maxOccurs="1" name="AssetTypes" type="AssetTypeInfoCollection" />
+          <xs:element minOccurs="0" maxOccurs="1" name="ServiceStatus" type="ReferenceTypeCollection" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Ownership" type="ReferenceTypeCollection" />
+          <xs:element minOccurs="0" maxOccurs="1" name="AssetWarrantyType" type="ReferenceTypeCollection" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="AssetTypeInfo">
+    <xs:sequence>
+      <xs:element name="Code" type="xs:string"/>
+      <xs:element name="Description" type="xs:string"/>
+      <xs:element name="Attributes" type="AssetAttributeCollection"/>
+      <xs:element name="Discipline" type="eAssetDiscipline"/>
+      <xs:element name="SecondaryTypes" type="ReferenceTypeCollection"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="AssetTypeInfoCollection">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="AssetTypeInfo" nillable="true" type="AssetTypeInfo" />
+    </xs:sequence>
+  </xs:complexType>
+  
+  <!-- Used by inherited Types in other Libraries (Maintenance, Operations, Meter) -->
+	<xs:complexType name="GPSInformation">
+		<xs:sequence>
+			<xs:element name="StartingGridReference" type="GridReference" />
+			<xs:element name="AdditionalPoints" type="GridReferenceCollection">
+				<xs:annotation>
+					<xs:documentation>To be supplied every 10m length in the case of Excavations</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="GridReference">
+		<xs:annotation>
+			<xs:documentation>This type is utilised when capturing GPS information e.g for an Excavation (Utilities)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="XCoord">
+				<xs:annotation>
+					<xs:documentation>GPS X coordinate, should be exactly 6 numeric characters</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:pattern value="([0-9]{6})" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="YCoord">
+				<xs:annotation>
+					<xs:documentation>GPS Y coordinate, should be exactly 6 numeric characters</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:pattern value="([0-9]{6})" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="GridReferenceCollection">
+		<xs:sequence>
+			<xs:element name="GridReference" type="GridReference" maxOccurs="unbounded" minOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="MeterBase">
+		<xs:sequence>
+			<xs:element name="ID" type="xs:int">
+				<xs:annotation>
+					<xs:documentation>Internal identifier for instance of the class [MeterReference]</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="SerialNumber">
+				<xs:annotation>
+					<xs:documentation>SerialNumber within Meter master system, maximum of 13 alphanumeric characters</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:pattern value="^([A-Za-z0-9]{0,13})$" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="Reading" type="xs:decimal" />
+			<xs:element name="Location" type="xs:string" />
+			<xs:element name="NumberOfDials">
+				<xs:annotation>
+					<xs:documentation>NumberOfDials, value should be less than or equal to 9</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:pattern value="^([0-9]{1}$)" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="ChamberType" type="eMeterChamberType" />
+			<xs:element name="Validation" type="MeterValidationSettings" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="MeterValidationSettings">
+		<xs:sequence>
+			<xs:element name="LastReading" type="xs:decimal" />
+			<xs:element name="High" type="xs:decimal" />
+			<xs:element name="Low" type="xs:decimal" />
+			<xs:element name="Expected" type="xs:decimal" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="JobIncompleteOutcome">
+		<xs:sequence>
+			<xs:element minOccurs="0" maxOccurs="1" name="IncompleteReason" type="xs:string" />
+			<xs:element minOccurs="0" maxOccurs="1" name="UserID" type="xs:string" />
+			<xs:element minOccurs="1" maxOccurs="1" name="StartDateTime" type="xs:dateTime" />
+			<xs:element minOccurs="1" maxOccurs="1" name="EndDateTime" type="xs:dateTime" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="JobIncompleteOutcomeCollection">
+		<xs:sequence>
+			<xs:element minOccurs="0" maxOccurs="unbounded" name="JobIncompleteOutcome" nillable="true" type="JobIncompleteOutcome" />
+		</xs:sequence>
+	</xs:complexType>
+  <xs:complexType name="StatusConflict">
+    <xs:annotation>
+      <xs:documentation>This type supports the Integration layer and is solely for internal system use</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="ID" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>Unique identifier for the Job within the (originating) Work Management system</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="SourceSystem" type="eWMSourceSystem">
+        <xs:annotation>
+          <xs:documentation>Business Stream</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="ProposedStatus" type="eJobStatus">
+        <xs:annotation>
+          <xs:documentation>Status as defined by the Enumeration, e.g., Dispatched</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="CurrentStatus" type="eJobStatus">
+        <xs:annotation>
+          <xs:documentation>Status as defined by the Enumeration, e.g., Dispatched</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="LastUpdated" type="xs:dateTime" minOccurs="1">
+        <xs:annotation>
+          <xs:documentation>The Date the Job Status Change occurred</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="UserID" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>The User initiating the Status change</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Service" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>The Service that issued the Status change message </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="InstanceNumber" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>Unique identifier for the Instance (potential or actual Assignment) of the Job the StatusConflict is associated with [Click Task.Number]</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="WindowsIdentity" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>The WindowsIdentity of the User who updated the Job e.g. when logged on as a Gang will be != UserID</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="IsOfficeUser" type="xs:boolean" minOccurs="1" default="false">
+        <xs:annotation>
+          <xs:documentation>This flag indicates Update is being submitted via the Field Service is being sent by a Field worker, not an Office worker using the Field client application</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="StatusConflictCollection">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="StatusConflict" nillable="true" type="StatusConflict" />
+    </xs:sequence>
+  </xs:complexType>
+	<xs:complexType name="ScheduleDetailsCollection">
+		<xs:sequence>
+			<xs:element name="ScheduleDetails" type="ScheduleDetails" maxOccurs="unbounded" minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="ScheduleDetails" abstract="false">
+		<xs:sequence>
+			<xs:element name="ID" type="xs:int">
+				<xs:annotation>
+					<xs:documentation>ID of the Schedule</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Type" type="eScheduleType">
+				<xs:annotation>
+					<xs:documentation>Type of the Schedule</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Frequency" type="xs:int">
+				<xs:annotation>
+					<xs:documentation>Frequency thet Schedule runs at, expressed as a whole number of Weeks</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Status" type="eScheduleStatus">
+				<xs:annotation>
+					<xs:documentation>Status of the Schedule in Hansen, e.g On Hold, Disabled, etc</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+  <xs:complexType name="EngineerSkill">
+    <xs:sequence>
+      <xs:element name="ID" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>Unique identifier for the entity within the system</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="TrentID" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Unique identifier for the skill entity within the Trent HR system</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="ClickID" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>Unique identifier for the skill entity within the Click Scheduling system</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Description" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>User meaningful Description for an HR Skill</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="TrentPersonID" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Unique identifier for the resource in the Trent HR system</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="ClickEmployeeID" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Unique identifier for the resource in the Click Scheduling system</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="ExpiryDate" type="xs:dateTime">
+        <xs:annotation>
+          <xs:documentation>The expiry date of the skill in Trent</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="DateCreated" type="xs:dateTime">
+        <xs:annotation>
+          <xs:documentation>Creation date of the Engineer Skill mapping records</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="DateLastUpdated" type="xs:dateTime">
+        <xs:annotation>
+          <xs:documentation>Last Updated date of the Engineer Skill mapping records</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Active" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>Flag denoting whether the Engineer Skill is active or not</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="EngineerSkillCollection">
+    <xs:sequence>
+      <xs:element name="EngineerSkill" type="EngineerSkill" maxOccurs="unbounded" minOccurs="1" />
+    </xs:sequence>
+  </xs:complexType>
+<!-- Engineer Standby used for Control Room Application integration of Engineer Standby data to Click -->
+  <xs:complexType name="EngineerStandby">
+    <xs:sequence>
+      <xs:element name="ID" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>Unique identifier for the entity within the system ie. Control Room Application</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="RotaID" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>Unique identifier for the Standby Rota within the Control Room Application</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="StartDateTime" type="xs:dateTime">
+        <xs:annotation>
+          <xs:documentation>The Start Date and Time of the Standby entity with the Control Room Application</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="EndDateTime" type="xs:dateTime">
+        <xs:annotation>
+          <xs:documentation>The End Date and Time of the Standby entity with the Control Room Application</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="ClickEmployeeNo" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Unique identifier for the resource in the Click Scheduling system</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="IsTemporaryCover" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>Flag denoting whether the Engineer Standby record is for Temporary Cover (as opposed to Standby Cover)</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="IsDelete" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>Flag denoting whether the Engineer Standby record is to be deleted</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="EngineerStandbyCollection">
+    <xs:sequence>
+      <xs:element name="EngineerStandby" type="EngineerStandby" maxOccurs="unbounded" minOccurs="1" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- Recurring Non-Availability used with Click-Addin Non-Availability functionality  -->
+  <xs:complexType name="RecurringNonAvailability">
+    <xs:sequence>
+      <xs:element name="RecurrenceID" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>Unique identifier for the entity within the system ie. Click </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="RecurrenceInfo" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>String containing precise details of range of recurring dates. </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="NonAvailabilityType" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>The Non Availability type (expected to be from a lookup list of legal values)</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Street" type="xs:string"/>
+      <xs:element name="Town" type="xs:string"/>
+      <xs:element name="Postcode" type="xs:string"/>
+      <xs:element name="Country" type="xs:string"/>
+      <xs:element name="Comments" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>The Non-Availability comments</xs:documentation>
+        </xs:annotation>
+      </xs:element>        
+      <xs:element name="StartTime" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>The Start Time of each constituent Non-Availability period.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="EndTime" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>The End Time of each constituent Non-Availability period.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Duration" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>The Duration of each constituent Non-Availability period, as displayed in 
+          the Non-Availability Click form</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="RecurringNonAvailabilityCollection">
+    <xs:sequence>
+      <xs:element name="RecurringNonAvailability" type="RecurringNonAvailability" maxOccurs="unbounded" minOccurs="1" />
+    </xs:sequence>
+  </xs:complexType>
+
+	<!-- Image File Upload -->
+	<xs:complexType name="ImageFilesTaskUpdate">
+		<xs:complexContent mixed="false">
+			<xs:extension base="TaskUpdate">
+				<xs:sequence>
+					<xs:element name="ImageFiles" type="ImageFileCollection" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ImageFile">
+		<xs:sequence>
+			<xs:element name="FileName" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ImageFileCollection">
+		<xs:sequence>
+			<xs:element minOccurs="0" maxOccurs="unbounded" name="ImageFile" nillable="true" type="ImageFile" />
+		</xs:sequence>
+	</xs:complexType>
+
+  <xs:complexType name="WorkingDay">
+    <xs:sequence>
+      <xs:element name="Day" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>A single working day of the week</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="StartTime" type="xs:dateTime" nillable="true">
+        <xs:annotation>
+          <xs:documentation>The start time of the working day of the week.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="EndTime" type="xs:dateTime" nillable="true">
+        <xs:annotation>
+          <xs:documentation>The end time of the working day of the week.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="NonWorking" type="xs:boolean" default="false">
+        <xs:annotation>
+          <xs:documentation>Flag denoting whether or not the current day is a non-working day</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="WorkingWeek">
+    <xs:sequence>
+      <xs:element name="Monday" type="WorkingDay" />
+      <xs:element name="Tuesday" type="WorkingDay" />
+      <xs:element name="Wednesday" type="WorkingDay" />
+      <xs:element name="Thursday" type="WorkingDay" />
+      <xs:element name="Friday" type="WorkingDay" />
+      <xs:element name="Saturday" type="WorkingDay" />
+      <xs:element name="Sunday" type="WorkingDay" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- SupportingAssignmentDetails .. structure used to hold an AssignmentDetails object and any information specific to that exact instance.-->
+  <xs:complexType name="SupportingAssignmentDetails">
+    <xs:sequence>
+      <xs:element name="Assignment" type="AssignmentDetails" />
+      <xs:element name="SupportingDataChangeDate" type="xs:dateTime">
+        <xs:annotation>
+          <xs:documentation>The exact date and time that the Assignment member was updated. </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SupportingAssignmentDetailsCollection">
+    <xs:sequence>
+      <xs:element name="SupportingAssignmentDetails" type="SupportingAssignmentDetails" maxOccurs="unbounded" minOccurs="1" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="TravelDetails">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="TripMileage" type="xs:int" />
+      <xs:element minOccurs="1" maxOccurs="1" name="NumberOfTrips" type="xs:int" />
+      <xs:element minOccurs="1" maxOccurs="1" name="RatePerMile" type="xs:decimal" />
+      <xs:element minOccurs="1" maxOccurs="1" name="TollCharges" type="xs:decimal" />
+      <xs:element minOccurs="1" maxOccurs="1" name="TotalCost" type="xs:decimal" />
+      <xs:element name="MileageAtStartOfDay" type="xs:int" />
+      <xs:element name="MileageAtEndOfDay" type="xs:int" />
+      <xs:element name="VehicleRegistration" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="AccommodationDetails">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="NumberOfNights" type="xs:int" />
+      <xs:element minOccurs="1" maxOccurs="1" name="NumberOfRooms" type="xs:int" />
+      <xs:element minOccurs="1" maxOccurs="1" name="RatePerRoom" type="xs:decimal" />
+      <xs:element minOccurs="1" maxOccurs="1" name="TotalCost" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="CostingCollection">
+    <xs:sequence>
+      <xs:element name="Costing" type="Costing" maxOccurs="unbounded" minOccurs="1" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Costing">
+    <xs:sequence>
+      <xs:element name="ID" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>Unique identifier for the entity within the system (Optional) </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Description">
+        <xs:annotation>
+          <xs:documentation>The Costing Description</xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:pattern value="^(?=.*\S).+$">
+              <xs:annotation>
+                <xs:documentation>'Description' is a mandatory field and has not been specified.</xs:documentation>
+              </xs:annotation>
+            </xs:pattern>
+            <xs:minLength value="1" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="Code" type="xs:string" />
+      <xs:element name="UnitPrice">
+        <xs:annotation>
+          <xs:documentation>The Costing Unit Price</xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xs:decimal">
+            <xs:pattern value="[0-9]+(\.[0-9][0-9]?)?">
+              <xs:annotation>
+                <xs:documentation>'Unit Price' must be a valid decimal number.</xs:documentation>
+              </xs:annotation>
+            </xs:pattern>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="DiscountPercent" type="xs:int" />
+      <xs:element name="RetailPrice" type="xs:decimal" />
+      <xs:element name="VATRate" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="StockLocation">
+    <xs:sequence>
+      <xs:element name="Code" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Unique identifier for the Stock Location within the system</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Description" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>The Stock Location Description.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Type" type="eStockLocation">
+        <xs:annotation>
+          <xs:documentation>The type of Stock Location as defined by the Enumeration e.g Warehouse, Van</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="LocationID" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>Key to the physical location of the Stock Location (if applicable) e.g. Warehouse</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="Stock">
+    <xs:sequence>
+      <xs:element name="StockItems" type="StockItemCollection">
+        <xs:annotation>
+          <xs:documentation>A collection of physical Stock Items of a single kind.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="PhysicalQuantity" type="xs:int" default="0">
+        <xs:annotation>
+          <xs:documentation>The total number of Stock Items in the StockItems collection.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="AllocatedQuantity" type="xs:int" default="0">
+        <xs:annotation>
+          <xs:documentation>The total number of allocated Stock Items (ie. allocated to a job) within the StockItems collection.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="UnAllocatedQuantity" type="xs:int" default="0">
+        <xs:annotation>
+          <xs:documentation>The total number of unallocated Stock Items (ie. not allocated to a job) within the StockItems collection.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="DataRetrievedDate" type="xs:dateTime" minOccurs="1">
+        <xs:annotation>
+          <xs:documentation>The exact date and time this Stock data was retrieved from the database.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  
+  <xs:complexType name="StockItemCollection">
+    <xs:sequence>
+      <xs:element name="StockItem" type="StockItem" maxOccurs="unbounded" minOccurs="1" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="StockItem">
+    <xs:sequence>
+      <xs:element name="ID" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>Unique identifier for the entity within the Work Management system.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Material" type="Material">
+        <xs:annotation>
+          <xs:documentation>The Stock Item's Material type.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="JobID" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>The ID of the Job that the Stock Item is allocated to.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="JobDueDate" type="xs:dateTime">
+        <xs:annotation>
+          <xs:documentation>The Due Date of the Job that the Stock Item is allocated to.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Location" type="StockLocation">
+        <xs:annotation>
+          <xs:documentation>The location of the Stock Item containing information such as the location type e.g. Van.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Status" type="eStockStatus">
+        <xs:annotation>
+          <xs:documentation>The Status of the Stock Items as defined by the Enumeration e.g Allocated, UnAllocated</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="SerialNo" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>The Serial Number of the Stock Item.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="UserID" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Optional. The UserID (NT Login) of the individual (e.g. Engineer) who is in possession of the Stock Item.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="LastUpdatedDate" type="xs:dateTime" />
+      <xs:element name="DataRetrievedDate" type="xs:dateTime" minOccurs="1">
+        <xs:annotation>
+          <xs:documentation>The exact date and time the StockItem entity data was retrieved from the database.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Quantity" type="xs:int" default="1">
+        <xs:annotation>
+          <xs:documentation>The number of the StockItem entity.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="StockTaskUpdateCollection">
+    <xs:sequence>
+      <xs:element name="StockTaskUpdate" type="StockTaskUpdate" maxOccurs="unbounded" minOccurs="1" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="StockTaskUpdate">
+    <xs:complexContent mixed="false">
+      <xs:extension base="TaskUpdate">
+        <xs:sequence>
+          <xs:element name="StockItem" type="StockItem">
+            <xs:annotation>
+              <xs:documentation>The Stock Task Update's StockItem.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="UpdateType" type="eStockSaveAction">
+            <xs:annotation>
+              <xs:documentation>The update action required on the StockItem entity.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="AssignmentConstraints">
+    <xs:sequence>
+      <xs:element name="ID" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>Unique identifier for the entity within the Work Management system.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="WMSourceID" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>The ID of the Job associated with the AssignmentConstraints entity.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Instance" type="xs:int" default="0">
+        <xs:annotation>
+          <xs:documentation>The Instance Number of the Job associated with the AssignmentConstraints entity.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Duration" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>The Assignment's Duration.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="TimeWindow" type="eTimeWindow">
+        <xs:annotation>
+          <xs:documentation>The Assignment time window ie. Morning or Afternoon</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="StartTime" type="xs:dateTime">
+        <xs:annotation>
+          <xs:documentation>The time at which the associated Assignment is due to start.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="EndTime" type="xs:dateTime">
+        <xs:annotation>
+          <xs:documentation>The time at which the associated Assignment is due to end.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="SpecificStartTime" type="xs:dateTime">
+        <xs:annotation>
+          <xs:documentation>The specific time at which the associated Assignment must start.</xs:documentation>
+          <xs:documentation> Note. This time should be thought of as being immoveable, as opposed to StartTime which is moveable.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="MustBeCompletedByTime" type="xs:dateTime">
+        <xs:annotation>
+          <xs:documentation>The Specific Time at which the associated Assignment must be finished by.</xs:documentation>
+          <xs:documentation> Note. This time should be thought of as being immoveable, as opposed to EndTime which is moveable.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="LastUpdatedDate" type="xs:dateTime" />
+      <xs:element name="Skills" type="SkillCollection">
+        <xs:annotation>
+          <xs:documentation>Skills in respect of suitability to carry out a Job</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="IsUserSetStartDate" type="xs:boolean" maxOccurs="1" default="false">
+        <xs:annotation>
+          <xs:documentation>This flag signals that the associated Assignment's Start Date has been set by a user via the front-end .. as opposed to being auto-created on the server.
+ Note. This flag effects whether the associated Assignment can be moved around by the intelligent Scheduling algorithm(s). A value of 'True' means that the Assignment should not be moved.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Preferences">
+    <xs:annotation>
+      <xs:documentation>This class allows Customer and Asset (Sites only) preferences to be specified</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="ID" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>Unique identifier for the entity within the Work Management system.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="RequiredEngineerID" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Allow preference to be expressed for a particular Engineer (UserID)</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="TimeWindow" type="eTimeWindow">
+        <xs:annotation>
+          <xs:documentation>The Assignment time window ie. Morning or Afternoon</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="TaskAttribute">
+    <xs:sequence>
+      <xs:element name="Name">
+        <xs:annotation>
+          <xs:documentation>Unique identifier for the entity within the Asset Management system</xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:pattern value="^(?=.*\S).+$">
+              <xs:annotation>
+                <xs:documentation>'Name' is a mandatory field and has not been specified.</xs:documentation>
+              </xs:annotation>
+            </xs:pattern>
+            <xs:minLength value="1" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="Value" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>All SQL Server column values are converted to string irrelevant of datatype</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="UserID" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>ADDBY/MODBY</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="ValidationExpression" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Regex expression where applicable (when no Lookup data is available to constrain the value entered)</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="ValidationMessage" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>User friendly message to post when Regex expression not matched</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="IsEditable" type="xs:boolean" minOccurs="1" default="false">
+        <xs:annotation>
+          <xs:documentation>This flag indicates to client software (AAA) if value can be edited or not</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="MaxLength" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>Max length of Value when it is natively a varchar in SQL Server</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="DataType" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>The native DataType of Value</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Position" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>Allows control of the Display Order that Attributes appear in</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="IsMandatory" type="xs:boolean" minOccurs="1" default="false">
+        <xs:annotation>
+          <xs:documentation>This flag indicates to client software (AAA) if value required on a New asset</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="IsHidden" type="xs:boolean" minOccurs="1" default="false">
+        <xs:annotation>
+          <xs:documentation>This flag indicates to client software (AAA) if value should be displayed to User</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="TaskAttributeCollection">
+    <xs:sequence>
+      <xs:element name="TaskAttribute" type="TaskAttribute" maxOccurs="unbounded" minOccurs="1" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="FaultDetails">
+    <xs:sequence>
+      <xs:element name="Reported" type="FaultClassification" />
+      <xs:element name="Actual" type="FaultClassification" />
+      <xs:element name="IsFixed" type="xs:boolean" minOccurs="1" default="false" />
+      <xs:element name="ActionTaken" type="CommentAuditRecord" />
+      <xs:element name="Liability" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="FaultClassification">
+    <xs:sequence>
+      <xs:element name="Type" type="xs:string" />
+      <xs:element name="Code" type="xs:string" />
+      <xs:element name="Issue" type="CommentAuditRecord" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="FaultDetailsCollection">
+    <xs:sequence>
+      <xs:element name="FaultDetails" type="FaultDetails" maxOccurs="unbounded" minOccurs="1" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="OptimisationRequest">
+    <xs:sequence>
+      <xs:element name="ID" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>Unique identifier for the Job within the Work Management system</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="AreaDetails" type="AreaDetails">
+        <xs:annotation>
+          <xs:documentation>Primary and SubArea(s) associated with the Job (Region and District in Click terms)</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  
+  
+  <!-- Enumerations -->
+	<xs:simpleType name="eWorkDownloadedAction">
+		<xs:annotation>
+			<xs:documentation>This enumeration supports the Field Management system as is purely for internal use</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Added">
+				<xs:annotation>
+					<xs:documentation>Add downloaded items into local data</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Removed">
+				<xs:annotation>
+					<xs:documentation>Remove downloaded items from local data</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Modified">
+				<xs:annotation>
+					<xs:documentation>Modify existing copies of downloaded items within local data</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="eWorkType">
+		<xs:annotation>
+			<xs:documentation>This enumeration is for use with the Job entity</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Unspecified">
+				<xs:annotation>
+					<xs:documentation>Work Type not specified</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Planned">
+				<xs:annotation>
+					<xs:documentation>Planned work</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Reactive">
+				<xs:annotation>
+					<xs:documentation>Reactive work</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="eWMSourceSystem">
+		<xs:annotation>
+			<xs:documentation>Corresponds to Business Stream. This enumeration is for use with Job related entities</xs:documentation>
+			<xs:documentation>Note. Enumeration needs extended for additional Streams</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Unspecified">
+				<xs:annotation>
+					<xs:documentation>Work originated in an unspecified WM System</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Maintenance">
+				<xs:annotation>
+					<xs:documentation>Work originated in the Asset Maintenance WM System</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Telemetry">
+				<xs:annotation>
+					<xs:documentation>Work originated in the Scope-X System</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Customer">
+				<xs:annotation>
+					<xs:documentation>Inspection - Work originated in the CRM System</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MeterReading">
+				<xs:annotation>
+					<xs:documentation>Work originated in the MeterReading WM System</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Sludge">
+				<xs:annotation>
+					<xs:documentation>Work originated in the Sludge WM System</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="RepairAndMaintenance">
+				<xs:annotation>
+					<xs:documentation>JobCard - Work is Follow Up to Inspection that originated in the CRM System</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AssetManagement">
+				<xs:annotation>
+					<xs:documentation>Required to identify AssetAttribute specific LookupData that is required by the AAA client</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="StoresProductCatalog">
+				<xs:annotation>
+					<xs:documentation>Required to identify Stores Product specific LookupData that is required by the RepairAndMaintenance client</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+      <xs:enumeration value="Workshop">
+        <xs:annotation>
+          <xs:documentation>Required to identify Workshop specific LookupData and direct to separate Plugin</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="eJobStatus">
+		<xs:annotation>
+			<xs:documentation>This enumeration is for use with Job related entities</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Planned">
+				<xs:annotation>
+					<xs:documentation>Job created in WM System</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="InProgress">
+				<xs:annotation>
+					<xs:documentation>Job passed from WM System to the Integration layer</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AwaitingScheduling">
+				<xs:annotation>
+					<xs:documentation>Job passed from Integration layer to Scheduling system (Click)</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="OnHold">
+				<xs:annotation>
+					<xs:documentation>Job passed from Integration layer to Scheduling system and put on OnHold</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+      <xs:enumeration value="Unassigned">
+        <xs:annotation>
+          <xs:documentation>Job Unassigned (instance) message received by the Integration layer from Click</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Assigned">
+				<xs:annotation>
+					<xs:documentation>Job (instance) Assigned message received by the Integration layer from Click. Available for download.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+      <xs:enumeration value="Dispatched">
+        <xs:annotation>
+          <xs:documentation>Assigned Job is now available for download post-throttling.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+			<xs:enumeration value="Downloaded">
+				<xs:annotation>
+					<xs:documentation>Job successfully downloaded to the Field Worker device</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+      <xs:enumeration value="InTransit">
+        <xs:annotation>
+          <xs:documentation>Field Worker has indicated travelling to Job</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Started">
+				<xs:annotation>
+					<xs:documentation>Job commenced on the Field Worker device</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Paused">
+				<xs:annotation>
+					<xs:documentation>Job stopped on the Field Worker device (Incomplete but retained by current Worker)</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Incomplete">
+				<xs:annotation>
+					<xs:documentation>Job stopped on the Field Worker device (Incomplete, not retained by current Worker)</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+      <xs:enumeration value="InstanceIsComplete">
+        <xs:annotation>
+          <xs:documentation>Job stopped on the Field Worker device. Complete for this Job Instance, that is, this Assignee no longer requires the Job on their device</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Completed">
+				<xs:annotation>
+					<xs:documentation>Completed</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Cancelled">
+				<xs:annotation>
+					<xs:documentation>Cancelled</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="eFileAssociationType">
+		<xs:annotation>
+			<xs:documentation>This enumeration is for use with the FileAssociation entity</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Unspecified">
+				<xs:annotation>
+					<xs:documentation>Nature of File not specified</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UtilityPlan">
+				<xs:annotation>
+					<xs:documentation>Utility Plan</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Map">
+				<xs:annotation>
+					<xs:documentation>Map</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="FieldClientImage">
+				<xs:annotation>
+					<xs:documentation>An Image Uploaded from the Field Client</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UserRelated">
+				<xs:annotation>
+					<xs:documentation>Any form of file associated with a UserID</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>			
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="eLostTimeCause">
+		<xs:annotation>
+			<xs:documentation>This enumeration is for use with the LostTimeUpdate entity</xs:documentation>
+			<xs:documentation>The list of causes needs to be confirmed across Business Streams</xs:documentation>
+			<xs:documentation>Causes may need to be subgrouped for particular Business Streams</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Unspecified">
+				<xs:annotation>
+					<xs:documentation>Must specify textual reason if cause is Unspecified</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TravelToJob">
+				<xs:annotation>
+					<xs:documentation>TravelToJob</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TimeInDepot">
+				<xs:annotation>
+					<xs:documentation>TimeInDepot</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LookingForSite">
+				<xs:annotation>
+					<xs:documentation>LookingForSite</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Break">
+				<xs:annotation>
+					<xs:documentation>Break</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="VehicleDownTime">
+				<xs:annotation>
+					<xs:documentation>VehicleDownTime</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ComputerProblems">
+				<xs:annotation>
+					<xs:documentation>ComputerProblems</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="WaitingForGang">
+				<xs:annotation>
+					<xs:documentation>WaitingForGang</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TracingMains">
+				<xs:annotation>
+					<xs:documentation>TracingMains</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CustomerLiason">
+				<xs:annotation>
+					<xs:documentation>CustomerLiason</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="IncorrectIncidentType">
+				<xs:annotation>
+					<xs:documentation>IncorrectIncidentType</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PoorLocationDetails">
+				<xs:annotation>
+					<xs:documentation>PoorLocationDetails</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="eAssetAttributeType">
+		<xs:annotation>
+			<xs:documentation>Identifies the nature of the Data Source for an Asset Attribute</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Static">
+				<xs:annotation>
+					<xs:documentation>Attribute held as a column in an Asset specific table</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Dynamic">
+				<xs:annotation>
+					<xs:documentation>Attribute held as a row in a generic Asset Attribute table</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+      <xs:enumeration value="Core">
+        <xs:annotation>
+          <xs:documentation>Attribute held in master Asset table</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="eJobFailureType">
+		<xs:annotation>
+			<xs:documentation>Identifies the reason a Job failed to progress through the system</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="LoadAndExport">
+				<xs:annotation>
+					<xs:documentation>Failed to create Job in WM system up to and including Save to TaskStore (WIS LoadAndExportJob method)</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ForwardToWorkflowService">
+				<xs:annotation>
+				  <xs:documentation>Failed to pass created Job as far as the Import method (WIS ForwardToWorkflow method)</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Import">
+				<xs:annotation>
+					<xs:documentation>Failed to create Click Task associated with the Job (ClickAgent ImportJob method)</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="StatusChange">
+				<xs:annotation>
+				  <xs:documentation>Failed to process Job Status Change successfully [post the Import call])</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MobileUpdate">
+				<xs:annotation>
+					<xs:documentation>Failed to process content received from from Mobile (JobUpdate ApplyToJob method)</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ServiceWrapper">
+				<xs:annotation>
+					<xs:documentation>Failed to process a call through a ServiceWrapper inheriting class after Max no of retries it allowed</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="eMobileIdentityType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="WindowsIdentity">
+				<xs:annotation>
+					<xs:documentation>WindowsIdentity</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Gang">
+				<xs:annotation>
+					<xs:documentation>Gang</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Contractor">
+				<xs:annotation>
+					<xs:documentation>Contractor</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+  <xs:simpleType name="eReportDefinitionType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="User">
+        <xs:annotation>
+          <xs:documentation>User</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Job">
+        <xs:annotation>
+          <xs:documentation>Job</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Asset">
+        <xs:annotation>
+          <xs:documentation>Asset</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="eCommentType">
+		<xs:annotation>
+			<xs:documentation>This enumeration is for use with CommentAuditRecord entities</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="General">
+				<xs:annotation>
+					<xs:documentation>General Comment</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="OnHold">
+				<xs:annotation>
+					<xs:documentation>Comment associated with an On Hold Reason</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Telemetry">
+				<xs:annotation>
+					<xs:documentation>Information about a Telemetry Alarm</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UtilityPlan">
+				<xs:annotation>
+					<xs:documentation>For Auditing the Viewing of Utility Plans</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Overdue">
+				<xs:annotation>
+					<xs:documentation>For Auditing a Job DueDate being missed</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="eMeterChamberType">
+		<xs:annotation>
+			<xs:documentation>This enumeration supports the MeterDetailsTaskUpdate (.MeterDetails.ChamberType)</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="DefaultValue" />
+			<xs:enumeration value="ConcreteSet" />
+			<xs:enumeration value="PrefabOrPlastic" />
+			<xs:enumeration value="Brick" />
+			<xs:enumeration value="BrickOrConcrete" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="eAppointmentMissedReason">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="DefaultValue" />
+			<xs:enumeration value="VehicleBreakdown" />
+			<xs:enumeration value="SchedulerAdvisedToAbort" />
+			<xs:enumeration value="SupervisorAdvisedToAbort" />
+			<xs:enumeration value="CSTAdvisedToAbort" />
+			<xs:enumeration value="InspectorUnableToAttend" />
+			<xs:enumeration value="SevereWeather" />
+			<xs:enumeration value="EarlyVisitNotAgreedAndDidNotWait" />
+			<xs:enumeration value="ArrivedLate" />
+		</xs:restriction>
+	</xs:simpleType>
+  <xs:simpleType name="eSchedulerAlertType">
+    <xs:annotation>
+      <xs:documentation>This enumeration supports communication between Engineer and Scheduler</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="None" />
+      <xs:enumeration value="AnotherGangRequired" />
+      <xs:enumeration value="StreetworksNoticeDay2" />
+      <xs:enumeration value="StreetworksJobStarted" />
+      <xs:enumeration value="EffluentQuality" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="eSchedulingSystem">
+    <xs:annotation>
+      <xs:documentation>This enumeration supports deciding which Client system schedules a Job</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Click" />
+      <xs:enumeration value="Utilities" />
+      <xs:enumeration value="Sludge" />
+      <xs:enumeration value="Workshop" />
+      <xs:enumeration value="Contractor" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="eSchedulerAppointmentMissedReason">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="DefaultValue" />
+      <!-- Cancellation Reasons -->
+			<xs:enumeration value="Cancelled_by_company_with_at_least_24hrs_notice_(N)" />
+			<xs:enumeration value="Cancelled_due_to_gang_emergency_-_more_than_24hrs_notice_(N)" />
+			<xs:enumeration value="Cancelled_due_to_resource_(sick,_training,_leave,_rest_time)_-_more_than_24hrs_notice_(N)" />
+			<xs:enumeration value="Cancelled_due_to_incorrect_job_instructions/traffic_management_-_more_than_24hrs_notice_(N)" />
+			<xs:enumeration value="Cancelled_due_to_Risk_Assessment_issue_-_more_than_24hrs_notice_(N)" />
+			<xs:enumeration value="Customer_was_happy_with_earlier_visit_(N)" />
+			<xs:enumeration value="Cancelled_-_advised_to_abort_by_scheduler/supervisor_as_customer_has_called_to_cancel_(N)" />
+			<xs:enumeration value="Cancelled_by_the_company_WITHOUT_at_least_24hrs_notice_(Y)" />
+			<xs:enumeration value="Cancelled_due_to_a_van_breakdown_(Y)" />
+			<xs:enumeration value="Cancelled_-_diverted_to_emergency_(Y)" />
+			<xs:enumeration value="Cancelled_-_advised_to_abort_by_scheduler/supervisor_(Y)" />
+			<xs:enumeration value="Cancelled_by_customer_(N)" />
+			<xs:enumeration value="Cancelled_due_to_creation_in_error_(N)" />
+			<xs:enumeration value="Cancelled_due_to_default_of_other_than_the_company_representative_(N)" />
+			<xs:enumeration value="Cancelled_due_to_inability_to_keep_(Y)" />
+			<xs:enumeration value="Cancelled_due_to_Industrial_Action_(N)" />
+			<xs:enumeration value="Cancelled_due_to_Severe_Weather_(N)" />
+      <!-- Missed Reasons -->
+      <xs:enumeration value="Missed_due_to_emergency_(Y)" />
+      <xs:enumeration value="Missed_due_to_resource_(sick,_rest_time)_(Y)" />
+      <xs:enumeration value="Missed_Arrived_Late_(Y)" />
+      <xs:enumeration value="Missed_Arrived_Early_Customer_Not_Happy_with_Early_Attendance_(Y)" />
+      <xs:enumeration value="Missed_due_to_Vehicle_Breakdown_(Y)" />
+		</xs:restriction>
+	</xs:simpleType>
+  <xs:simpleType name="eAppointmentConfirmationMethod">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="None" />
+			<xs:enumeration value="Telephone" />
+			<xs:enumeration value="Writing" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="eAppointmentEarlyVisitOutcome">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="DefaultValue" />
+			<xs:enumeration value="AgreedTo" />
+			<xs:enumeration value="NotAgreedToButWaited" />
+			<xs:enumeration value="NotAgreedTo" />
+		</xs:restriction>
+	</xs:simpleType>
+  <xs:simpleType name="eAssetDiscipline">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Unspecified" />
+      <xs:enumeration value="Civil" />
+      <xs:enumeration value="Electrical" />
+      <xs:enumeration value="Mechanical" />
+      <xs:enumeration value="Instrument" />
+    </xs:restriction>
+  </xs:simpleType>
+	<xs:simpleType name="eScheduleType">
+		<xs:annotation>
+			<xs:documentation>This enumeration is for use with the Schedule Details entity</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Unspecified">
+				<xs:annotation>
+					<xs:documentation>Value has not been specified</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Group">
+				<xs:annotation>
+					<xs:documentation>SMGROUP</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Unit">
+				<xs:annotation>
+					<xs:documentation>SMUNIT</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="eScheduleStatus">
+		<xs:annotation>
+			<xs:documentation>This enumeration is for use with the Schedule Details entity</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Unspecified">
+				<xs:annotation>
+					<xs:documentation>Value has not been specified</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+  <xs:simpleType name="eJobScope">
+    <xs:annotation>
+      <xs:documentation>This enumeration is for use with the ActivityTask entity</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Unspecified">
+        <xs:annotation>
+          <xs:documentation>Value has not been specified. Assume "Whole Job" scope</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="AllAssets">
+        <xs:annotation>
+          <xs:documentation>Value has not been specified</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="SpecificAssets">
+        <xs:annotation>
+          <xs:documentation>Value has not been specified</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="eTaskScope">
+    <xs:annotation>
+      <xs:documentation>This enumeration is for use with entities that are children of Task e.g Measurementy</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Unspecified">
+        <xs:annotation>
+          <xs:documentation>Value has not been specified. Assume "Whole Job" scope</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="AllTasks">
+        <xs:annotation>
+          <xs:documentation>Value has not been specified</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="SpecificTasks">
+        <xs:annotation>
+          <xs:documentation>Value has not been specified</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="eStockLocation">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Unspecified"/>
+      <xs:enumeration value="Warehouse" />
+      <xs:enumeration value="Van" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="eStockStatus">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Unspecified"/>
+      <xs:enumeration value="Allocated">
+        <xs:annotation>
+          <xs:documentation>Stock Item is allocated to a job.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="UnAllocated">
+        <xs:annotation>
+          <xs:documentation>Stock Item is not allocated to a job.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="eSaveAction">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="None"/>
+      <xs:enumeration value="Insert"/>
+      <xs:enumeration value="Update"/>
+      <xs:enumeration value="Delete"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="eStockSaveAction">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="None"/>
+      <xs:enumeration value="Insert"/>
+      <xs:enumeration value="Update"/>
+      <xs:enumeration value="Delete"/>
+      <xs:enumeration value="Allocate"/>
+      <xs:enumeration value="UnAllocate"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="eTimeWindow">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="None"/>
+      <xs:enumeration value="Morning"/>
+      <xs:enumeration value="Afternoon"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

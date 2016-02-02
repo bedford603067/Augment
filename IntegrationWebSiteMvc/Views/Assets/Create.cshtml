@@ -1,0 +1,156 @@
+﻿@model IntegrationWebSiteMvc.CorporateData.AssetUpdate
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Edit Site</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Update</legend>
+
+    @Html.HiddenFor(model => model.AssetID) <!-- NB: For a property to be set on the bound instance returned from the POST it must be bound to a Hidden or Visible field -->
+
+    @if (Model.AssetType != "SITE")
+    {
+        @Html.HiddenFor(model => model.ParentAsset.ID) <!-- NB: For a property to be set on the bound instance returned from the POST it must be bound to a Hidden or Visible field -->
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.AssetType)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.AssetType)
+            @Html.ValidationMessageFor(model => model.AssetType)
+        </div>
+    }
+    @if (Model.AssetType == "SITE")
+    {
+        @Html.HiddenFor(model => model.AssetType) <!-- NB: For a property to be set on the bound instance returned from the POST it must be bound to a Hidden or Visible field -->
+    }
+    
+    <div class="editor-label">
+        @Html.LabelFor(model => model.Code)
+    </div>
+    <div class="editor-field">
+        @Html.EditorFor(model => model.Code)
+        @Html.ValidationMessageFor(model => model.Code)
+    </div>
+    <div class="editor-label">
+        @Html.LabelFor(model => model.Description)
+    </div>
+    <div class="editor-field">
+        @Html.TextAreaFor(model => model.Description) <!-- TextAreaFor(model => model.Description, 2, 0, null). Rows [2] sets no. of lines -->
+        @Html.ValidationMessageFor(model => model.Description)
+    </div>
+    
+    @if (Model.AssetType != "SITE")
+    {
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Group)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Group)
+            @Html.ValidationMessageFor(model => model.Group)
+        </div>
+    }
+    
+    @if (Model.AssetType == "SITE")
+    { 
+        @Html.HiddenFor(model => model.Location.ID) <!-- NB: For a property to be set on the bound instance returned from the POST it must be bound to a Hidden or Visible field -->
+        @Html.HiddenFor(model => model.Location.PropertyReference) 
+
+        <!-- Using a hidden field the way would use ViewState or Session in ASP.Net to hold on to value of the instance so can work out on POST if edited or not. -->
+        <input type="hidden" name="originalModel" value="@Html.Encode(ViewBag.LocationXml)" />
+         
+        <div>
+            <div class="editor-label">
+                Customer
+            </div>
+            <div class="editor-field">
+                @Html.DropDownListFor(x => x.CustomerID, new SelectList(ViewBag.Customers, "ID", "Surname", Model.CustomerID), new { style = "font-size:medium;" }) 
+                @Html.ValidationMessageFor(model => model.CustomerID)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Location.PostCode)
+            </div>
+            <div class="editor-field">
+             <!-- @Html.EditorFor(model => model.Location.PostCode) -->
+                @Html.TextBoxFor(model => model.Location.PostCode, new { style = "width:75px" })  <!-- NB MVC framework bug in Html.EditorFor ? Ignoring some htmlAttributes -->
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Location.HouseName)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Location.HouseName)
+                @Html.ValidationMessageFor(model => model.Location.HouseName)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Location.HouseNo)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Location.HouseNo)
+                @Html.ValidationMessageFor(model => model.Location.HouseNo)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Location.Street)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Location.Street)
+                @Html.ValidationMessageFor(model => model.Location.Street)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Location.Town)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Location.Town)
+                @Html.ValidationMessageFor(model => model.Location.Town)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Location.District)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Location.District)
+                @Html.ValidationMessageFor(model => model.Location.District)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Location.SubBuilding)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Location.SubBuilding)
+                @Html.ValidationMessageFor(model => model.Location.SubBuilding)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Location.Directions)
+            </div>
+            <div class="editor-field">
+                @Html.TextAreaFor(model => model.Location.Directions)
+                @Html.ValidationMessageFor(model => model.Location.Directions)
+            </div>
+        </div>
+    }
+        <p>
+            <input type="submit" value="Save Asset" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

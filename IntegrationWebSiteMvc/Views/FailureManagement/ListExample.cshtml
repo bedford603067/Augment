@@ -1,0 +1,35 @@
+﻿@model IEnumerable<IntegrationWebSiteMvc.Models.JobFailure>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<ul>
+@foreach (var item in Model)
+{
+    <li>@item.ID</li>
+    <li>@item.DateRecorded</li>
+}
+</ul>
+
+<h2>Basic Web Grid</h2>
+<div>
+
+@{
+  var grid = new WebGrid(Model, defaultSort:"Name");
+}
+
+<!-- @grid.GetHtml() -->
+
+@grid.GetHtml(columns: grid.Columns(
+grid.Column("ID", format: @<text>@Html.ActionLink((string)item.Type,
+"Details", "FailureManagement", new { id = item.ID }, null)</text>),
+grid.Column("DateRecorded", header:"Date", 
+             format: @<text>@item.DateRecorded.ToString()</text>))
+)
+    
+</div>
+
